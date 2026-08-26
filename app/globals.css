@@ -8,6 +8,7 @@
   --p20: #1f4fe0;
   --p15: #f5c400;
   --p10: #17a44c;
+  --lime: #c6ff2e;
 
   --background: var(--ink);
   --foreground: var(--chalk);
@@ -23,8 +24,10 @@
   --color-p20: var(--p20);
   --color-p15: var(--p15);
   --color-p10: var(--p10);
+  --color-lime: var(--lime);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-archivo);
 }
 
 body {
@@ -32,4 +35,40 @@ body {
   color: var(--foreground);
   background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 7px 7px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-rise {
+  opacity: 0;
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.animate-rise-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.animate-rise-delay-2 {
+  animation-delay: 0.24s;
+}
+
+.animate-rise-delay-3 {
+  animation-delay: 0.36s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
