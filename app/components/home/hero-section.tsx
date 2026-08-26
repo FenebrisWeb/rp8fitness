@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { animate, motion, useMotionValue, AnimatePresence, type PanInfo } from "framer-motion";
 import type { HeroSlide } from "@/app/types/home";
 import Counter from "./counter";
-import SmokeOverlay from "./smoke-overlay";
 
 const AUTOPLAY_MS = 3000;
 
@@ -121,45 +120,52 @@ export default function HeroSection() {
 
   return (
     <section
-      ref={containerRef}
-      className="relative aspect-[1920/750] w-full overflow-hidden"
+      className="relative w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <motion.div
-        className="flex h-full"
-        style={{ x, width: width ? width * SLIDE_COUNT : "100%" }}
-        drag="x"
-        dragConstraints={{ left: -(width * (SLIDE_COUNT - 1)), right: 0 }}
-        dragElastic={0.12}
-        dragMomentum={false}
-        onDragStart={() => setPaused(true)}
-        onDragEnd={handleDragEnd}
+      {/* Image track — a short, fully visible crop on mobile; the wide
+          1920/750 banner ratio kicks in from md up. */}
+      <div
+        ref={containerRef}
+        className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]"
       >
-        {HERO_SLIDES.map((slide, i) => (
-          <div
-            key={slide.id}
-            className="relative h-full overflow-hidden"
-            style={{ flex: slideFlex }}
-          >
-            <Image
-              src={slide.image.src}
-              alt={slide.image.alt}
-              fill
-              sizes="100vw"
-              quality={85}
-              priority={i === 0}
-              draggable={false}
-              className="select-none object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
-            <SmokeOverlay />
-          </div>
-        ))}
-      </motion.div>
+        <motion.div
+          className="flex h-full"
+          style={{ x, width: width ? width * SLIDE_COUNT : "100%" }}
+          drag="x"
+          dragConstraints={{ left: -(width * (SLIDE_COUNT - 1)), right: 0 }}
+          dragElastic={0.12}
+          dragMomentum={false}
+          onDragStart={() => setPaused(true)}
+          onDragEnd={handleDragEnd}
+        >
+          {HERO_SLIDES.map((slide, i) => (
+            <div
+              key={slide.id}
+              className="relative h-full overflow-hidden"
+              style={{ flex: slideFlex }}
+            >
+              <Image
+                src={slide.image.src}
+                alt={slide.image.alt}
+                fill
+                sizes="100vw"
+                quality={85}
+                priority={i === 0}
+                draggable={false}
+                className="select-none object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
 
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-end">
-        <div className="mx-auto flex w-full max-w-[1700px] flex-col px-6 pb-16 sm:px-10">
+      {/* Content — sits below the banner in normal flow on mobile; becomes
+          an absolute overlay pinned to the bottom of the image from md up. */}
+      <div className="relative bg-ink px-5 py-6 sm:px-10 sm:py-8 md:absolute md:inset-0 md:flex md:flex-col md:justify-end md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">
+        <div className="mx-auto flex w-full max-w-[1700px] flex-col md:px-6 md:pb-16 lg:px-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
@@ -168,30 +174,30 @@ export default function HeroSection() {
               exit="exit"
               variants={textVariants}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-end justify-between gap-8"
+              className="flex items-end justify-between gap-4 sm:gap-8"
             >
-              <div>
+              <div className="min-w-0">
                 <h1 className="font-display font-black uppercase leading-[0.85] tracking-tight text-chalk">
-                  <span className="block text-[15vw] italic sm:text-[11vw] md:text-[8vw] lg:text-[6.5vw]">
+                  <span className="block text-[11vw] italic sm:text-[9vw] md:text-[8vw] lg:text-[6.5vw]">
                     {active.headlineLine1}
                   </span>
-                  <span className="block text-[15vw] text-chalk sm:text-[11vw] md:text-[8vw] lg:text-[6.5vw]">
+                  <span className="block text-[11vw] text-chalk sm:text-[9vw] md:text-[8vw] lg:text-[6.5vw]">
                     {active.headlineLine2}
                   </span>
                 </h1>
-                <p className="mt-4 max-w-md font-mono text-sm text-chalk">
+                <p className="mt-3 max-w-md font-mono text-xs text-chalk sm:mt-4 sm:text-sm">
                   {active.description}
                 </p>
               </div>
 
-              <dl className="flex gap-6 pb-2">
+              <dl className="flex flex-none gap-3 pb-1 sm:gap-6 sm:pb-2">
                 {active.stats.map((stat) => (
                   <div key={stat.label} className="text-right">
                     <dt className="sr-only">{stat.label}</dt>
-                    <dd className="font-display text-3xl font-black text-chalk sm:text-4xl">
+                    <dd className="font-display text-xl font-black text-chalk sm:text-3xl md:text-4xl">
                       <Counter value={stat.value} suffix={stat.suffix} />
                     </dd>
-                    <dd className="font-mono text-[11px] uppercase tracking-[0.14em] text-chalk">
+                    <dd className="font-mono text-[9px] uppercase tracking-[0.14em] text-chalk sm:text-[11px]">
                       {stat.label}
                     </dd>
                   </div>
@@ -200,7 +206,7 @@ export default function HeroSection() {
             </motion.div>
           </AnimatePresence>
 
-          <div className="pointer-events-auto mt-8 flex items-center gap-3">
+          <div className="pointer-events-auto mt-5 flex items-center gap-3 sm:mt-8">
             {HERO_SLIDES.map((slide, i) => (
               <button
                 key={slide.id}
