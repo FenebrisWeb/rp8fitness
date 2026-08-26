@@ -54,6 +54,14 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Native <button> elements don't get a pointer cursor by default in every
+   browser — force it everywhere so anything that looks clickable feels
+   clickable, without needing "cursor-pointer" repeated on every button. */
+button:not(:disabled),
+[role="button"] {
+  cursor: pointer;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

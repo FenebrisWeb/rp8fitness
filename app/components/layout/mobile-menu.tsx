@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -34,7 +36,10 @@ function DoubleArrow({ className }: { className?: string }) {
 }
 
 export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
-  return (
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const menu = (
     <AnimatePresence>
       {open && (
         <>
@@ -105,4 +110,11 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       )}
     </AnimatePresence>
   );
+
+  // Portal to document.body — keeps the overlay out of the sticky header's
+  // own stacking/backdrop-filter context, which otherwise made the glass
+  // panel render as fully transparent (nested backdrop-blur compositing
+  // bug).
+  if (!mounted) return null;
+  return createPortal(menu, document.body);
 }

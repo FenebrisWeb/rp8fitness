@@ -19,7 +19,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full">
+    <header className="sticky top-0 z-40 w-full border-b border-foreground/10 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-[1700px] items-center justify-between gap-6 px-6 py-3 sm:px-10 sm:py-4">
         <Link href="/" className="flex-none">
           <Image
