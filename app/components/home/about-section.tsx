@@ -46,7 +46,7 @@ export default function AboutSection() {
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-6 text-center sm:px-10">
-        <h2 className="max-w-3xl font-display font-medium uppercase leading-snug tracking-tight text-chalk text-xl sm:text-2xl md:text-3xl">
+        <h2 className="max-w-3xl font-display font-medium uppercase leading-snug tracking-tight text-foreground text-xl sm:text-2xl md:text-3xl">
           {headline}
         </h2>
 
@@ -70,7 +70,7 @@ export default function AboutSection() {
               />
             </div>
 
-            <div className="flex h-[230px] w-[150px] flex-none snap-center flex-col justify-between rounded-xl bg-white/5 p-4 sm:w-[170px]">
+            <div className="flex h-[230px] w-[150px] flex-none snap-center flex-col justify-between rounded-xl bg-ink p-4 sm:w-[170px]">
               <motion.p
                 className="text-left font-sans text-sm font-semibold leading-snug"
                 initial={{ color: "#7c848d" }}
@@ -117,17 +117,17 @@ export default function AboutSection() {
                 ))}
               </div>
               <div className="text-left">
-                <p className="font-display text-lg font-black text-chalk">
+                <p className="font-display text-lg font-black text-foreground">
                   <Counter value={ratingValue} suffix={ratingSuffix} />
                 </p>
                 <p className="font-mono text-xs text-steel">{ratingLabel}</p>
               </div>
             </div>
 
-            <div className="flex divide-x divide-white/10">
+            <div className="flex divide-x divide-foreground/10">
               {stats.map((stat) => (
                 <div key={stat.label} className="px-6 text-left first:pl-0">
-                  <p className="font-display text-3xl font-black text-chalk sm:text-4xl">
+                  <p className="font-display text-3xl font-black text-foreground sm:text-4xl">
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </p>
                   <p className="mt-1 font-mono text-xs text-steel">{stat.label}</p>

@@ -1,17 +1,32 @@
 @import "tailwindcss";
 
+/* Dark is the default theme for this site. */
 :root {
   --ink: #101215;
-  --chalk: #f3f2ec;
+  --chalk: #ffffff;
   --steel: #7c848d;
   --p25: #d9232b;
   --p20: #1f4fe0;
   --p15: #f5c400;
   --p10: #17a44c;
   --lime: #c6ff2e;
+  --coral: #f27272;
 
-  --background: var(--ink);
-  --foreground: var(--chalk);
+  --bg: var(--ink);
+  --fg: var(--chalk);
+  --dot: rgba(255, 255, 255, 0.045);
+
+  --background: var(--bg);
+  --foreground: var(--fg);
+}
+
+/* Explicit light mode — toggled via [data-theme="light"] on <html>.
+   A brushed-concrete grey, not white paper — reads like a gym, not a
+   document. */
+:root[data-theme="light"] {
+  --bg: #dcdad4;
+  --fg: #101215;
+  --dot: rgba(0, 0, 0, 0.06);
 }
 
 @theme inline {
@@ -25,6 +40,7 @@
   --color-p15: var(--p15);
   --color-p10: var(--p10);
   --color-lime: var(--lime);
+  --color-coral: var(--coral);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-archivo);
@@ -33,8 +49,9 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
   background-size: 7px 7px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes rise {
