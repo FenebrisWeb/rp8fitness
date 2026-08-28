@@ -84,23 +84,23 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
-const SLIDE_SIZE = 2;
+// Two icons visible at once, but the track steps by a single item — each
+// swipe/tick slides one icon out and the next one in, instead of jumping a
+// whole pair at a time.
+const VISIBLE = 2;
 
 function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] }) {
-  // Two feature cards per slide, so the last slide can hold fewer.
-  const slides: WhyChooseContent["features"][] = [];
-  for (let i = 0; i < features.length; i += SLIDE_SIZE) {
-    slides.push(features.slice(i, i + SLIDE_SIZE));
-  }
-  const count = slides.length;
+  const total = features.length;
+  const count = Math.max(total - VISIBLE + 1, 1);
 
   const [index, setIndex] = useState(0);
   const [width, setWidth] = useState(0);
   const [paused, setPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
+  const itemWidth = width / VISIBLE;
 
-  // Measure the slide width so the track can be positioned in pixels
+  // Measure the viewport so an item's width can be derived from it
   // (ResizeObserver also catches viewport/orientation changes).
   useEffect(() => {
     const el = containerRef.current;
@@ -116,12 +116,12 @@ function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] 
     return () => ro.disconnect();
   }, []);
 
-  // Keep the track aligned with the active slide (and re-align on resize).
+  // Keep the track aligned with the active step (and re-align on resize).
   useEffect(() => {
-    if (!width) return;
-    const controls = animate(x, -index * width, spring);
+    if (!itemWidth) return;
+    const controls = animate(x, -index * itemWidth, spring);
     return () => controls.stop();
-  }, [index, width, x]);
+  }, [index, itemWidth, x]);
 
   // Autoplay every 3s — a timeout keyed on `index` restarts itself, so a
   // manual swipe or a hover-pause gives a full interval before advancing
@@ -136,18 +136,16 @@ function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] 
 
   const handleDragEnd = (_: unknown, info: PanInfo) => {
     setPaused(false);
-    const threshold = width * 0.18;
+    const threshold = itemWidth * 0.3;
 
     if (info.offset.x < -threshold || info.velocity.x < -500) {
       goTo(index + 1);
     } else if (info.offset.x > threshold || info.velocity.x > 500) {
       goTo(index - 1);
-    } else if (width) {
-      animate(x, -index * width, spring);
+    } else if (itemWidth) {
+      animate(x, -index * itemWidth, spring);
     }
   };
-
-  const slideFlex = width ? `0 0 ${width}px` : "0 0 100%";
 
   return (
     <div
@@ -158,39 +156,35 @@ function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] 
       <div ref={containerRef} className="overflow-hidden">
         <motion.div
           className="flex"
-          style={{ x, width: width ? width * count : "100%" }}
+          style={{ x, width: itemWidth ? itemWidth * total : "100%" }}
           drag="x"
-          dragConstraints={{ left: -(width * (count - 1)), right: 0 }}
+          dragConstraints={{ left: -(itemWidth * (total - VISIBLE)), right: 0 }}
           dragElastic={0.12}
           dragMomentum={false}
           onDragStart={() => setPaused(true)}
           onDragEnd={handleDragEnd}
         >
-          {slides.map((slide, i) => (
+          {features.map((feature) => (
             <div
-              key={i}
-              className="flex flex-none items-start justify-center gap-10"
-              style={{ flex: slideFlex }}
+              key={feature.id}
+              className="flex flex-none flex-col items-center gap-4 px-5 text-center"
+              style={{ flex: itemWidth ? `0 0 ${itemWidth}px` : `0 0 ${100 / VISIBLE}%` }}
             >
-              {slide.map((feature) => (
-                <div key={feature.id} className="flex flex-col items-center gap-4 text-center">
-                  <WhyChooseIcon id={feature.id} className="h-11 w-11 text-steel" />
-                  <p className="font-mono text-xs uppercase leading-snug text-steel">
-                    {feature.line1}
-                    <br />
-                    <span className="font-bold text-foreground">{feature.line2}</span>
-                  </p>
-                </div>
-              ))}
+              <WhyChooseIcon id={feature.id} className="h-11 w-11 text-steel" />
+              <p className="font-mono text-xs uppercase leading-snug text-steel">
+                {feature.line1}
+                <br />
+                <span className="font-bold text-foreground">{feature.line2}</span>
+              </p>
             </div>
           ))}
         </motion.div>
       </div>
 
       <div className="mt-6 flex items-center justify-center gap-2">
-        {slides.map((slide, i) => (
+        {Array.from({ length: count }).map((_, i) => (
           <button
-            key={slide.map((feature) => feature.id).join("-")}
+            key={i}
             type="button"
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === index}
