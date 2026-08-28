@@ -52,14 +52,14 @@ export default function AboutHeroSection() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-lg"
           >
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
               {eyebrow}
             </span>
 
             <h1 className="mt-3 font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-chalk sm:text-5xl">
               <span className="block">{headlineLine1}</span>
               <span className="block">
-                <span className="text-accent-strong">{headlineAccent}</span> {headlineRest}
+                <span className="text-accent-vivid">{headlineAccent}</span> {headlineRest}
               </span>
             </h1>
 
@@ -67,7 +67,7 @@ export default function AboutHeroSection() {
 
             <button
               type="button"
-              className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-strong hover:text-accent-strong"
+              className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
             >
               <svg viewBox="0 0 12 14" className="h-3 w-3" fill="currentColor" aria-hidden>
                 <path d="M0 0.5L12 7L0 13.5V0.5Z" />

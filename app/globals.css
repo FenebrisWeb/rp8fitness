@@ -31,6 +31,17 @@
   --accent-strong-contrast: var(--ink);
   --accent-glow: rgba(198, 255, 46, 0.5);
   --accent-glow-strong: rgba(198, 255, 46, 0.75);
+
+  /* --accent-strong's light-mode red (--maroon) is tuned to sit on the
+     light page background — it reads well there but has almost no
+     contrast against the fixed-dark banners/cards used everywhere else on
+     the site (a photo, or bg-ink), where it looks flat and the text is
+     hard to read. --accent-vivid is the same lime-in-dark/red-in-light
+     swap, but with a brighter red for exactly those dark surfaces. */
+  --accent-vivid: var(--lime);
+  --accent-vivid-contrast: var(--ink);
+  --accent-vivid-glow: rgba(198, 255, 46, 0.5);
+  --accent-vivid-glow-strong: rgba(198, 255, 46, 0.75);
 }
 
 /* Explicit light mode — toggled via [data-theme="light"] on <html>.
@@ -44,6 +55,11 @@
   --accent-strong-contrast: var(--chalk);
   --accent-glow: rgba(146, 14, 23, 0.5);
   --accent-glow-strong: rgba(146, 14, 23, 0.75);
+
+  --accent-vivid: #ef4444;
+  --accent-vivid-contrast: var(--ink);
+  --accent-vivid-glow: rgba(239, 68, 68, 0.5);
+  --accent-vivid-glow-strong: rgba(239, 68, 68, 0.75);
 }
 
 @theme inline {
@@ -61,6 +77,8 @@
   --color-maroon: var(--maroon);
   --color-accent-strong: var(--accent-strong);
   --color-accent-strong-contrast: var(--accent-strong-contrast);
+  --color-accent-vivid: var(--accent-vivid);
+  --color-accent-vivid-contrast: var(--accent-vivid-contrast);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-archivo);
@@ -126,6 +144,4 @@ button:not(:disabled),
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-
 

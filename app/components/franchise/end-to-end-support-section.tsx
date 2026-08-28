@@ -72,14 +72,14 @@ export default function EndToEndSupportSection() {
 
             <div className="flex-1 text-center lg:text-left">
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
-                {headlineLine1} <span className="text-accent-strong">{headlineAccent}</span>
+                {headlineLine1} <span className="text-accent-vivid">{headlineAccent}</span>
                 <br className="hidden sm:block" /> At Every Step
               </h2>
 
               <div className="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-6 lg:justify-start">
                 {items.map((item) => (
                   <div key={item.id} className="flex w-24 flex-col items-center gap-2 text-center lg:w-auto lg:flex-row lg:text-left">
-                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
+                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                       <ItemIcon id={item.id} className="h-5 w-5" />
                     </span>
                     <p className="font-mono text-xs uppercase leading-snug text-chalk">{item.label}</p>

@@ -76,7 +76,7 @@ export default function OpenTerraceSection() {
           />
 
           <div className="flex max-w-xl flex-col gap-5 p-6 sm:gap-6 sm:p-10 lg:p-14">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
               {eyebrow}
             </span>
 
@@ -89,7 +89,7 @@ export default function OpenTerraceSection() {
             <div className="mt-2 grid grid-cols-3 gap-4 sm:gap-6">
               {pointers.map((pointer) => (
                 <div key={pointer.id} className="flex flex-col gap-2">
-                  <PointerIcon id={pointer.id} className="h-6 w-6 text-accent-strong" />
+                  <PointerIcon id={pointer.id} className="h-6 w-6 text-accent-vivid" />
                   <p className="font-mono text-xs uppercase leading-snug text-chalk">
                     {pointer.label}
                   </p>
@@ -99,7 +99,7 @@ export default function OpenTerraceSection() {
 
             <Link
               href="#"
-              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-strong/70 bg-accent-strong/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-glow)] transition-all hover:bg-accent-strong/35 hover:shadow-[0_0_28px_var(--accent-glow-strong)] hover:scale-105"
+              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105"
             >
               {ctaLabel}
               <span aria-hidden className="text-sm leading-none">

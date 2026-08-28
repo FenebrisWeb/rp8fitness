@@ -84,7 +84,7 @@ export default function GermanEquipmentSection() {
 
           <div className="flex w-full p-6 sm:justify-end sm:p-10 lg:p-14">
             <div className="flex max-w-xl flex-col gap-5 sm:gap-6">
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
                 {eyebrow}
               </span>
 
@@ -98,7 +98,7 @@ export default function GermanEquipmentSection() {
               <div className="mt-2 grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {features.map((feature) => (
                   <div key={feature.id} className="flex flex-col gap-2">
-                    <FeatureIcon id={feature.id} className="h-6 w-6 text-accent-strong" />
+                    <FeatureIcon id={feature.id} className="h-6 w-6 text-accent-vivid" />
                     <p className="font-mono text-xs uppercase leading-snug text-chalk">
                       {feature.label}
                     </p>
@@ -108,7 +108,7 @@ export default function GermanEquipmentSection() {
 
               <Link
                 href="#"
-                className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105"
+                className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 {ctaLabel}
                 <span aria-hidden className="text-sm leading-none">

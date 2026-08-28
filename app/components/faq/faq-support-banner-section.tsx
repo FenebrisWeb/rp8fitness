@@ -58,19 +58,19 @@ export default function FaqSupportBannerSection() {
           </div>
 
           <div className="flex-1 text-center lg:text-left">
-            <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-accent-strong/50 text-accent-strong lg:mx-0">
+            <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid lg:mx-0">
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M4 5h16v11H8l-4 4z" />
               </svg>
             </span>
             <p className="mt-3 font-display text-xl font-black uppercase tracking-tight text-chalk sm:text-2xl">
-              {headlineLine1} <span className="text-accent-strong">{headlineAccent}</span>
+              {headlineLine1} <span className="text-accent-vivid">{headlineAccent}</span>
             </p>
             <p className="mx-auto mt-2 max-w-sm font-mono text-sm text-chalk lg:mx-0">{description}</p>
 
             <Link
               href="/contact"
-              className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105"
+              className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
             >
               {ctaLabel}
               <span aria-hidden className="text-sm leading-none">
@@ -82,7 +82,7 @@ export default function FaqSupportBannerSection() {
           <div className="flex flex-none flex-col gap-4">
             {quickContact.map((item) => (
               <div key={item.id} className="flex items-center gap-3">
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
+                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                   <QuickIcon id={item.id} className="h-4 w-4" />
                 </span>
                 <div>

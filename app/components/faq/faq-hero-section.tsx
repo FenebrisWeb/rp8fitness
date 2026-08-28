@@ -54,15 +54,15 @@ export default function FaqHeroSection({
             className="max-w-lg"
           >
             <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
                 {eyebrow}
               </span>
-              <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
+              <span aria-hidden className="h-px w-10 bg-accent-vivid/40" />
             </div>
 
             <h1 className="mt-3 font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-chalk sm:text-5xl">
               <span className="block">{headlineLine1}</span>
-              <span className="block text-accent-strong">{headlineAccent}</span>
+              <span className="block text-accent-vivid">{headlineAccent}</span>
             </h1>
 
             <p className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
@@ -85,7 +85,7 @@ export default function FaqHeroSection({
                 type="search"
                 placeholder={searchPlaceholder}
                 onChange={(e) => onSearch?.(e.target.value)}
-                className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-sm text-chalk placeholder:text-chalk/50 backdrop-blur-sm focus:border-accent-strong focus:outline-none"
+                className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-sm text-chalk placeholder:text-chalk/50 backdrop-blur-sm focus:border-accent-vivid focus:outline-none"
               />
             </div>
           </motion.div>

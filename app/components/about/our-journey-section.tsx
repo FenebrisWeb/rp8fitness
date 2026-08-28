@@ -80,10 +80,10 @@ export default function OurJourneySection() {
 
               {MILESTONES.map((milestone) => (
                 <div key={milestone.id} className="relative flex flex-col items-center gap-2 text-center">
-                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent-strong/60 bg-ink text-accent-strong">
+                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent-vivid/60 bg-ink text-accent-vivid">
                     <MilestoneIcon id={milestone.id} className="h-5 w-5" />
                   </span>
-                  <p className="font-display text-sm font-black uppercase text-accent-strong">{milestone.year}</p>
+                  <p className="font-display text-sm font-black uppercase text-accent-vivid">{milestone.year}</p>
                   <p className="font-mono text-xs font-bold uppercase text-chalk">{milestone.title}</p>
                   <p className="max-w-[180px] font-mono text-xs leading-relaxed text-chalk">
                     {milestone.description}

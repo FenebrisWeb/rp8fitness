@@ -66,7 +66,7 @@ export default function OurStorySection() {
             <button
               type="button"
               aria-label="Play our story video"
-              className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-accent-strong text-accent-strong-contrast transition-transform hover:scale-105"
+              className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-accent-vivid text-accent-vivid-contrast transition-transform hover:scale-105"
             >
               <svg width="16" height="18" viewBox="0 0 12 14" fill="currentColor">
                 <path d="M0 0.5L12 7L0 13.5V0.5Z" />
@@ -74,8 +74,8 @@ export default function OurStorySection() {
             </button>
           </div>
 
-          <div className="flex-none rounded-2xl border border-accent-strong/40 bg-ink p-6 sm:w-[220px]">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
+          <div className="flex-none rounded-2xl border border-accent-vivid/40 bg-ink p-6 sm:w-[220px]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden>
                 <circle cx="12" cy="12" r="9" />
                 <circle cx="12" cy="12" r="5" />

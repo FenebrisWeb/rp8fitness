@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { label: "Franchise", href: "/franchise" },
   { label: "About Us", href: "/about" },
   { label: "FAQs", href: "/faq" },
+  { label: "BMI Calculator", href: "/bmi-calculator" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -27,8 +28,8 @@ export default function Header() {
           <Image
             src="/rp8-logo.png"
             alt="RP8 Fitness"
-            width={88}
-            height={88}
+            width={400}
+            height={159}
             className="h-9 w-auto sm:h-11"
           />
         </Link>

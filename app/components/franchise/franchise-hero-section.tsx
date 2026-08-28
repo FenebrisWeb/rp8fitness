@@ -90,17 +90,17 @@ export default function FranchiseHeroSection() {
             className="max-w-xl"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
                 {eyebrow}
               </span>
-              <span aria-hidden className="text-accent-strong">
+              <span aria-hidden className="text-accent-vivid">
                 ›
               </span>
             </div>
 
             <h1 className="mt-3 font-display text-3xl font-black uppercase leading-[1.05] tracking-tight text-chalk sm:text-4xl md:text-5xl">
               <span className="block">{headlineLine1}</span>
-              <span className="block text-accent-strong">{headlineAccent}</span>
+              <span className="block text-accent-vivid">{headlineAccent}</span>
               <span className="block">{headlineLine3}</span>
             </h1>
 
@@ -109,7 +109,7 @@ export default function FranchiseHeroSection() {
             <dl className="mt-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-6">
               {pointers.map((pointer) => (
                 <div key={pointer.id} className="flex items-center gap-2.5">
-                  <PointerIcon id={pointer.id} className="h-5 w-5 flex-none text-accent-strong" />
+                  <PointerIcon id={pointer.id} className="h-5 w-5 flex-none text-accent-vivid" />
                   <dt className="font-mono text-xs font-bold uppercase tracking-[0.04em] text-chalk">
                     {pointer.label}
                   </dt>
@@ -120,7 +120,7 @@ export default function FranchiseHeroSection() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="#"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 {primaryCtaLabel}
                 <span aria-hidden className="text-sm leading-none">
@@ -130,7 +130,7 @@ export default function FranchiseHeroSection() {
 
               <button
                 type="button"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-strong hover:text-accent-strong"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
               >
                 <svg viewBox="0 0 12 14" className="h-3 w-3" fill="currentColor" aria-hidden>
                   <path d="M0 0.5L12 7L0 13.5V0.5Z" />

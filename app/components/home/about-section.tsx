@@ -82,7 +82,7 @@ export default function AboutSection() {
               <button
                 type="button"
                 aria-label="Play video"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-strong text-accent-strong-contrast transition-transform hover:scale-105"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-vivid text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor">
                   <path d="M0 0.5L12 7L0 13.5V0.5Z" />

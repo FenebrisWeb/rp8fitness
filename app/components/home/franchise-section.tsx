@@ -72,14 +72,14 @@ export default function FranchiseSection() {
 
           <div className="flex flex-col gap-10 p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-start lg:gap-14 lg:p-14">
             <div className="max-w-sm">
-              <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-tight text-accent-strong drop-shadow-[0_0_18px_var(--accent-glow)] sm:text-4xl">
+              <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-tight text-accent-vivid drop-shadow-[0_0_18px_var(--accent-vivid-glow)] sm:text-4xl">
                 {headline}
               </h2>
               <p className="mt-3 font-mono text-sm text-chalk sm:text-base">{description}</p>
 
               <Link
                 href="#"
-                className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-accent-strong/70 bg-accent-strong/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-glow)] transition-all hover:bg-accent-strong/35 hover:shadow-[0_0_28px_var(--accent-glow-strong)] hover:scale-105"
+                className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105"
               >
                 {ctaLabel}
                 <span aria-hidden className="text-sm leading-none">
@@ -91,7 +91,7 @@ export default function FranchiseSection() {
             <dl className="flex flex-col gap-6">
               {highlights.map((highlight) => (
                 <div key={highlight.id} className="flex items-start gap-3">
-                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-strong/60 bg-ink/40 text-accent-strong backdrop-blur-sm">
+                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/60 bg-ink/40 text-accent-vivid backdrop-blur-sm">
                     <HighlightIcon id={highlight.id} className="h-5 w-5" />
                   </span>
                   <div>

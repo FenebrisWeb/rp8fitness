@@ -28,6 +28,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} h-full antialiased`}
+      // The inline script below sets data-theme before hydration so light
+      // mode never flashes dark first — React's hydration check has no way
+      // to know that's expected, so this is the documented escape hatch.
+      suppressHydrationWarning
     >
       <head>
         {/* Set the theme before paint so switching to light mode never

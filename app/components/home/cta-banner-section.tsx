@@ -23,7 +23,7 @@ function WaveLines() {
   return (
     <svg
       viewBox="0 0 420 420"
-      className="pointer-events-none absolute -left-6 -top-6 h-[130%] w-[45%] text-accent-strong"
+      className="pointer-events-none absolute -left-6 -top-6 h-[130%] w-[45%] text-accent-vivid"
       aria-hidden
     >
       {paths.map((d, i) => (
@@ -61,7 +61,7 @@ export default function CtaBannerSection() {
 
             <Link
               href="#"
-              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105"
+              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
             >
               {ctaLabel}
               <span aria-hidden className="text-sm leading-none">

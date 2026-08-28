@@ -218,7 +218,7 @@ export default function WhyChooseSection() {
             <h2 className="flex-none font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk lg:text-3xl">
               <span className="block">{headlineLine1}</span>
               <span className="block">
-                <span className="text-accent-strong">{accentWord}</span>
+                <span className="text-accent-vivid">{accentWord}</span>
                 {headlineRest ? ` ${headlineRest}` : ""}
               </span>
             </h2>

@@ -59,7 +59,7 @@ export default function StatsBarSection() {
           <div className="grid grid-cols-2 gap-y-8 sm:grid-cols-3 lg:flex lg:divide-x lg:divide-chalk/10">
             {STATS.map((stat) => (
               <div key={stat.id} className="flex flex-col items-center gap-2 text-center lg:flex-1 lg:px-4">
-                <StatIcon id={stat.id} className="h-6 w-6 text-accent-strong" />
+                <StatIcon id={stat.id} className="h-6 w-6 text-accent-vivid" />
                 <p className="font-display text-lg font-black uppercase leading-tight text-chalk sm:text-xl">
                   {stat.value}
                 </p>

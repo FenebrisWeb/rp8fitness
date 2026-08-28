@@ -105,7 +105,7 @@ const fadeUp = {
 };
 
 const inputClasses =
-  "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-sm text-chalk placeholder:text-chalk/50 focus:border-accent-strong focus:outline-none";
+  "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-sm text-chalk placeholder:text-chalk/50 focus:border-accent-vivid focus:outline-none";
 
 export default function ContactFormSection() {
   const { formHeadlineLine1, formHeadlineAccent, privacyNote, infoHeadlineLine1, infoHeadlineAccent, infoItems, followLabel } =
@@ -123,9 +123,9 @@ export default function ContactFormSection() {
             className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8"
           >
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-chalk sm:text-3xl">
-              {formHeadlineLine1} <span className="text-accent-strong">{formHeadlineAccent}</span>
+              {formHeadlineLine1} <span className="text-accent-vivid">{formHeadlineAccent}</span>
             </h2>
-            <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
+            <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
 
             <form onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col gap-4">
               <div className="relative">
@@ -175,7 +175,7 @@ export default function ContactFormSection() {
 
               <button
                 type="submit"
-                className="mt-1 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-strong px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-[1.02]"
+                className="mt-1 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-vivid px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-[1.02]"
               >
                 Send Message
                 <span aria-hidden className="text-sm leading-none">
@@ -210,14 +210,14 @@ export default function ContactFormSection() {
                   key={item.id}
                   className="flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5"
                 >
-                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
+                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                     <InfoIcon id={item.id} className="h-5 w-5" />
                   </span>
                   <div className="flex-1">
                     <p className="font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk">
                       {item.title}
                     </p>
-                    <div className={`mt-1 font-mono text-sm ${item.accentLine ? "text-accent-strong" : "text-chalk"}`}>
+                    <div className={`mt-1 font-mono text-sm ${item.accentLine ? "text-accent-vivid" : "text-chalk"}`}>
                       {item.lines.map((line) => (
                         <p key={line}>{line}</p>
                       ))}

@@ -42,7 +42,7 @@ export default function AboutCtaSection() {
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
                 {headlineLine1}
                 <br />
-                <span className="text-accent-strong">{headlineLine2}</span>
+                <span className="text-accent-vivid">{headlineLine2}</span>
               </h2>
               <p className="mt-3 font-mono text-sm text-chalk">{description}</p>
             </div>
@@ -50,7 +50,7 @@ export default function AboutCtaSection() {
             <div className="flex flex-none flex-wrap items-center gap-3">
               <Link
                 href="#"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-strong px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 {primaryCtaLabel}
                 <span aria-hidden className="text-sm leading-none">
@@ -60,7 +60,7 @@ export default function AboutCtaSection() {
 
               <Link
                 href="#"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 bg-black/30 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-strong hover:text-accent-strong"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 bg-black/30 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="3" y="5" width="18" height="16" rx="2" />

@@ -61,7 +61,7 @@ export default function NewsletterSection() {
     <section className="border-t border-white/10 bg-black">
       <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-8 px-6 py-10 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left">
         <div className="flex flex-none items-start gap-3 sm:max-w-xs">
-          <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-accent-strong/50 text-accent-strong">
+          <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <rect x="3" y="5" width="18" height="14" rx="2" />
               <path d="M4 7l8 6 8-6" />
@@ -78,11 +78,11 @@ export default function NewsletterSection() {
             type="email"
             required
             placeholder="Enter your email"
-            className="w-full min-w-0 rounded-full border border-chalk/20 bg-transparent px-4 py-2.5 font-mono text-xs text-chalk placeholder:text-steel focus:border-accent-strong focus:outline-none sm:w-56"
+            className="w-full min-w-0 rounded-full border border-chalk/20 bg-transparent px-4 py-2.5 font-mono text-xs text-chalk placeholder:text-steel focus:border-accent-vivid focus:outline-none sm:w-56"
           />
           <button
             type="submit"
-            className="flex-none cursor-pointer rounded-full bg-accent-strong px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105"
+            className="flex-none cursor-pointer rounded-full bg-accent-vivid px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
           >
             {ctaLabel}
           </button>
@@ -98,7 +98,7 @@ export default function NewsletterSection() {
                 key={social.id}
                 href={social.href}
                 aria-label={social.label}
-                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-chalk/25 text-chalk transition-colors hover:border-accent-strong hover:text-accent-strong"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-chalk/25 text-chalk transition-colors hover:border-accent-vivid hover:text-accent-vivid"
               >
                 <SocialIcon id={social.id} className="h-4 w-4" />
               </Link>

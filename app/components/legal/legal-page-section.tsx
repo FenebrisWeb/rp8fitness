@@ -34,7 +34,7 @@ export default function LegalPageSection({ content }: { content: LegalPageConten
                   <ul className="mt-3 flex flex-col gap-2">
                     {section.list.map((item) => (
                       <li key={item} className="flex items-start gap-2 font-mono text-sm leading-relaxed text-chalk">
-                        <span aria-hidden className="mt-2 h-1 w-1 flex-none rounded-full bg-accent-strong" />
+                        <span aria-hidden className="mt-2 h-1 w-1 flex-none rounded-full bg-accent-vivid" />
                         {item}
                       </li>
                     ))}

@@ -346,8 +346,8 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
                   onClick={() => selectCategory(category.id)}
                   className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 text-left font-mono text-sm font-bold transition-colors ${
                     active
-                      ? "border-accent-strong bg-accent-strong text-accent-strong-contrast"
-                      : "border-chalk/10 bg-ink text-chalk hover:border-accent-strong/50"
+                      ? "border-accent-vivid bg-accent-vivid text-accent-vivid-contrast"
+                      : "border-chalk/10 bg-ink text-chalk hover:border-accent-vivid/50"
                   }`}
                 >
                   <CategoryIcon id={category.id} className="h-5 w-5 flex-none" />
@@ -376,13 +376,13 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
                     aria-expanded={open}
                     className="flex w-full cursor-pointer items-center justify-between gap-4 text-left"
                   >
-                    <span className={`font-mono text-sm font-bold ${open ? "text-accent-strong" : "text-chalk"}`}>
+                    <span className={`font-mono text-sm font-bold ${open ? "text-accent-vivid" : "text-chalk"}`}>
                       {item.question}
                     </span>
                     <span
                       aria-hidden
                       className={`flex h-7 w-7 flex-none items-center justify-center rounded-full border text-sm ${
-                        open ? "border-accent-strong text-accent-strong" : "border-chalk/25 text-chalk"
+                        open ? "border-accent-vivid text-accent-vivid" : "border-chalk/25 text-chalk"
                       }`}
                     >
                       {open ? "−" : "+"}

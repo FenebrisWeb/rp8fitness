@@ -93,7 +93,7 @@ export default function WhyPartnerSection() {
           <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {cards.map((card) => (
               <div key={card.id} className="rounded-xl border border-chalk/10 bg-ink p-5">
-                <CardIcon id={card.id} className="h-7 w-7 text-accent-strong" />
+                <CardIcon id={card.id} className="h-7 w-7 text-accent-vivid" />
                 <p className="mt-4 font-mono text-sm font-bold uppercase leading-snug text-chalk">
                   {card.title}
                 </p>

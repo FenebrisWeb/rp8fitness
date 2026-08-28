@@ -86,9 +86,9 @@ const ACCENTS = ["red", "lime"] as const;
 const ACCENT_CLASSES: Record<(typeof ACCENTS)[number], { border: string; bg: string; text: string }> = {
   red: { border: "group-hover:border-p25", bg: "group-hover:bg-p25", text: "group-hover:text-chalk" },
   lime: {
-    border: "group-hover:border-accent-strong",
-    bg: "group-hover:bg-accent-strong",
-    text: "group-hover:text-accent-strong-contrast",
+    border: "group-hover:border-accent-vivid",
+    bg: "group-hover:bg-accent-vivid",
+    text: "group-hover:text-accent-vivid-contrast",
   },
 };
 

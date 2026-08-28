@@ -118,7 +118,7 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-[1700px] px-6 py-14 sm:px-10 sm:py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
-            <Image src="/rp8-logo.png" alt="RP8 Fitness" width={110} height={110} className="h-11 w-auto" />
+            <Image src="/rp8-logo.png" alt="RP8 Fitness" width={400} height={159} className="h-11 w-auto" />
             <p className="mt-4 max-w-[220px] font-mono text-sm text-foreground">{tagline}</p>
 
             <div className="mt-5 flex items-center gap-3">

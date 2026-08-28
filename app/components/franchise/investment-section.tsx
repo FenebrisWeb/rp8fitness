@@ -71,16 +71,16 @@ export default function InvestmentSection() {
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
                 {headline}
                 <br />
-                <span className="text-accent-strong">{headlineAccent}</span>
+                <span className="text-accent-vivid">{headlineAccent}</span>
               </h2>
-              <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
+              <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
               <p className="mt-4 max-w-xs font-mono text-sm text-chalk">{description}</p>
             </div>
 
             <dl className="flex flex-col gap-6">
               {items.map((item) => (
                 <div key={item.id} className="flex items-start gap-3">
-                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                     <ItemIcon id={item.id} className="h-5 w-5" />
                   </span>
                   <div>

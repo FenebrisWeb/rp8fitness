@@ -56,7 +56,7 @@ export default function FranchiseStatsSection() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:divide-x lg:divide-chalk/10">
             {STATS.map((stat) => (
               <div key={stat.id} className="flex items-center gap-3 lg:flex-1 lg:px-4">
-                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
+                <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                   <StatIcon id={stat.id} className="h-5 w-5" />
                 </span>
                 <div>
