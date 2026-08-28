@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { label: "Trainers", href: "#" },
   { label: "Franchise", href: "/franchise" },
   { label: "About Us", href: "/about" },
+  { label: "FAQs", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 

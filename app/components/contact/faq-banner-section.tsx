@@ -45,7 +45,7 @@ export default function FaqBannerSection() {
           </div>
 
           <Link
-            href="#"
+            href="/faq"
             className="inline-flex flex-none cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk transition-colors hover:border-accent-strong hover:text-accent-strong"
           >
             {ctaLabel}

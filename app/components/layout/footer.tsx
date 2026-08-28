@@ -29,7 +29,7 @@ const FOOTER_CONTENT: FooterContent = {
     {
       title: "Support",
       links: [
-        { label: "FAQs", href: "#" },
+        { label: "FAQs", href: "/faq" },
         { label: "Terms & Conditions", href: "/terms-and-conditions" },
         { label: "Privacy Policy", href: "/privacy-policy" },
         { label: "Refund Policy", href: "/refund-policy" },
