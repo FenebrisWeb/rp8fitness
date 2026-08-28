@@ -94,13 +94,13 @@ export default function GermanEquipmentSection() {
                 <span className="block text-3xl sm:text-4xl lg:text-5xl">{headlineLine2}</span>
               </h2>
 
-              <p className="max-w-md font-mono text-sm text-chalk/75 sm:text-base">{description}</p>
+              <p className="max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
 
               <div className="mt-2 grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {features.map((feature) => (
                   <div key={feature.id} className="flex flex-col gap-2">
                     <FeatureIcon id={feature.id} className="h-6 w-6 text-lime" />
-                    <p className="font-mono text-xs uppercase leading-snug text-chalk/80">
+                    <p className="font-mono text-xs uppercase leading-snug text-chalk">
                       {feature.label}
                     </p>
                   </div>

@@ -82,7 +82,7 @@ export default function MembershipSection() {
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
                 <span className="text-lime">{headlineAccent}</span> {headlineRest}
               </h2>
-              <p className="mt-3 font-mono text-sm text-chalk/75">{description}</p>
+              <p className="mt-3 font-mono text-sm text-chalk">{description}</p>
 
               <Link
                 href="#"
@@ -103,7 +103,7 @@ export default function MembershipSection() {
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-md border border-lime/50 text-lime">
                     <PointerIcon id={pointer.id} className="h-4 w-4" />
                   </span>
-                  <span className="font-mono text-xs uppercase tracking-[0.04em] text-chalk/85">
+                  <span className="font-mono text-xs uppercase tracking-[0.04em] text-chalk">
                     {pointer.label}
                   </span>
                 </div>
@@ -111,7 +111,7 @@ export default function MembershipSection() {
             </div>
 
             <div className="min-w-[240px] rounded-2xl border border-lime/50 bg-black/30 px-8 py-8 text-center backdrop-blur-sm sm:px-10 sm:py-9 lg:ml-auto">
-              <p className="font-mono text-xs uppercase tracking-[0.15em] text-chalk/70">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-chalk">
                 {price.eyebrow}
               </p>
               <p className="mt-2 font-display text-4xl font-black text-chalk sm:text-5xl">
@@ -119,7 +119,7 @@ export default function MembershipSection() {
                 <span className="text-lg font-bold text-lime sm:text-xl">{price.period}</span>
               </p>
               <div className="my-4 h-px w-full bg-lime/30" />
-              <p className="font-mono text-xs uppercase leading-relaxed tracking-[0.1em] text-chalk/70">
+              <p className="font-mono text-xs uppercase leading-relaxed tracking-[0.1em] text-chalk">
                 {price.notes[0]}
                 <br />
                 {price.notes[1]}

@@ -85,13 +85,13 @@ export default function OpenTerraceSection() {
               {headline}
             </h2>
 
-            <p className="max-w-md font-mono text-base text-chalk/75 sm:text-lg">{description}</p>
+            <p className="max-w-md font-mono text-base text-chalk sm:text-lg">{description}</p>
 
             <div className="mt-2 grid grid-cols-3 gap-4 sm:gap-6">
               {pointers.map((pointer) => (
                 <div key={pointer.id} className="flex flex-col gap-2">
                   <PointerIcon id={pointer.id} className="h-6 w-6 text-lime" />
-                  <p className="font-mono text-xs uppercase leading-snug text-chalk/80">
+                  <p className="font-mono text-xs uppercase leading-snug text-chalk">
                     {pointer.label}
                   </p>
                 </div>

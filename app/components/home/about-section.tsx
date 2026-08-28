@@ -120,7 +120,7 @@ export default function AboutSection() {
                 <p className="font-display text-lg font-black text-foreground">
                   <Counter value={ratingValue} suffix={ratingSuffix} />
                 </p>
-                <p className="font-mono text-xs text-steel">{ratingLabel}</p>
+                <p className="font-mono text-xs text-foreground">{ratingLabel}</p>
               </div>
             </div>
 
@@ -130,7 +130,7 @@ export default function AboutSection() {
                   <p className="font-display text-3xl font-black text-foreground sm:text-4xl">
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </p>
-                  <p className="mt-1 font-mono text-xs text-steel">{stat.label}</p>
+                  <p className="mt-1 font-mono text-xs text-foreground">{stat.label}</p>
                 </div>
               ))}
             </div>

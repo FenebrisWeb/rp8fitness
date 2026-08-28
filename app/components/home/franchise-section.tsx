@@ -73,10 +73,10 @@ export default function FranchiseSection() {
 
           <div className="flex flex-col gap-10 p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-start lg:gap-14 lg:p-14">
             <div className="max-w-sm">
-              <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-tight text-lime drop-shadow-[0_0_18px_rgba(198,255,46,0.45)] sm:text-4xl">
+              <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-tight text-accent-strong drop-shadow-[0_0_18px_var(--accent-glow)] sm:text-4xl">
                 {headline}
               </h2>
-              <p className="mt-3 font-mono text-sm text-chalk/75 sm:text-base">{description}</p>
+              <p className="mt-3 font-mono text-sm text-chalk sm:text-base">{description}</p>
 
               <Link
                 href="#"
@@ -96,7 +96,7 @@ export default function FranchiseSection() {
                     <HighlightIcon id={highlight.id} className="h-5 w-5" />
                   </span>
                   <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-chalk/60">
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-chalk">
                       {highlight.label}
                     </dt>
                     <dd className="mt-0.5 max-w-[220px] font-display text-base font-bold uppercase leading-snug text-chalk sm:text-lg">

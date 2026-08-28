@@ -19,6 +19,12 @@
 
   --background: var(--bg);
   --foreground: var(--fg);
+
+  /* A lime accent reads fine on dark banners, but goes flat/illegible-looking
+     on a light background — this swaps to the brand red for headline
+     accents that need to work on the plain (theme-following) page surface. */
+  --accent-strong: var(--lime);
+  --accent-glow: rgba(198, 255, 46, 0.45);
 }
 
 /* Explicit light mode — toggled via [data-theme="light"] on <html>.
@@ -28,6 +34,8 @@
   --bg: #dcdad4;
   --fg: #101215;
   --dot: rgba(0, 0, 0, 0.06);
+  --accent-strong: var(--maroon);
+  --accent-glow: rgba(146, 14, 23, 0.45);
 }
 
 @theme inline {
@@ -43,6 +51,7 @@
   --color-lime: var(--lime);
   --color-coral: var(--coral);
   --color-maroon: var(--maroon);
+  --color-accent-strong: var(--accent-strong);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-archivo);
@@ -108,4 +117,5 @@ button:not(:disabled),
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 

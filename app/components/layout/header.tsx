@@ -7,11 +7,12 @@ import ThemeToggle from "./theme-toggle";
 import MobileMenu from "./mobile-menu";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#" },
-  { label: "Pages", href: "#" },
-  { label: "Program", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Zones", href: "#" },
+  { label: "Membership", href: "#" },
   { label: "Trainers", href: "#" },
-  { label: "Blog", href: "#" },
+  { label: "Franchise", href: "#" },
+  { label: "About Us", href: "/about" },
   { label: "Contact", href: "#" },
 ];
 

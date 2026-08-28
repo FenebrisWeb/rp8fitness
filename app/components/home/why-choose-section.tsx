@@ -172,8 +172,8 @@ function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] 
               className="flex flex-none flex-col items-center gap-4 px-5 text-center"
               style={{ flex: itemWidth ? `0 0 ${itemWidth}px` : `0 0 ${100 / VISIBLE}%` }}
             >
-              <WhyChooseIcon id={feature.id} className="h-11 w-11 text-steel" />
-              <p className="font-mono text-xs uppercase leading-snug text-steel">
+              <WhyChooseIcon id={feature.id} className="h-11 w-11 text-foreground" />
+              <p className="font-mono text-xs uppercase leading-snug text-foreground">
                 {feature.line1}
                 <br />
                 <span className="font-bold text-foreground">{feature.line2}</span>
@@ -216,7 +216,7 @@ export default function WhyChooseSection() {
               left, then the feature row, each item separated by a
               vertical divider. */}
           <div className="hidden rounded-2xl border border-chalk/10 bg-ink p-8 sm:flex sm:items-center sm:gap-8 sm:rounded-3xl lg:gap-10 lg:p-10">
-            <h2 className="flex-none font-display text-2xl font-black uppercase leading-tight tracking-tight text-foreground lg:text-3xl">
+            <h2 className="flex-none font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk lg:text-3xl">
               <span className="block">{headlineLine1}</span>
               <span className="block">
                 <span className="text-lime">{accentWord}</span>
@@ -230,11 +230,11 @@ export default function WhyChooseSection() {
               {features.map((feature, i) => (
                 <div key={feature.id} className="flex items-start">
                   <div className="flex flex-col items-center gap-3 px-3 text-center lg:px-4">
-                    <WhyChooseIcon id={feature.id} className="h-10 w-10 text-steel lg:h-11 lg:w-11" />
-                    <p className="font-mono text-[11px] uppercase leading-snug text-steel lg:text-xs">
+                    <WhyChooseIcon id={feature.id} className="h-10 w-10 text-chalk lg:h-11 lg:w-11" />
+                    <p className="font-mono text-[11px] uppercase leading-snug text-chalk lg:text-xs">
                       {feature.line1}
                       <br />
-                      <span className="font-bold text-foreground">{feature.line2}</span>
+                      <span className="font-bold text-chalk">{feature.line2}</span>
                     </p>
                   </div>
                   {i < features.length - 1 && (

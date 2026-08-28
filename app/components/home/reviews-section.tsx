@@ -261,7 +261,7 @@ export default function ReviewsSection() {
           <path d={STAR_PATH} />
         </svg>
         <span className="text-sm font-bold text-foreground">{ratingValue}</span>
-        <span className="text-xs text-steel">{ratingLabel}</span>
+        <span className="text-xs text-foreground">{ratingLabel}</span>
       </div>
 
       <div className="flex items-center gap-2">
@@ -269,7 +269,7 @@ export default function ReviewsSection() {
           type="button"
           aria-label="Previous review"
           onClick={() => goTo(index - 1)}
-          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-lime hover:text-lime"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-accent-strong hover:text-accent-strong"
         >
           ‹
         </button>
@@ -277,7 +277,7 @@ export default function ReviewsSection() {
           type="button"
           aria-label="Next review"
           onClick={() => goTo(index + 1)}
-          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-lime hover:text-lime"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-accent-strong hover:text-accent-strong"
         >
           ›
         </button>
@@ -330,7 +330,7 @@ export default function ReviewsSection() {
                         <span aria-hidden className="font-display text-3xl leading-none text-lime">
                           &ldquo;
                         </span>
-                        <p className="mt-2 font-mono text-sm leading-snug text-chalk/80">
+                        <p className="mt-2 font-mono text-sm leading-snug text-chalk">
                           {short}
                           {isTruncated && (
                             <>
@@ -395,7 +395,7 @@ export default function ReviewsSection() {
                     type="button"
                     onClick={() => setActiveReview(null)}
                     aria-label="Close"
-                    className="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-chalk/60 transition-colors hover:bg-chalk/10 hover:text-chalk"
+                    className="absolute right-4 top-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-chalk transition-colors hover:bg-chalk/10"
                   >
                     ✕
                   </button>
@@ -403,7 +403,7 @@ export default function ReviewsSection() {
                   <span aria-hidden className="font-display text-4xl leading-none text-lime">
                     &ldquo;
                   </span>
-                  <p className="mt-3 font-mono text-sm leading-relaxed text-chalk/85">{activeReview.text}</p>
+                  <p className="mt-3 font-mono text-sm leading-relaxed text-chalk">{activeReview.text}</p>
 
                   <div className="mt-6 flex items-center gap-3">
                     <div className="relative h-12 w-12 flex-none overflow-hidden rounded-full border border-lime/50">
