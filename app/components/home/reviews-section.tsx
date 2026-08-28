@@ -177,8 +177,8 @@ function getVisibleCount(width: number) {
   return 5;
 }
 
-export default function ReviewsSection() {
-  const { headline, ratingValue, ratingLabel, reviews } = REVIEWS_CONTENT;
+export default function ReviewsSection({ content = REVIEWS_CONTENT }: { content?: ReviewsContent }) {
+  const { headline, ratingValue, ratingLabel, reviews } = content;
   const total = reviews.length;
 
   const [index, setIndex] = useState(0);
@@ -189,7 +189,9 @@ export default function ReviewsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
 
-  const visible = width ? getVisibleCount(width) : 1;
+  // Never try to show more slots than there are reviews (a page reusing
+  // this component with a short list shouldn't leave the track half-empty).
+  const visible = width ? Math.min(getVisibleCount(width), total) : 1;
   const itemWidth = width ? width / visible : 0;
   const count = Math.max(total - visible + 1, 1);
 

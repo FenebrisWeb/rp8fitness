@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { label: "Zones", href: "#" },
   { label: "Membership", href: "#" },
   { label: "Trainers", href: "#" },
-  { label: "Franchise", href: "#" },
+  { label: "Franchise", href: "/franchise" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "#" },
 ];
