@@ -81,7 +81,12 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
               </button>
             </div>
 
-            <nav className="flex flex-1 flex-col justify-center gap-2 px-6 sm:px-10">
+            {/* min-h-0 lets this flex-1 pane actually shrink to the panel's
+                remaining height instead of growing to fit its content — the
+                overflow-y-auto below only kicks in with that in place, so a
+                longer link list scrolls internally instead of pushing past
+                the viewport edge on shorter desktop windows. */}
+            <nav className="flex min-h-0 flex-1 flex-col justify-center gap-2 overflow-y-auto px-6 py-4 sm:px-10">
               {links.map((link, i) => (
                 <motion.div
                   key={link.label}
