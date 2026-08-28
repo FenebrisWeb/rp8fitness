@@ -51,7 +51,7 @@ export default function FranchiseSection() {
   const { headline, description, ctaLabel, image, highlights } = FRANCHISE_CONTENT;
 
   return (
-    <section className="relative overflow-hidden bg-transparent pb-20 sm:pb-28">
+    <section className="relative overflow-hidden bg-transparent pb-5">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
@@ -62,9 +62,7 @@ export default function FranchiseSection() {
           className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* Full-bleed banner photo — the card's background, not a side
-              panel — with a two-way gradient (left-to-right for the text
-              column, bottom-to-top for the content band) so copy stays
-              legible over the storefront shot. */}
+              panel — shown as-is, with no gradient layered on top. */}
           <Image
             src={image.src}
             alt={image.alt}
@@ -72,8 +70,6 @@ export default function FranchiseSection() {
             sizes="100vw"
             className="-z-10 object-cover"
           />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/70 to-ink/10" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/95 via-ink/10 to-transparent" />
 
           <div className="flex flex-col gap-10 p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-start lg:gap-14 lg:p-14">
             <div className="max-w-sm">
