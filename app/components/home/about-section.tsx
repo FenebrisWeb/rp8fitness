@@ -72,7 +72,7 @@ export default function AboutSection() {
 
             <div className="flex h-[230px] w-[150px] flex-none snap-center flex-col justify-between rounded-xl bg-ink p-4 sm:w-[170px]">
               <motion.p
-                className="text-left font-sans text-sm font-semibold leading-snug"
+                className="text-left font-mono text-sm font-semibold leading-snug"
                 initial={{ color: "#7c848d" }}
                 whileInView={{ color: "#f3f2ec" }}
                 viewport={{ once: true, amount: 0.6 }}
