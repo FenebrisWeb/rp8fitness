@@ -7,6 +7,7 @@ import GermanEquipmentSection from "@/app/components/home/german-equipment-secti
 import OpenTerraceSection from "@/app/components/home/open-terrace-section";
 import ReviewsSection from "@/app/components/home/reviews-section";
 import MembershipSection from "@/app/components/home/membership-section";
+import CtaBannerSection from "@/app/components/home/cta-banner-section";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <WhyChooseSection />
       <ReviewsSection />
       <MembershipSection />
+      <CtaBannerSection />
     </>
   );
 }
