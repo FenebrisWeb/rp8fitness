@@ -61,7 +61,7 @@ export default function GermanEquipmentSection() {
     GERMAN_EQUIPMENT_CONTENT;
 
   return (
-    <section className="relative overflow-hidden bg-transparent pb-20 sm:pb-28">
+    <section className="relative overflow-hidden bg-transparent pb-5">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
