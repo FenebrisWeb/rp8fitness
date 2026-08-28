@@ -6,6 +6,7 @@ import FranchiseSection from "@/app/components/home/franchise-section";
 import GermanEquipmentSection from "@/app/components/home/german-equipment-section";
 import OpenTerraceSection from "@/app/components/home/open-terrace-section";
 import ReviewsSection from "@/app/components/home/reviews-section";
+import MembershipSection from "@/app/components/home/membership-section";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <FranchiseSection />
       <WhyChooseSection />
       <ReviewsSection />
+      <MembershipSection />
     </>
   );
 }
