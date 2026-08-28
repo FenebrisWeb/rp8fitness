@@ -11,6 +11,7 @@
   --p10: #17a44c;
   --lime: #c6ff2e;
   --coral: #f27272;
+  --maroon: #920e17;
 
   --bg: var(--ink);
   --fg: var(--chalk);
@@ -41,6 +42,7 @@
   --color-p10: var(--p10);
   --color-lime: var(--lime);
   --color-coral: var(--coral);
+  --color-maroon: var(--maroon);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-archivo);
@@ -106,3 +108,4 @@ button:not(:disabled),
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
