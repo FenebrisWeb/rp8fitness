@@ -10,11 +10,8 @@ const FOOTER_CONTENT: FooterContent = {
       links: [
         { label: "Home", href: "/" },
         { label: "About Us", href: "/about" },
-        { label: "Our Zones", href: "#" },
         { label: "Membership", href: "/membership" },
-        { label: "Trainers", href: "#" },
         { label: "Franchise", href: "/franchise" },
-        { label: "Contact Us", href: "/contact" },
       ],
     },
     {
@@ -33,6 +30,7 @@ const FOOTER_CONTENT: FooterContent = {
         { label: "Terms & Conditions", href: "/terms-and-conditions" },
         { label: "Privacy Policy", href: "/privacy-policy" },
         { label: "Refund Policy", href: "/refund-policy" },
+        { label: "Contact Us", href: "/contact" },
       ],
     },
   ],
@@ -116,7 +114,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-foreground/10">
       <div className="mx-auto w-full max-w-[1700px] px-6 py-14 sm:px-10 sm:py-16">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-10">
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <Image src="/rp8-logo.png" alt="RP8 Fitness" width={400} height={159} className="h-11 w-auto" />
             <p className="mt-4 max-w-[220px] font-mono text-sm text-foreground">{tagline}</p>
@@ -151,25 +149,29 @@ export default function Footer() {
                     </Link>
                   </li>
                 ))}
-
-                {/* Contact details live inside the Support column now,
-                    rather than as their own separate footer block. */}
-                {group.title === "Support" &&
-                  contact.map((item) => (
-                    <li key={item.id} className="flex items-start gap-2.5">
-                      <ContactIcon id={item.id} className="mt-0.5 h-4 w-4 flex-none text-accent-strong" />
-                      <span className="font-mono text-sm text-foreground">
-                        {item.lines.map((line) => (
-                          <span key={line} className="block">
-                            {line}
-                          </span>
-                        ))}
-                      </span>
-                    </li>
-                  ))}
               </ul>
             </div>
           ))}
+
+          <div>
+            <h3 className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-foreground">
+              Contact Us
+            </h3>
+            <ul className="mt-4 flex flex-col gap-3">
+              {contact.map((item) => (
+                <li key={item.id} className="flex items-start gap-2.5">
+                  <ContactIcon id={item.id} className="mt-0.5 h-4 w-4 flex-none text-accent-strong" />
+                  <span className="font-mono text-sm text-foreground">
+                    {item.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
