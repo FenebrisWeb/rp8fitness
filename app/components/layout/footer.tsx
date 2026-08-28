@@ -14,7 +14,7 @@ const FOOTER_CONTENT: FooterContent = {
         { label: "Membership", href: "#" },
         { label: "Trainers", href: "#" },
         { label: "Franchise", href: "/franchise" },
-        { label: "Contact Us", href: "#" },
+        { label: "Contact Us", href: "/contact" },
       ],
     },
     {
