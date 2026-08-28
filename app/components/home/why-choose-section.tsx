@@ -182,21 +182,6 @@ function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] 
           ))}
         </motion.div>
       </div>
-
-      <div className="mt-6 flex items-center justify-center gap-2">
-        {Array.from({ length: count }).map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            aria-label={`Go to slide ${i + 1}`}
-            aria-current={i === index}
-            onClick={() => goTo(i)}
-            className={`h-1.5 rounded-full transition-all ${
-              i === index ? "w-6 bg-lime" : "w-3 bg-steel/30"
-            }`}
-          />
-        ))}
-      </div>
     </div>
   );
 }
@@ -218,11 +203,11 @@ export default function WhyChooseSection() {
         >
           {/* Mobile — plain heading with the lime underline accent above
               the sliding carousel. */}
-          <div className="mb-10 sm:hidden">
+          <div className="mb-10 text-center sm:hidden">
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground">
               {headline}
             </h2>
-            <span aria-hidden className="mt-2 block h-1 w-16 rounded-full bg-lime" />
+            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-lime" />
           </div>
 
           <WhyChooseSlider features={features} />
