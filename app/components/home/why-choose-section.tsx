@@ -9,6 +9,8 @@ const spring = { type: "spring", stiffness: 260, damping: 34 } as const;
 
 const WHY_CHOOSE_CONTENT: WhyChooseContent = {
   headline: "Why Choose RP8 Fitness?",
+  headlineLine1: "Why Choose",
+  headlineLine2: "RP8 Fitness?",
   features: [
     { id: "machines", line1: "Imported German", line2: "Tech Machines" },
     { id: "trainers", line1: "Expert Trainers &", line2: "Personalized Plans" },
@@ -200,7 +202,9 @@ function WhyChooseSlider({ features }: { features: WhyChooseContent["features"] 
 }
 
 export default function WhyChooseSection() {
-  const { headline, features } = WHY_CHOOSE_CONTENT;
+  const { headline, headlineLine1, headlineLine2, features } = WHY_CHOOSE_CONTENT;
+  const [accentWord, ...restWords] = headlineLine2.split(" ");
+  const headlineRest = restWords.join(" ");
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 pt-[50px] sm:pb-20">
@@ -212,8 +216,10 @@ export default function WhyChooseSection() {
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="mb-10 sm:mb-14">
-            <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
+          {/* Mobile — plain heading with the lime underline accent above
+              the sliding carousel. */}
+          <div className="mb-10 sm:hidden">
+            <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground">
               {headline}
             </h2>
             <span aria-hidden className="mt-2 block h-1 w-16 rounded-full bg-lime" />
@@ -221,17 +227,37 @@ export default function WhyChooseSection() {
 
           <WhyChooseSlider features={features} />
 
-          <div className="hidden gap-y-10 sm:grid sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-6">
-            {features.map((feature) => (
-              <div key={feature.id} className="flex flex-col items-center gap-4 text-center">
-                <WhyChooseIcon id={feature.id} className="h-11 w-11 text-steel" />
-                <p className="font-mono text-xs uppercase leading-snug text-steel sm:text-sm">
-                  {feature.line1}
-                  <br />
-                  <span className="font-bold text-foreground">{feature.line2}</span>
-                </p>
-              </div>
-            ))}
+          {/* Desktop — a single bordered card: two-line heading on the
+              left, then the feature row, each item separated by a
+              vertical divider. */}
+          <div className="hidden rounded-2xl border border-chalk/10 bg-ink p-8 sm:flex sm:items-center sm:gap-8 sm:rounded-3xl lg:gap-10 lg:p-10">
+            <h2 className="flex-none font-display text-2xl font-black uppercase leading-tight tracking-tight text-foreground lg:text-3xl">
+              <span className="block">{headlineLine1}</span>
+              <span className="block">
+                <span className="text-lime">{accentWord}</span>
+                {headlineRest ? ` ${headlineRest}` : ""}
+              </span>
+            </h2>
+
+            <div className="h-16 w-px flex-none bg-chalk/10" />
+
+            <div className="flex flex-1 items-start justify-between">
+              {features.map((feature, i) => (
+                <div key={feature.id} className="flex items-start">
+                  <div className="flex flex-col items-center gap-3 px-3 text-center lg:px-4">
+                    <WhyChooseIcon id={feature.id} className="h-10 w-10 text-steel lg:h-11 lg:w-11" />
+                    <p className="font-mono text-[11px] uppercase leading-snug text-steel lg:text-xs">
+                      {feature.line1}
+                      <br />
+                      <span className="font-bold text-foreground">{feature.line2}</span>
+                    </p>
+                  </div>
+                  {i < features.length - 1 && (
+                    <div className="ml-3 h-16 w-px flex-none bg-chalk/10 lg:ml-4" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
