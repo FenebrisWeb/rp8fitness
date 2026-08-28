@@ -84,7 +84,7 @@ export default function MembershipSection() {
               <p className="mt-3 font-mono text-sm text-chalk">{description}</p>
 
               <Link
-                href="#"
+                href="/membership"
                 className="mt-6 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 {ctaLabel}

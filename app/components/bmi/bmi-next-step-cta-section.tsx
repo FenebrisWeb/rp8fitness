@@ -44,7 +44,7 @@ export default function BmiNextStepCtaSection() {
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
               <Link
-                href="/#membership"
+                href="/membership"
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 Explore Membership

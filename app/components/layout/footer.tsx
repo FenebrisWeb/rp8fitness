@@ -11,7 +11,7 @@ const FOOTER_CONTENT: FooterContent = {
         { label: "Home", href: "/" },
         { label: "About Us", href: "/about" },
         { label: "Our Zones", href: "#" },
-        { label: "Membership", href: "#" },
+        { label: "Membership", href: "/membership" },
         { label: "Trainers", href: "#" },
         { label: "Franchise", href: "/franchise" },
         { label: "Contact Us", href: "/contact" },
@@ -20,7 +20,7 @@ const FOOTER_CONTENT: FooterContent = {
     {
       title: "Membership",
       links: [
-        { label: "Plans", href: "#" },
+        { label: "Plans", href: "/membership" },
         { label: "Personal Training", href: "#" },
         { label: "Group Classes", href: "#" },
         { label: "Schedule", href: "#" },
