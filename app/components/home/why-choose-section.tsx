@@ -39,14 +39,14 @@ function WhyChooseIcon({ id, className }: { id: string; className?: string }) {
         <svg viewBox="0 0 24 24" className={className} aria-hidden>
           <circle cx="12" cy="13" r="8" {...shared} />
           <path d="M9 3h6M12 3v3" {...shared} />
-          <path d="M12 13l3-3" stroke="var(--lime)" strokeWidth={1.5} strokeLinecap="round" />
-          <circle cx="12" cy="13" r="1.2" fill="var(--lime)" />
+          <path d="M12 13l3-3" stroke="var(--accent-strong)" strokeWidth={1.5} strokeLinecap="round" />
+          <circle cx="12" cy="13" r="1.2" fill="var(--accent-strong)" />
         </svg>
       );
     case "trainers":
       return (
         <svg viewBox="0 0 24 24" className={className} aria-hidden>
-          <circle cx="12" cy="7" r="3.2" fill="var(--lime)" />
+          <circle cx="12" cy="7" r="3.2" fill="var(--accent-strong)" />
           <path d="M5 21v-2.5A6.5 6.5 0 0111.5 12h1A6.5 6.5 0 0119 18.5V21" {...shared} />
           <path d="M2.5 15h2M19.5 15h2" {...shared} />
         </svg>
@@ -55,7 +55,7 @@ function WhyChooseIcon({ id, className }: { id: string; className?: string }) {
       return (
         <svg viewBox="0 0 24 24" className={className} aria-hidden>
           <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" {...shared} />
-          <path d="M8.7 12.2l2.3 2.3 4.3-4.5" stroke="var(--lime)" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8.7 12.2l2.3 2.3 4.3-4.5" stroke="var(--accent-strong)" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       );
     case "hygiene":
@@ -64,7 +64,7 @@ function WhyChooseIcon({ id, className }: { id: string; className?: string }) {
           <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" {...shared} />
           <path
             d="M12 8.5c-1.6 1.6-1.6 4 0 5.6 1.6-1.6 1.6-4 0-5.6z"
-            fill="var(--lime)"
+            fill="var(--accent-strong)"
           />
         </svg>
       );
@@ -72,7 +72,7 @@ function WhyChooseIcon({ id, className }: { id: string; className?: string }) {
       return (
         <svg viewBox="0 0 24 24" className={className} aria-hidden>
           <circle cx="8.5" cy="8" r="2.6" {...shared} />
-          <circle cx="15.5" cy="8" r="2.6" fill="var(--lime)" />
+          <circle cx="15.5" cy="8" r="2.6" fill="var(--accent-strong)" />
           <path d="M3 20v-1.5A5 5 0 018 13.5h.3M13 13.6a5 5 0 015.8 4.9V20" {...shared} />
         </svg>
       );
@@ -196,8 +196,7 @@ export default function WhyChooseSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -207,7 +206,7 @@ export default function WhyChooseSection() {
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground">
               {headline}
             </h2>
-            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-lime" />
+            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-accent-strong" />
           </div>
 
           <WhyChooseSlider features={features} />
@@ -219,7 +218,7 @@ export default function WhyChooseSection() {
             <h2 className="flex-none font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk lg:text-3xl">
               <span className="block">{headlineLine1}</span>
               <span className="block">
-                <span className="text-lime">{accentWord}</span>
+                <span className="text-accent-strong">{accentWord}</span>
                 {headlineRest ? ` ${headlineRest}` : ""}
               </span>
             </h2>

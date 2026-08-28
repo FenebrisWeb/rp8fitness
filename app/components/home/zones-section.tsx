@@ -85,7 +85,11 @@ const ZONES: Zone[] = [
 const ACCENTS = ["red", "lime"] as const;
 const ACCENT_CLASSES: Record<(typeof ACCENTS)[number], { border: string; bg: string; text: string }> = {
   red: { border: "group-hover:border-p25", bg: "group-hover:bg-p25", text: "group-hover:text-chalk" },
-  lime: { border: "group-hover:border-lime", bg: "group-hover:bg-lime", text: "group-hover:text-ink" },
+  lime: {
+    border: "group-hover:border-accent-strong",
+    bg: "group-hover:bg-accent-strong",
+    text: "group-hover:text-accent-strong-contrast",
+  },
 };
 
 const fadeUp = {
@@ -99,8 +103,7 @@ export default function ZonesSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap items-end justify-between gap-6"
@@ -128,8 +131,7 @@ export default function ZonesSection() {
               <motion.div
                 key={zone.id}
                 initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
+                animate="show"
                 variants={fadeUp}
                 transition={{
                   duration: 0.5,

@@ -41,7 +41,7 @@ export default function Header() {
 
           <Link
             href="#"
-            className="flex items-center gap-2 rounded-full bg-lime px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-black transition-opacity hover:opacity-90"
+            className="flex items-center gap-2 rounded-full bg-accent-strong px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-opacity hover:opacity-90"
           >
             Join Now
             <span aria-hidden className="text-sm leading-none">

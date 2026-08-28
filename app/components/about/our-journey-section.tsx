@@ -66,8 +66,7 @@ export default function OurJourneySection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
@@ -81,10 +80,10 @@ export default function OurJourneySection() {
 
               {MILESTONES.map((milestone) => (
                 <div key={milestone.id} className="relative flex flex-col items-center gap-2 text-center">
-                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-lime/60 bg-ink text-lime">
+                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent-strong/60 bg-ink text-accent-strong">
                     <MilestoneIcon id={milestone.id} className="h-5 w-5" />
                   </span>
-                  <p className="font-display text-sm font-black uppercase text-lime">{milestone.year}</p>
+                  <p className="font-display text-sm font-black uppercase text-accent-strong">{milestone.year}</p>
                   <p className="font-mono text-xs font-bold uppercase text-chalk">{milestone.title}</p>
                   <p className="max-w-[180px] font-mono text-xs leading-relaxed text-chalk">
                     {milestone.description}

@@ -293,7 +293,7 @@ export default function ReviewsSection() {
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
               {headline}
             </h2>
-            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-lime sm:mx-0" />
+            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-accent-strong sm:mx-0" />
           </div>
 
           {/* Desktop/tablet only — on mobile this moves below the cards. */}
@@ -327,7 +327,7 @@ export default function ReviewsSection() {
                   >
                     <div className="flex h-full flex-col justify-between rounded-xl border border-chalk/10 bg-ink p-5">
                       <div>
-                        <span aria-hidden className="font-display text-3xl leading-none text-lime">
+                        <span aria-hidden className="font-display text-3xl leading-none text-accent-strong">
                           &ldquo;
                         </span>
                         <p className="mt-2 font-mono text-sm leading-snug text-chalk">
@@ -338,7 +338,7 @@ export default function ReviewsSection() {
                               <button
                                 type="button"
                                 onClick={() => setActiveReview(review)}
-                                className="cursor-pointer font-bold text-lime underline-offset-2 hover:underline"
+                                className="cursor-pointer font-bold text-accent-strong underline-offset-2 hover:underline"
                               >
                                 Read More
                               </button>
@@ -352,7 +352,7 @@ export default function ReviewsSection() {
                           <p className="font-mono text-xs font-bold text-chalk">{review.name}</p>
                           <StarRow rating={review.rating} className="mt-1" />
                         </div>
-                        <div className="relative h-10 w-10 flex-none overflow-hidden rounded-full border border-lime/50">
+                        <div className="relative h-10 w-10 flex-none overflow-hidden rounded-full border border-accent-strong/50">
                           <Image src={review.avatar} alt={review.name} fill sizes="40px" className="object-cover" />
                         </div>
                       </div>
@@ -400,13 +400,13 @@ export default function ReviewsSection() {
                     ✕
                   </button>
 
-                  <span aria-hidden className="font-display text-4xl leading-none text-lime">
+                  <span aria-hidden className="font-display text-4xl leading-none text-accent-strong">
                     &ldquo;
                   </span>
                   <p className="mt-3 font-mono text-sm leading-relaxed text-chalk">{activeReview.text}</p>
 
                   <div className="mt-6 flex items-center gap-3">
-                    <div className="relative h-12 w-12 flex-none overflow-hidden rounded-full border border-lime/50">
+                    <div className="relative h-12 w-12 flex-none overflow-hidden rounded-full border border-accent-strong/50">
                       <Image
                         src={activeReview.avatar}
                         alt={activeReview.name}

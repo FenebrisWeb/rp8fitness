@@ -215,7 +215,7 @@ export default function HeroSection() {
                 aria-current={i === index}
                 onClick={() => goTo(i)}
                 className={`h-1.5 rounded-full transition-all ${
-                  i === index ? "w-8 bg-lime" : "w-4 bg-chalk/30 hover:bg-chalk/50"
+                  i === index ? "w-8 bg-accent-strong" : "w-4 bg-chalk/30 hover:bg-chalk/50"
                 }`}
               />
             ))}

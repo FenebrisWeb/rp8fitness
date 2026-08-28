@@ -40,8 +40,7 @@ export default function AboutSection() {
     <motion.section
       className="relative overflow-hidden py-20 sm:py-28"
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
+      animate="show"
       variants={fadeUp}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
@@ -57,7 +56,7 @@ export default function AboutSection() {
           <div className="no-scrollbar -mx-6 flex snap-x snap-mandatory items-stretch gap-2 overflow-x-auto px-6 pb-2 sm:mx-0 sm:snap-none sm:overflow-visible sm:px-0 sm:pb-0">
             <span
               aria-hidden
-              className="mt-1 hidden h-3 w-3 flex-none rounded-full border border-lime sm:block"
+              className="mt-1 hidden h-3 w-3 flex-none rounded-full border border-accent-strong sm:block"
             />
 
             <div className="relative h-[230px] w-[160px] flex-none snap-center overflow-hidden rounded-xl sm:w-[190px]">
@@ -83,7 +82,7 @@ export default function AboutSection() {
               <button
                 type="button"
                 aria-label="Play video"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-lime text-ink transition-transform hover:scale-105"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-strong text-accent-strong-contrast transition-transform hover:scale-105"
               >
                 <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor">
                   <path d="M0 0.5L12 7L0 13.5V0.5Z" />

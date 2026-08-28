@@ -20,11 +20,17 @@
   --background: var(--bg);
   --foreground: var(--fg);
 
-  /* A lime accent reads fine on dark banners, but goes flat/illegible-looking
-     on a light background — this swaps to the brand red for headline
-     accents that need to work on the plain (theme-following) page surface. */
+  /* The site's one "brand accent" — lime everywhere in dark mode, the
+     brand red everywhere in light mode. Every green element (text, solid
+     buttons, borders, glows, underlines) should read off this pair rather
+     than the raw --lime token, so the whole site flips consistently.
+     --accent-strong-contrast is the text/icon color to place ON TOP of a
+     solid --accent-strong fill: dark ink reads on lime, but needs to flip
+     to chalk-white once the fill becomes the darker red. */
   --accent-strong: var(--lime);
-  --accent-glow: rgba(198, 255, 46, 0.45);
+  --accent-strong-contrast: var(--ink);
+  --accent-glow: rgba(198, 255, 46, 0.5);
+  --accent-glow-strong: rgba(198, 255, 46, 0.75);
 }
 
 /* Explicit light mode — toggled via [data-theme="light"] on <html>.
@@ -35,7 +41,9 @@
   --fg: #101215;
   --dot: rgba(0, 0, 0, 0.06);
   --accent-strong: var(--maroon);
-  --accent-glow: rgba(146, 14, 23, 0.45);
+  --accent-strong-contrast: var(--chalk);
+  --accent-glow: rgba(146, 14, 23, 0.5);
+  --accent-glow-strong: rgba(146, 14, 23, 0.75);
 }
 
 @theme inline {
@@ -52,6 +60,7 @@
   --color-coral: var(--coral);
   --color-maroon: var(--maroon);
   --color-accent-strong: var(--accent-strong);
+  --color-accent-strong-contrast: var(--accent-strong-contrast);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-archivo);
@@ -117,5 +126,6 @@ button:not(:disabled),
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 
 

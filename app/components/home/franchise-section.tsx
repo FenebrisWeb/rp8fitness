@@ -55,8 +55,7 @@ export default function FranchiseSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.35 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
@@ -80,7 +79,7 @@ export default function FranchiseSection() {
 
               <Link
                 href="#"
-                className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-lime/70 bg-lime/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_rgba(198,255,46,0.5)] transition-all hover:bg-lime/35 hover:shadow-[0_0_28px_rgba(198,255,46,0.75)] hover:scale-105"
+                className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-accent-strong/70 bg-accent-strong/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-glow)] transition-all hover:bg-accent-strong/35 hover:shadow-[0_0_28px_var(--accent-glow-strong)] hover:scale-105"
               >
                 {ctaLabel}
                 <span aria-hidden className="text-sm leading-none">
@@ -92,7 +91,7 @@ export default function FranchiseSection() {
             <dl className="flex flex-col gap-6">
               {highlights.map((highlight) => (
                 <div key={highlight.id} className="flex items-start gap-3">
-                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-lime/60 bg-ink/40 text-lime backdrop-blur-sm">
+                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-strong/60 bg-ink/40 text-accent-strong backdrop-blur-sm">
                     <HighlightIcon id={highlight.id} className="h-5 w-5" />
                   </span>
                   <div>

@@ -161,7 +161,7 @@ export default function Footer() {
             <ul className="mt-4 flex flex-col gap-3">
               {contact.map((item) => (
                 <li key={item.id} className="flex items-start gap-2.5">
-                  <ContactIcon id={item.id} className="mt-0.5 h-4 w-4 flex-none text-lime" />
+                  <ContactIcon id={item.id} className="mt-0.5 h-4 w-4 flex-none text-accent-strong" />
                   <span className="font-mono text-sm text-foreground">
                     {item.lines.map((line) => (
                       <span key={line} className="block">

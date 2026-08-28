@@ -51,8 +51,7 @@ export default function StatsBarSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="rounded-2xl border border-chalk/10 bg-ink px-6 py-8 sm:rounded-3xl sm:px-10"
@@ -60,7 +59,7 @@ export default function StatsBarSection() {
           <div className="grid grid-cols-2 gap-y-8 sm:grid-cols-3 lg:flex lg:divide-x lg:divide-chalk/10">
             {STATS.map((stat) => (
               <div key={stat.id} className="flex flex-col items-center gap-2 text-center lg:flex-1 lg:px-4">
-                <StatIcon id={stat.id} className="h-6 w-6 text-lime" />
+                <StatIcon id={stat.id} className="h-6 w-6 text-accent-strong" />
                 <p className="font-display text-lg font-black uppercase leading-tight text-chalk sm:text-xl">
                   {stat.value}
                 </p>

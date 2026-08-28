@@ -33,8 +33,7 @@ export default function OurStorySection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-10"
@@ -67,7 +66,7 @@ export default function OurStorySection() {
             <button
               type="button"
               aria-label="Play our story video"
-              className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-lime text-ink transition-transform hover:scale-105"
+              className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-accent-strong text-accent-strong-contrast transition-transform hover:scale-105"
             >
               <svg width="16" height="18" viewBox="0 0 12 14" fill="currentColor">
                 <path d="M0 0.5L12 7L0 13.5V0.5Z" />
@@ -75,8 +74,8 @@ export default function OurStorySection() {
             </button>
           </div>
 
-          <div className="flex-none rounded-2xl border border-lime/40 bg-ink p-6 sm:w-[220px]">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-lime/50 text-lime">
+          <div className="flex-none rounded-2xl border border-accent-strong/40 bg-ink p-6 sm:w-[220px]">
+            <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-strong/50 text-accent-strong">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden>
                 <circle cx="12" cy="12" r="9" />
                 <circle cx="12" cy="12" r="5" />

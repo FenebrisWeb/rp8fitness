@@ -59,8 +59,7 @@ export default function OpenTerraceSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.35 }}
+          animate="show"
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
@@ -77,7 +76,7 @@ export default function OpenTerraceSection() {
           />
 
           <div className="flex max-w-xl flex-col gap-5 p-6 sm:gap-6 sm:p-10 lg:p-14">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-lime">
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
               {eyebrow}
             </span>
 
@@ -90,7 +89,7 @@ export default function OpenTerraceSection() {
             <div className="mt-2 grid grid-cols-3 gap-4 sm:gap-6">
               {pointers.map((pointer) => (
                 <div key={pointer.id} className="flex flex-col gap-2">
-                  <PointerIcon id={pointer.id} className="h-6 w-6 text-lime" />
+                  <PointerIcon id={pointer.id} className="h-6 w-6 text-accent-strong" />
                   <p className="font-mono text-xs uppercase leading-snug text-chalk">
                     {pointer.label}
                   </p>
@@ -100,7 +99,7 @@ export default function OpenTerraceSection() {
 
             <Link
               href="#"
-              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-lime/70 bg-lime/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_rgba(198,255,46,0.5)] transition-all hover:bg-lime/35 hover:shadow-[0_0_28px_rgba(198,255,46,0.75)] hover:scale-105"
+              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-strong/70 bg-accent-strong/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-glow)] transition-all hover:bg-accent-strong/35 hover:shadow-[0_0_28px_var(--accent-glow-strong)] hover:scale-105"
             >
               {ctaLabel}
               <span aria-hidden className="text-sm leading-none">
