@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import LegalPageSection from "@/app/components/legal/legal-page-section";
 import type { LegalPageContent } from "@/app/types/legal-page";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Read RP8 Fitness's Privacy Policy to learn what information we collect from members, visitors and franchise enquirers, how we use it, and the choices you have.",
+  alternates: { canonical: "/privacy-policy" },
+  robots: { index: true, follow: true },
+};
 
 const PRIVACY_POLICY_CONTENT: LegalPageContent = {
   title: "Privacy Policy",

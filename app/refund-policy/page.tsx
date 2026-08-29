@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import LegalPageSection from "@/app/components/legal/legal-page-section";
 import type { LegalPageContent } from "@/app/types/legal-page";
+
+export const metadata: Metadata = {
+  title: "Refund Policy",
+  description:
+    "Read RP8 Fitness's Refund Policy covering membership cancellations, personal training package refunds and class booking terms.",
+  alternates: { canonical: "/refund-policy" },
+  robots: { index: true, follow: true },
+};
 
 const REFUND_POLICY_CONTENT: LegalPageContent = {
   title: "Refund Policy",

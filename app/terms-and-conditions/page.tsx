@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
 import LegalPageSection from "@/app/components/legal/legal-page-section";
 import type { LegalPageContent } from "@/app/types/legal-page";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions",
+  description:
+    "Read the Terms & Conditions governing membership eligibility, website use and services at RP8 Fitness.",
+  alternates: { canonical: "/terms-and-conditions" },
+  robots: { index: true, follow: true },
+};
 
 const TERMS_CONTENT: LegalPageContent = {
   title: "Terms & Conditions",
