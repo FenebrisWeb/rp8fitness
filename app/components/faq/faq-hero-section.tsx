@@ -12,9 +12,7 @@ const FAQ_HERO_CONTENT: FaqHeroContent = {
   headlineAccent: "We've Got Answers.",
   description: "Find answers to common questions about RP8 Fitness memberships, facilities, services and more.",
   searchPlaceholder: "Search your question here...",
-  // Placeholder — reusing an existing gym photo until dedicated FAQ page
-  // photography is ready.
-  image: { src: "/HomePage/plans.webp", alt: "RP8 Fitness training floor" },
+  image: { src: "/pages/FAQ Banner.webp", alt: "RP8 Fitness FAQ page banner" },
 };
 
 export default function FaqHeroSection({

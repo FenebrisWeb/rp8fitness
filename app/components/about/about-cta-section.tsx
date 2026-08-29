@@ -13,7 +13,7 @@ const ABOUT_CTA_CONTENT: AboutCtaContent = {
   description: "Join RP8 Fitness today and be a part of a stronger, healthier community.",
   primaryCtaLabel: "Join Now",
   secondaryCtaLabel: "Book A Tour",
-  image: { src: "/HomePage/plans.webp", alt: "Member training at RP8 Fitness" },
+  image: { src: "/pages/About page - start journey type.webp", alt: "Member ready to start their fitness journey at RP8 Fitness" },
 };
 
 export default function AboutCtaSection() {

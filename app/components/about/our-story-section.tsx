@@ -17,9 +17,7 @@ const OUR_STORY_CONTENT: OurStoryContent = {
     description:
       "To empower every individual to achieve their fitness goals through expert guidance, advanced facilities and a supportive community.",
   },
-  // Placeholder — reusing the Franchise storefront photo until a dedicated
-  // brand story shot is ready.
-  image: { src: "/HomePage/Franchise.webp", alt: "RP8 Fitness storefront" },
+  image: { src: "/pages/About page -A CommunityA Promise.webp", alt: "A community, a lifestyle, a promise at RP8 Fitness" },
 };
 
 export default function OurStorySection() {

@@ -14,9 +14,7 @@ const ABOUT_HERO_CONTENT: AboutHeroContent = {
   description:
     "RP8 Fitness is more than a gym, it's a complete fitness ecosystem designed to help you train smarter, live stronger and be your best every day.",
   ctaLabel: "Watch Our Story",
-  // Placeholder — reusing the homepage hero's action shot until dedicated
-  // About page photography is ready.
-  image: { src: "/HomePage/hero-banner01.webp", alt: "Athlete training at RP8 Fitness" },
+  image: { src: "/pages/About Page Banner.webp", alt: "RP8 Fitness About page banner" },
 };
 
 export default function AboutHeroSection() {
