@@ -55,7 +55,7 @@ export default function FranchiseSection() {
           whileInView="show"
           viewport={viewportOnce}
           variants={staggerContainer}
-          className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
+          className="group relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* Full-bleed banner photo — the card's background, not a side
               panel — shown as-is, with no gradient layered on top. */}
@@ -64,7 +64,7 @@ export default function FranchiseSection() {
             alt={image.alt}
             fill
             sizes="100vw"
-            className="-z-10 object-cover animate-slow-zoom"
+            className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
           />
 
           <div className="flex flex-col gap-10 p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-start lg:gap-14 lg:p-14">
@@ -79,10 +79,10 @@ export default function FranchiseSection() {
               <motion.div variants={fadeUp}>
                 <Link
                   href="#"
-                  className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105"
+                  className="group mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105 active:scale-95"
                 >
                   {ctaLabel}
-                  <span aria-hidden className="text-sm leading-none">
+                  <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                     ↗
                   </span>
                 </Link>

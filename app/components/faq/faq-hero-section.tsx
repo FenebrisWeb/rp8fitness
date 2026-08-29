@@ -29,7 +29,7 @@ export default function FaqHeroSection({
       {/* Full-bleed banner photo — same treatment as the other page heroes:
           shown as-is, content overlaid on its own naturally dark left
           side, no gradient layered on top. */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
         <Image
           src={image.src}
           alt={image.alt}
@@ -37,18 +37,18 @@ export default function FaqHeroSection({
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover animate-slow-zoom"
+          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
         />
       </div>
 
-      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
+      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerContainer}
-            className="max-w-lg"
+            className="max-w-lg pointer-events-auto"
           >
             <motion.div variants={fadeUp} className="flex items-center gap-3">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
@@ -84,7 +84,7 @@ export default function FaqHeroSection({
                 type="search"
                 placeholder={searchPlaceholder}
                 onChange={(e) => onSearch?.(e.target.value)}
-                className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-sm text-chalk placeholder:text-chalk/50 backdrop-blur-sm focus:border-accent-vivid focus:outline-none"
+                className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-sm text-chalk placeholder:text-chalk/50 backdrop-blur-sm transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
               />
             </motion.div>
           </motion.div>

@@ -44,10 +44,10 @@ export default function FaqBannerSection() {
           <motion.div variants={fadeUp}>
             <Link
               href="/faq"
-              className="inline-flex flex-none cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk transition-colors hover:border-accent-vivid hover:text-accent-vivid"
+              className="group inline-flex flex-none cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk transition-colors hover:border-accent-vivid hover:text-accent-vivid active:scale-95"
             >
               {ctaLabel}
-              <span aria-hidden className="text-sm leading-none">
+              <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                 ›
               </span>
             </Link>

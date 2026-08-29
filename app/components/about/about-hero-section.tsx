@@ -27,7 +27,7 @@ export default function AboutHeroSection() {
     <section className="relative w-full">
       {/* Full-bleed banner photo — same photo (and same gradient, for the
           same legibility reason) as the homepage hero's first slide. */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
         <Image
           src={image.src}
           alt={image.alt}
@@ -35,19 +35,19 @@ export default function AboutHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover animate-slow-zoom"
+          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
       </div>
 
-      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
+      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerContainer}
-            className="max-w-lg"
+            className="max-w-lg pointer-events-auto"
           >
             <motion.span
               variants={fadeUp}

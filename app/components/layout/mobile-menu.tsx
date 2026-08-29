@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface NavLink {
@@ -37,6 +38,7 @@ function DoubleArrow({ className }: { className?: string }) {
 
 export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
   useEffect(() => setMounted(true), []);
 
   const menu = (
@@ -87,23 +89,33 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
                 longer link list scrolls internally instead of pushing past
                 the viewport edge on shorter desktop windows. */}
             <nav className="flex min-h-0 flex-1 flex-col justify-center gap-2 overflow-y-auto px-6 py-4 sm:px-10">
-              {links.map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, x: 24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.15 + i * 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={onClose}
-                    className="group flex items-center gap-3 border-b border-black/10 py-4 font-display text-3xl font-black uppercase tracking-tight text-black transition-colors hover:text-coral sm:text-4xl"
+              {links.map((link, i) => {
+                const active = pathname === link.href;
+                return (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15 + i * 0.06, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <DoubleArrow className="h-3 w-6 flex-none text-coral opacity-0 transition-opacity group-hover:opacity-100" />
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={link.href}
+                      onClick={onClose}
+                      aria-current={active ? "page" : undefined}
+                      className={`group flex items-center gap-3 border-b py-4 font-display text-3xl font-black uppercase tracking-tight transition-colors sm:text-4xl ${
+                        active ? "border-coral/40 text-coral" : "border-black/10 text-black hover:text-coral"
+                      }`}
+                    >
+                      <DoubleArrow
+                        className={`h-3 w-6 flex-none text-coral transition-all ${
+                          active ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
+                        }`}
+                      />
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </nav>
 
             <div className="flex items-center justify-between px-6 py-8 font-mono text-xs uppercase tracking-[0.14em] text-black sm:px-10">

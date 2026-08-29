@@ -50,13 +50,13 @@ export default function FaqSupportBannerSection() {
           variants={staggerContainer}
           className="flex flex-col gap-8 rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8 lg:flex-row lg:items-center lg:gap-10"
         >
-          <motion.div variants={fadeUp} className="relative h-[200px] w-full flex-none overflow-hidden rounded-xl lg:h-[220px] lg:w-[260px]">
+          <motion.div variants={fadeUp} className="group relative h-[200px] w-full flex-none overflow-hidden rounded-xl lg:h-[220px] lg:w-[260px]">
             <Image
               src={image.src}
               alt={image.alt}
               fill
               sizes="(min-width: 1024px) 260px, 100vw"
-              className="object-cover animate-slow-zoom"
+              className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
             />
           </motion.div>
 
@@ -74,10 +74,10 @@ export default function FaqSupportBannerSection() {
             <motion.div variants={fadeUp}>
               <Link
                 href="/contact"
-                className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                className="group mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {ctaLabel}
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
               </Link>

@@ -80,7 +80,7 @@ export default function BmiCategoryGuideSection({ activeCategory }: { activeCate
                 <motion.div
                   key={category.id}
                   variants={fadeUpItem}
-                  className="rounded-xl border p-5"
+                  className="rounded-xl border p-5 transition-transform duration-300 hover:-translate-y-1"
                   style={{
                     borderColor: active ? color : "color-mix(in srgb, var(--chalk) 10%, transparent)",
                     backgroundColor: active ? `color-mix(in srgb, ${color} 12%, var(--ink))` : "var(--ink)",

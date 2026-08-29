@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import type { FaqCategory } from "@/app/types/faq-accordion";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
@@ -373,7 +373,10 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
             {visibleItems.map((item) => {
               const open = item.id === openItemId;
               return (
-                <div key={item.id} className="rounded-xl border border-chalk/10 bg-ink px-5 py-4">
+                <div
+                  key={item.id}
+                  className="rounded-xl border border-chalk/10 bg-ink px-5 py-4 transition-colors duration-300 hover:border-accent-vivid/30"
+                >
                   <button
                     type="button"
                     onClick={() => setOpenItemId(open ? null : item.id)}
@@ -385,16 +388,37 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
                     </span>
                     <span
                       aria-hidden
-                      className={`flex h-7 w-7 flex-none items-center justify-center rounded-full border text-sm ${
+                      className={`flex h-7 w-7 flex-none items-center justify-center rounded-full border transition-colors duration-300 ${
                         open ? "border-accent-vivid text-accent-vivid" : "border-chalk/25 text-chalk"
                       }`}
                     >
-                      {open ? "−" : "+"}
+                      <svg
+                        viewBox="0 0 24 24"
+                        className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"}`}
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
                     </span>
                   </button>
-                  {open && (
-                    <p className="mt-3 font-mono text-sm leading-relaxed text-chalk">{item.answer}</p>
-                  )}
+                  <AnimatePresence initial={false}>
+                    {open && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="mt-3 font-mono text-sm leading-relaxed text-chalk">{item.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             })}

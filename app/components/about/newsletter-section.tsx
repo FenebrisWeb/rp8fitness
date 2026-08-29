@@ -88,7 +88,7 @@ export default function NewsletterSection() {
             type="email"
             required
             placeholder="Enter your email"
-            className="w-full min-w-0 rounded-full border border-chalk/20 bg-transparent px-4 py-2.5 font-mono text-xs text-chalk placeholder:text-steel focus:border-accent-vivid focus:outline-none sm:w-56"
+            className="w-full min-w-0 rounded-full border border-chalk/20 bg-transparent px-4 py-2.5 font-mono text-xs text-chalk placeholder:text-steel transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:w-56"
           />
           <button
             type="submit"

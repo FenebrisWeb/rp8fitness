@@ -144,7 +144,7 @@ export default function BmiCalculatorSection({
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="Years"
-                className="mt-1.5 w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 font-mono text-sm text-chalk placeholder:text-chalk/50 focus:border-accent-vivid focus:outline-none"
+                className="mt-1.5 w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 font-mono text-sm text-chalk placeholder:text-chalk/50 transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
               />
             </label>
 
@@ -176,7 +176,7 @@ export default function BmiCalculatorSection({
                   required
                   value={height}
                   onChange={(e) => setHeight(e.target.value)}
-                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-sm text-chalk focus:border-accent-vivid focus:outline-none"
+                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-sm text-chalk transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
                 />
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-chalk">cm</span>
               </div>
@@ -192,7 +192,7 @@ export default function BmiCalculatorSection({
                   required
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
-                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-sm text-chalk focus:border-accent-vivid focus:outline-none"
+                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-sm text-chalk transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
                 />
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-chalk">kg</span>
               </div>
@@ -201,10 +201,10 @@ export default function BmiCalculatorSection({
             <div className="flex flex-col justify-end gap-1.5">
               <button
                 type="submit"
-                className="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                className="group flex cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 Calculate BMI
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
               </button>

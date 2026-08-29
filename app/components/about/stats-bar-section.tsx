@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import type { StatBarItem } from "@/app/types/stats-bar";
 import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import Counter from "@/app/components/home/counter";
 
 const STATS: StatBarItem[] = [
-  { id: "zones", value: "10+", label: "Zones" },
-  { id: "area", value: "5000+", label: "Sq Ft Area" },
+  { id: "zones", value: "10+", label: "Zones", numericValue: 10, suffix: "+" },
+  { id: "area", value: "5000+", label: "Sq Ft Area", numericValue: 5000, suffix: "+" },
   { id: "machines", value: "Imported", label: "German Tech Machines" },
-  { id: "members", value: "10K+", label: "Active Members" },
-  { id: "experience", value: "12+", label: "Years Of Experience" },
-  { id: "trainers", value: "50+", label: "Expert Trainers" },
+  { id: "members", value: "10K+", label: "Active Members", numericValue: 10, suffix: "K+" },
+  { id: "experience", value: "12+", label: "Years Of Experience", numericValue: 12, suffix: "+" },
+  { id: "trainers", value: "50+", label: "Expert Trainers", numericValue: 50, suffix: "+" },
 ];
 
 const ICON_PATHS: Record<string, string> = {
@@ -64,7 +65,11 @@ export default function StatsBarSection() {
               >
                 <StatIcon id={stat.id} className="h-6 w-6 text-accent-vivid" />
                 <p className="font-display text-lg font-black uppercase leading-tight text-chalk sm:text-xl">
-                  {stat.value}
+                  {stat.numericValue !== undefined ? (
+                    <Counter value={stat.numericValue} suffix={stat.suffix} />
+                  ) : (
+                    stat.value
+                  )}
                 </p>
                 <p className="max-w-[110px] font-mono text-[10px] uppercase leading-snug tracking-wide text-chalk">
                   {stat.label}

@@ -99,8 +99,8 @@ function CheckIcon({ className }: { className?: string }) {
 function PlanCard({ plan, className = "" }: { plan: MembershipPlan; className?: string }) {
   return (
     <div
-      className={`flex h-full flex-col rounded-2xl border p-6 ${
-        plan.popular ? "border-accent-vivid" : "border-chalk/10 bg-ink"
+      className={`flex h-full flex-col rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1 ${
+        plan.popular ? "border-accent-vivid" : "border-chalk/10 bg-ink hover:border-accent-vivid/40"
       } ${className}`}
       // bg-accent-vivid/10 would composite over the page's own background —
       // in light mode that's a near-white tint the card's white text
@@ -143,14 +143,14 @@ function PlanCard({ plan, className = "" }: { plan: MembershipPlan; className?: 
 
       <Link
         href="/contact"
-        className={`mt-6 flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] transition-transform hover:scale-105 ${
+        className={`group mt-6 flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] transition-transform hover:scale-105 active:scale-95 ${
           plan.popular
             ? "bg-accent-vivid text-accent-vivid-contrast"
             : "border border-chalk/25 text-chalk hover:border-accent-vivid hover:text-accent-vivid"
         }`}
       >
         {plan.ctaLabel}
-        <span aria-hidden className="text-sm leading-none">
+        <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
           ›
         </span>
       </Link>

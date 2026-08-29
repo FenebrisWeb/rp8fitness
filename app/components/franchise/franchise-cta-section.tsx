@@ -41,10 +41,10 @@ export default function FranchiseCtaSection() {
           <motion.div variants={fadeUp} className="flex flex-none flex-wrap items-center justify-center gap-3">
             <Link
               href="#"
-              className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+              className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
             >
               {primaryCtaLabel}
-              <span aria-hidden className="text-sm leading-none">
+              <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                 ›
               </span>
             </Link>

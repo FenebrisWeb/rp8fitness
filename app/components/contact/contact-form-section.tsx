@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import type { ContactFormContent } from "@/app/types/contact-form";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
@@ -102,11 +103,30 @@ function SocialIcon({ id, className }: { id: string; className?: string }) {
 }
 
 const inputClasses =
-  "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-sm text-chalk placeholder:text-chalk/50 focus:border-accent-vivid focus:outline-none";
+  "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-sm text-chalk placeholder:text-chalk/50 transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20";
+
+type SubmitStatus = "idle" | "sending" | "sent";
 
 export default function ContactFormSection() {
   const { formHeadlineLine1, formHeadlineAccent, privacyNote, infoHeadlineLine1, infoHeadlineAccent, infoItems, followLabel } =
     CONTACT_FORM_CONTENT;
+
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+
+  // No backend is wired up yet, so this simulates a brief send — long
+  // enough for the button's loading/success states to actually read as
+  // feedback rather than an instant flicker. Swap the timeout body for a
+  // real submit call once an endpoint exists; the state machine stays the
+  // same either way.
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (status !== "idle") return;
+    setStatus("sending");
+    window.setTimeout(() => {
+      setStatus("sent");
+      window.setTimeout(() => setStatus("idle"), 2600);
+    }, 900);
+  };
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 pt-10 sm:pb-20 sm:pt-14">
@@ -124,7 +144,7 @@ export default function ContactFormSection() {
             </h2>
             <motion.span variants={fadeUp} aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
 
-            <motion.form variants={fadeUp} onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col gap-4">
+            <motion.form variants={fadeUp} onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
               <div className="relative">
                 <input type="text" placeholder="Full Name" required className={inputClasses} />
                 <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -172,12 +192,73 @@ export default function ContactFormSection() {
 
               <button
                 type="submit"
-                className="mt-1 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-accent-vivid px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-[1.02]"
+                disabled={status !== "idle"}
+                className={`group relative mt-1 flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.1em] transition-all active:scale-95 disabled:cursor-default ${
+                  status === "sent" ? "bg-p10 text-chalk" : "bg-accent-vivid text-accent-vivid-contrast hover:scale-[1.02]"
+                }`}
               >
-                Send Message
-                <span aria-hidden className="text-sm leading-none">
-                  ›
-                </span>
+                <AnimatePresence mode="wait" initial={false}>
+                  {status === "idle" && (
+                    <motion.span
+                      key="idle"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex items-center gap-2"
+                    >
+                      Send Message
+                      <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
+                        ›
+                      </span>
+                    </motion.span>
+                  )}
+                  {status === "sending" && (
+                    <motion.span
+                      key="sending"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex items-center gap-2"
+                    >
+                      <svg viewBox="0 0 24 24" className="h-4 w-4 animate-spin" fill="none" aria-hidden>
+                        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.25" />
+                        <path d="M21 12a9 9 0 00-9-9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                      </svg>
+                      Sending...
+                    </motion.span>
+                  )}
+                  {status === "sent" && (
+                    <motion.span
+                      key="sent"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.18 }}
+                      className="flex items-center gap-2"
+                    >
+                      <motion.svg
+                        viewBox="0 0 24 24"
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        <motion.path
+                          d="M5 13l4 4L19 7"
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        />
+                      </motion.svg>
+                      Message Sent!
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
 
               <p className="flex items-center gap-2 font-mono text-[11px] text-chalk/60">
@@ -206,7 +287,7 @@ export default function ContactFormSection() {
                 <motion.div
                   key={item.id}
                   variants={fadeUpItem}
-                  className="flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5"
+                  className="flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40"
                 >
                   <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                     <InfoIcon id={item.id} className="h-5 w-5" />

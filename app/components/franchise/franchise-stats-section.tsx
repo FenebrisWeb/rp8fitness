@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import type { FranchiseStatItem } from "@/app/types/franchise-stats";
 import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import Counter from "@/app/components/home/counter";
 
 const STATS: FranchiseStatItem[] = [
-  { id: "area", value: "5000+", label: "Sq Ft Min. Area" },
+  { id: "area", value: "5000+", label: "Sq Ft Min. Area", numericValue: 5000, suffix: "+" },
   { id: "terrace", value: "Open Terrace", label: "For Pickleball Court & Other Activities" },
   { id: "machines", value: "Imported", label: "German Tech Machines" },
   { id: "revenue", value: "Multiple", label: "Revenue Streams" },
@@ -60,7 +61,11 @@ export default function FranchiseStatsSection() {
                 </span>
                 <div>
                   <p className="font-display text-sm font-black uppercase leading-tight text-chalk">
-                    {stat.value}
+                    {stat.numericValue !== undefined ? (
+                      <Counter value={stat.numericValue} suffix={stat.suffix} />
+                    ) : (
+                      stat.value
+                    )}
                   </p>
                   <p className="mt-0.5 max-w-[160px] font-mono text-[10px] uppercase leading-snug tracking-wide text-chalk">
                     {stat.label}

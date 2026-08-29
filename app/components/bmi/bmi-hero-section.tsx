@@ -45,18 +45,18 @@ export default function BmiHeroSection() {
       {/* Full-bleed banner photo — same treatment as every other page
           hero: shown as-is, content overlaid on its own naturally dark
           left side, no gradient layered on top. */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
-        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover animate-slow-zoom" />
+      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105" />
       </div>
 
-      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
+      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerContainer}
-            className="max-w-lg"
+            className="max-w-lg pointer-events-auto"
           >
             <motion.span
               variants={fadeUp}

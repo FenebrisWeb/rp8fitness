@@ -89,7 +89,11 @@ export default function WhyPartnerSection() {
 
           <motion.div variants={staggerContainerTight} className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {cards.map((card) => (
-              <motion.div key={card.id} variants={fadeUpItem} className="rounded-xl border border-chalk/10 bg-ink p-5">
+              <motion.div
+                key={card.id}
+                variants={fadeUpItem}
+                className="rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40"
+              >
                 <CardIcon id={card.id} className="h-7 w-7 text-accent-vivid" />
                 <p className="mt-4 font-mono text-sm font-bold uppercase leading-snug text-chalk">
                   {card.title}

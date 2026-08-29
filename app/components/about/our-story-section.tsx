@@ -72,14 +72,14 @@ export default function OurStorySection() {
 
           <motion.div
             variants={fadeUp}
-            className="relative h-[280px] w-full flex-1 overflow-hidden rounded-2xl sm:h-[340px]"
+            className="group relative h-[280px] w-full flex-1 overflow-hidden rounded-2xl sm:h-[340px]"
           >
             <Image
               src={image.src}
               alt={image.alt}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover animate-slow-zoom"
+              className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
             />
             <button
               type="button"

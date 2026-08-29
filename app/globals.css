@@ -145,27 +145,20 @@ button:not(:disabled),
   display: none;
 }
 
-/* Ambient "Ken Burns" drift for every background/banner photo on the site —
-   runs continuously regardless of hover: a slow, even breathe from 1x up to
-   a gentle zoom and back down, looping forever. First half of the duration
-   is the zoom-in, second half is the zoom-out, so it never jump-cuts. */
-@keyframes slow-zoom {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
-  }
-}
-
-.animate-slow-zoom {
-  animation: slow-zoom 16s ease-in-out infinite;
-}
-
+/* Global reduced-motion safety net for every plain CSS transition/animation
+   on the site (hover lifts, icon nudges, accordion chevrons, etc.) — the
+   MotionConfig in Wrapper covers framer-motion's own animations, this
+   covers everything driven by a Tailwind `transition-*`/`animate-*` class
+   instead. Collapses motion to effectively instant rather than removing it
+   outright, so state changes (open/closed, hovered/not) still read clearly. */
 @media (prefers-reduced-motion: reduce) {
-  .animate-slow-zoom {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

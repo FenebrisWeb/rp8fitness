@@ -112,10 +112,10 @@ export default function ZonesSection() {
           <motion.div variants={fadeUp}>
             <Link
               href="#"
-              className="flex cursor-pointer items-center gap-2 rounded-full border border-foreground/25 px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-p25 hover:text-p25"
+              className="group flex cursor-pointer items-center gap-2 rounded-full border border-foreground/25 px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-p25 hover:text-p25 active:scale-95"
             >
               Explore All Zones
-              <span aria-hidden className="text-sm leading-none">
+              <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 ↗
               </span>
             </Link>
@@ -136,14 +136,14 @@ export default function ZonesSection() {
               <motion.div key={zone.id} variants={fadeUpItem}>
                 <Link
                   href="#"
-                  className="group relative flex aspect-[4/5] cursor-pointer overflow-hidden rounded-2xl border border-chalk/10"
+                  className="group relative flex aspect-[4/5] cursor-pointer overflow-hidden rounded-2xl border border-chalk/10 transition-transform duration-300 hover:-translate-y-1"
                 >
                   <Image
                     src={zone.image}
                     alt={zone.title}
                     fill
                     sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                    className="animate-slow-zoom object-cover"
+                    className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
 

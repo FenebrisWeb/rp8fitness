@@ -65,7 +65,7 @@ export default function FranchiseHeroSection() {
       {/* The photo already vignettes dark on the left, opening up to the
           lit storefront on the right — same treatment as the homepage
           Franchise banner, shown as-is with no gradient layered on top. */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
         <Image
           src={image.src}
           alt={image.alt}
@@ -73,18 +73,18 @@ export default function FranchiseHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover animate-slow-zoom"
+          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
         />
       </div>
 
-      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
+      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerContainer}
-            className="max-w-xl"
+            className="max-w-xl pointer-events-auto"
           >
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
@@ -122,10 +122,10 @@ export default function FranchiseHeroSection() {
             <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="#"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {primaryCtaLabel}
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
               </Link>

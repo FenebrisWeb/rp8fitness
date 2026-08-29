@@ -62,7 +62,11 @@ export default function BmiExerciseImportanceSection() {
 
           <motion.div variants={staggerContainerTight} className="mt-6 hidden gap-4 sm:grid sm:grid-cols-3">
             {ITEMS.map((item) => (
-              <motion.div key={item.id} variants={fadeUpItem} className="rounded-xl border border-chalk/10 bg-black/20 p-5 text-center">
+              <motion.div
+                key={item.id}
+                variants={fadeUpItem}
+                className="rounded-xl border border-chalk/10 bg-black/20 p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40"
+              >
                 <ItemIcon id={item.id} className="mx-auto h-7 w-7 text-accent-vivid" />
                 <p className="mt-2 font-mono text-sm font-bold text-chalk">{item.title}</p>
                 <p className="mt-1 font-mono text-sm leading-snug text-chalk">{item.description}</p>

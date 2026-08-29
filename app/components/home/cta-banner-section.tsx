@@ -61,10 +61,10 @@ export default function CtaBannerSection() {
             <motion.div variants={fadeUp}>
               <Link
                 href="#"
-                className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                className="group mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {ctaLabel}
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   ↗
                 </span>
               </Link>

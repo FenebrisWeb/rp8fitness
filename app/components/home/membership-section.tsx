@@ -67,11 +67,11 @@ export default function MembershipSection() {
           whileInView="show"
           viewport={viewportOnce}
           variants={staggerContainer}
-          className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
+          className="group relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* Full-bleed banner photo, shown as-is with no gradient layered
               on top — same treatment as the Franchise/Open Terrace banners. */}
-          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover animate-slow-zoom" />
+          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105" />
 
           <div className="flex flex-col gap-10 p-6 sm:p-10 lg:flex-row lg:items-center lg:gap-10 lg:p-14">
             <div className="max-w-xs">
@@ -86,10 +86,10 @@ export default function MembershipSection() {
               <motion.div variants={fadeUp}>
                 <Link
                   href="/membership"
-                  className="mt-6 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                  className="group mt-6 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
                 >
                   {ctaLabel}
-                  <span aria-hidden className="text-sm leading-none">
+                  <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                     ›
                   </span>
                 </Link>

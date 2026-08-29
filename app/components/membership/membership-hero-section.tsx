@@ -63,18 +63,18 @@ export default function MembershipHeroSection() {
       {/* Full-bleed banner photo, same treatment as every other page hero
           on the site — shown as-is, content sits in an ink panel below on
           mobile and overlays it directly from md up. */}
-      <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
-        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover animate-slow-zoom" />
+      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105" />
       </div>
 
-      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
+      <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={viewportOnce}
             variants={staggerContainer}
-            className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-10"
+            className="flex flex-col gap-6 pointer-events-auto lg:flex-row lg:items-start lg:justify-between lg:gap-10"
           >
             <div className="max-w-xl">
               <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2">
@@ -145,10 +145,10 @@ export default function MembershipHeroSection() {
 
               <Link
                 href="#plans"
-                className="mt-4 inline-flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                className="group mt-4 inline-flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-full bg-accent-vivid px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {offer.ctaLabel}
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
               </Link>

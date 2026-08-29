@@ -137,7 +137,7 @@ export default function HeroSection() {
           1920/750 banner ratio kicks in from md up. */}
       <div
         ref={containerRef}
-        className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]"
+        className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]"
       >
         <motion.div
           className="flex h-full"
@@ -163,7 +163,7 @@ export default function HeroSection() {
                 quality={85}
                 priority={i === 0}
                 draggable={false}
-                className="select-none object-cover animate-slow-zoom"
+                className="select-none object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
             </div>

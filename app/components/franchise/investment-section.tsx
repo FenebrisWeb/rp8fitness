@@ -93,32 +93,32 @@ export default function InvestmentSection() {
             </motion.dl>
 
             <motion.div variants={fadeUp} className="grid h-[320px] grid-rows-[1.4fr_1fr] gap-3 sm:h-[420px]">
-              <div className="relative overflow-hidden rounded-xl">
+              <div className="group relative overflow-hidden rounded-xl">
                 <Image
                   src={images.primary.src}
                   alt={images.primary.alt}
                   fill
                   sizes="(min-width: 1024px) 30vw, 100vw"
-                  className="object-cover animate-slow-zoom"
+                  className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <div className="relative overflow-hidden rounded-xl">
+                <div className="group relative overflow-hidden rounded-xl">
                   <Image
                     src={images.secondaryA.src}
                     alt={images.secondaryA.alt}
                     fill
                     sizes="(min-width: 1024px) 15vw, 50vw"
-                    className="object-cover animate-slow-zoom"
+                    className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
                   />
                 </div>
-                <div className="relative overflow-hidden rounded-xl">
+                <div className="group relative overflow-hidden rounded-xl">
                   <Image
                     src={images.secondaryB.src}
                     alt={images.secondaryB.alt}
                     fill
                     sizes="(min-width: 1024px) 15vw, 50vw"
-                    className="object-cover animate-slow-zoom"
+                    className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
                   />
                 </div>
               </div>

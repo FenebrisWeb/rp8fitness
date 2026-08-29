@@ -28,11 +28,11 @@ export default function AboutCtaSection() {
           whileInView="show"
           viewport={viewportOnce}
           variants={staggerContainer}
-          className="relative isolate flex min-h-[280px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[300px] sm:rounded-3xl"
+          className="group relative isolate flex min-h-[280px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[300px] sm:rounded-3xl"
         >
           {/* Shown as-is, no gradient layered on top — the photo's own
               dark left half is where the copy sits. */}
-          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover animate-slow-zoom" />
+          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105" />
 
           <div className="flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10 lg:p-12">
             <div className="max-w-md">
@@ -49,10 +49,10 @@ export default function AboutCtaSection() {
             <motion.div variants={fadeUp} className="flex flex-none flex-wrap items-center gap-3">
               <Link
                 href="#"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {primaryCtaLabel}
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
               </Link>

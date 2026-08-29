@@ -341,7 +341,7 @@ export default function ReviewsSection({ content = REVIEWS_CONTENT }: { content?
                     className="flex-none px-2.5"
                     style={{ flex: itemWidth ? `0 0 ${itemWidth}px` : "0 0 100%" }}
                   >
-                    <div className="flex h-full flex-col justify-between rounded-xl border border-chalk/10 bg-ink p-5">
+                    <div className="flex h-full flex-col justify-between rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/30">
                       <div>
                         <span aria-hidden className="font-display text-3xl leading-none text-accent-vivid">
                           &ldquo;

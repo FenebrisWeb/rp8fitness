@@ -55,14 +55,14 @@ export default function TransformationHubSection() {
         >
           <motion.div
             variants={fadeUp}
-            className="relative h-[240px] w-full flex-none overflow-hidden rounded-2xl lg:h-[320px] lg:w-[440px]"
+            className="group relative h-[240px] w-full flex-none overflow-hidden rounded-2xl lg:h-[320px] lg:w-[440px]"
           >
             <Image
               src={video.src}
               alt={video.alt}
               fill
               sizes="(min-width: 1024px) 440px, 100vw"
-              className="object-cover animate-slow-zoom"
+              className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
             />
             <button
               type="button"

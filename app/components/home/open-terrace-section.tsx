@@ -59,7 +59,7 @@ export default function OpenTerraceSection() {
           whileInView="show"
           viewport={viewportOnce}
           variants={staggerContainer}
-          className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
+          className="group relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* The source photo already vignettes dark on the left and opens
               up to the court and skyline on the right — same as the
@@ -69,7 +69,7 @@ export default function OpenTerraceSection() {
             alt={image.alt}
             fill
             sizes="100vw"
-            className="-z-10 object-cover animate-slow-zoom"
+            className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
           />
 
           <div className="flex max-w-xl flex-col gap-5 p-6 sm:gap-6 sm:p-10 lg:p-14">
@@ -102,10 +102,10 @@ export default function OpenTerraceSection() {
             <motion.div variants={fadeUp}>
               <Link
                 href="#"
-                className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105"
+                className="group mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105 active:scale-95"
               >
                 {ctaLabel}
-                <span aria-hidden className="text-sm leading-none">
+                <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   ↗
                 </span>
               </Link>

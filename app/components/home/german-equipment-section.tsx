@@ -65,7 +65,7 @@ export default function GermanEquipmentSection() {
           whileInView="show"
           viewport={viewportOnce}
           variants={staggerContainer}
-          className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
+          className="group relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* The source photo already has its equipment on the left and a
               near-black right half, so — unlike the Franchise banner — no
@@ -76,7 +76,7 @@ export default function GermanEquipmentSection() {
             alt={image.alt}
             fill
             sizes="100vw"
-            className="-z-10 object-cover animate-slow-zoom"
+            className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
           />
 
           <div className="flex w-full p-6 sm:justify-end sm:p-10 lg:p-14">
@@ -115,10 +115,10 @@ export default function GermanEquipmentSection() {
               <motion.div variants={fadeUp}>
                 <Link
                   href="#"
-                  className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                  className="group mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
                 >
                   {ctaLabel}
-                  <span aria-hidden className="text-sm leading-none">
+                  <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                     ›
                   </span>
                 </Link>

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { AboutContent } from "@/app/types/about";
 import Counter from "./counter";
-import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const ABOUT_CONTENT: AboutContent = {
@@ -42,9 +41,15 @@ export default function AboutSection() {
       variants={staggerContainer}
     >
       <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-6 text-center sm:px-10">
-        <h2 className="max-w-3xl font-display font-medium uppercase leading-snug tracking-tight text-foreground text-xl sm:text-2xl md:text-3xl">
-          <AnimatedWords text={headline} />
-        </h2>
+        {/* A full descriptive sentence, not a short punchy headline — a
+            plain fade reads better here than a 19-word cascade, which would
+            take several seconds to finish revealing. */}
+        <motion.h2
+          variants={fadeUp}
+          className="max-w-3xl font-display font-medium uppercase leading-snug tracking-tight text-foreground text-xl sm:text-2xl md:text-3xl"
+        >
+          {headline}
+        </motion.h2>
 
         <motion.div
           variants={fadeUp}
@@ -59,13 +64,13 @@ export default function AboutSection() {
               className="mt-1 hidden h-3 w-3 flex-none rounded-full border border-accent-strong sm:block"
             />
 
-            <div className="relative h-[230px] w-[160px] flex-none snap-center overflow-hidden rounded-xl sm:w-[190px]">
+            <div className="group relative h-[230px] w-[160px] flex-none snap-center overflow-hidden rounded-xl sm:w-[190px]">
               <Image
                 src={images.primary.src}
                 alt={images.primary.alt}
                 fill
                 sizes="190px"
-                className="object-cover animate-slow-zoom"
+                className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
               />
             </div>
 
@@ -90,13 +95,13 @@ export default function AboutSection() {
               </button>
             </div>
 
-            <div className="relative h-[230px] w-[160px] flex-none snap-center overflow-hidden rounded-xl sm:w-[190px]">
+            <div className="group relative h-[230px] w-[160px] flex-none snap-center overflow-hidden rounded-xl sm:w-[190px]">
               <Image
                 src={images.secondary.src}
                 alt={images.secondary.alt}
                 fill
                 sizes="190px"
-                className="object-cover animate-slow-zoom"
+                className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-110"
               />
             </div>
           </div>
