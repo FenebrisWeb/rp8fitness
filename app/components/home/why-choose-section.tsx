@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, motion, useMotionValue, type PanInfo } from "framer-motion";
 import type { WhyChooseContent } from "@/app/types/why-choose";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const AUTOPLAY_MS = 3000;
 const spring = { type: "spring", stiffness: 260, damping: 34 } as const;
@@ -80,11 +82,6 @@ function WhyChooseIcon({ id, className }: { id: string; className?: string }) {
       return null;
   }
 }
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
 
 // Two icons visible at once, but the track steps by a single item — each
 // swipe/tick slides one icon out and the next one in, instead of jumping a
@@ -196,17 +193,21 @@ export default function WhyChooseSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
         >
           {/* Mobile — plain heading with the lime underline accent above
               the sliding carousel. */}
           <div className="mb-10 text-center sm:hidden">
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground">
-              {headline}
+              <AnimatedWords text={headline} />
             </h2>
-            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-accent-strong" />
+            <motion.span
+              variants={fadeUp}
+              aria-hidden
+              className="mx-auto mt-2 block h-1 w-16 rounded-full bg-accent-strong"
+            />
           </div>
 
           <WhyChooseSlider features={features} />
@@ -214,20 +215,25 @@ export default function WhyChooseSection() {
           {/* Desktop — a single bordered card: two-line heading on the
               left, then the feature row, each item separated by a
               vertical divider. */}
-          <div className="hidden rounded-2xl border border-chalk/10 bg-ink p-8 sm:flex sm:items-center sm:gap-8 sm:rounded-3xl lg:gap-10 lg:p-10">
+          <motion.div
+            variants={fadeUp}
+            className="hidden rounded-2xl border border-chalk/10 bg-ink p-8 sm:flex sm:items-center sm:gap-8 sm:rounded-3xl lg:gap-10 lg:p-10"
+          >
             <h2 className="flex-none font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk lg:text-3xl">
-              <span className="block">{headlineLine1}</span>
               <span className="block">
-                <span className="text-accent-vivid">{accentWord}</span>
-                {headlineRest ? ` ${headlineRest}` : ""}
+                <AnimatedWords text={headlineLine1} />
+              </span>
+              <span className="block">
+                <AnimatedWords text={accentWord} className="text-accent-vivid" />{" "}
+                {headlineRest ? <AnimatedWords text={headlineRest} /> : ""}
               </span>
             </h2>
 
             <div className="h-16 w-px flex-none bg-chalk/10" />
 
-            <div className="flex flex-1 items-start justify-between">
+            <motion.div variants={staggerContainerTight} className="flex flex-1 items-start justify-between">
               {features.map((feature, i) => (
-                <div key={feature.id} className="flex items-start">
+                <motion.div key={feature.id} variants={fadeUpItem} className="flex items-start">
                   <div className="flex flex-col items-center gap-3 px-3 text-center lg:px-4">
                     <WhyChooseIcon id={feature.id} className="h-10 w-10 text-chalk lg:h-11 lg:w-11" />
                     <p className="font-mono text-[11px] uppercase leading-snug text-chalk lg:text-xs">
@@ -239,10 +245,10 @@ export default function WhyChooseSection() {
                   {i < features.length - 1 && (
                     <div className="ml-3 h-16 w-px flex-none bg-chalk/10 lg:ml-4" />
                   )}
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

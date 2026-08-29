@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { InvestmentContent } from "@/app/types/investment";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const INVESTMENT_CONTENT: InvestmentContent = {
   headline: "Investment",
@@ -48,11 +50,6 @@ function ItemIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function InvestmentSection() {
   const { headline, headlineAccent, description, items, images } = INVESTMENT_CONTENT;
 
@@ -61,25 +58,25 @@ export default function InvestmentSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8 lg:p-10"
         >
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:gap-8">
             <div>
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
-                {headline}
+                <AnimatedWords text={headline} />
                 <br />
-                <span className="text-accent-vivid">{headlineAccent}</span>
+                <AnimatedWords text={headlineAccent} className="text-accent-vivid" />
               </h2>
-              <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
-              <p className="mt-4 max-w-xs font-mono text-sm text-chalk">{description}</p>
+              <motion.span aria-hidden variants={fadeUp} className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
+              <motion.p variants={fadeUp} className="mt-4 max-w-xs font-mono text-sm text-chalk">{description}</motion.p>
             </div>
 
-            <dl className="flex flex-col gap-6">
+            <motion.dl variants={staggerContainerTight} className="flex flex-col gap-6">
               {items.map((item) => (
-                <div key={item.id} className="flex items-start gap-3">
+                <motion.div key={item.id} variants={fadeUpItem} className="flex items-start gap-3">
                   <span className="flex h-10 w-10 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                     <ItemIcon id={item.id} className="h-5 w-5" />
                   </span>
@@ -91,18 +88,18 @@ export default function InvestmentSection() {
                       {item.value}
                     </dd>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </dl>
+            </motion.dl>
 
-            <div className="grid h-[320px] grid-rows-[1.4fr_1fr] gap-3 sm:h-[420px]">
+            <motion.div variants={fadeUp} className="grid h-[320px] grid-rows-[1.4fr_1fr] gap-3 sm:h-[420px]">
               <div className="relative overflow-hidden rounded-xl">
                 <Image
                   src={images.primary.src}
                   alt={images.primary.alt}
                   fill
                   sizes="(min-width: 1024px) 30vw, 100vw"
-                  className="object-cover"
+                  className="object-cover animate-slow-zoom"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -112,7 +109,7 @@ export default function InvestmentSection() {
                     alt={images.secondaryA.alt}
                     fill
                     sizes="(min-width: 1024px) 15vw, 50vw"
-                    className="object-cover"
+                    className="object-cover animate-slow-zoom"
                   />
                 </div>
                 <div className="relative overflow-hidden rounded-xl">
@@ -121,11 +118,11 @@ export default function InvestmentSection() {
                     alt={images.secondaryB.alt}
                     fill
                     sizes="(min-width: 1024px) 15vw, 50vw"
-                    className="object-cover"
+                    className="object-cover animate-slow-zoom"
                   />
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

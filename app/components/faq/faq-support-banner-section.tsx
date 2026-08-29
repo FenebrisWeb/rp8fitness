@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { FaqSupportContent } from "@/app/types/faq-support";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const FAQ_SUPPORT_CONTENT: FaqSupportContent = {
   headlineLine1: "Still Have Questions?",
@@ -35,11 +37,6 @@ function QuickIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function FaqSupportBannerSection() {
   const { headlineLine1, headlineAccent, description, ctaLabel, quickContact, image } = FAQ_SUPPORT_CONTENT;
 
@@ -48,40 +45,48 @@ export default function FaqSupportBannerSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="flex flex-col gap-8 rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8 lg:flex-row lg:items-center lg:gap-10"
         >
-          <div className="relative h-[200px] w-full flex-none overflow-hidden rounded-xl lg:h-[220px] lg:w-[260px]">
-            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 260px, 100vw" className="object-cover" />
-          </div>
+          <motion.div variants={fadeUp} className="relative h-[200px] w-full flex-none overflow-hidden rounded-xl lg:h-[220px] lg:w-[260px]">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 260px, 100vw"
+              className="object-cover animate-slow-zoom"
+            />
+          </motion.div>
 
           <div className="flex-1 text-center lg:text-left">
-            <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid lg:mx-0">
+            <motion.span variants={fadeUp} className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid lg:mx-0">
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M4 5h16v11H8l-4 4z" />
               </svg>
-            </span>
+            </motion.span>
             <p className="mt-3 font-display text-xl font-black uppercase tracking-tight text-chalk sm:text-2xl">
-              {headlineLine1} <span className="text-accent-vivid">{headlineAccent}</span>
+              <AnimatedWords text={headlineLine1} /> <AnimatedWords text={headlineAccent} className="text-accent-vivid" />
             </p>
-            <p className="mx-auto mt-2 max-w-sm font-mono text-sm text-chalk lg:mx-0">{description}</p>
+            <motion.p variants={fadeUp} className="mx-auto mt-2 max-w-sm font-mono text-sm text-chalk lg:mx-0">{description}</motion.p>
 
-            <Link
-              href="/contact"
-              className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
-            >
-              {ctaLabel}
-              <span aria-hidden className="text-sm leading-none">
-                ›
-              </span>
-            </Link>
+            <motion.div variants={fadeUp}>
+              <Link
+                href="/contact"
+                className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+              >
+                {ctaLabel}
+                <span aria-hidden className="text-sm leading-none">
+                  ›
+                </span>
+              </Link>
+            </motion.div>
           </div>
 
-          <div className="flex flex-none flex-col gap-4">
+          <motion.div variants={staggerContainerTight} className="flex flex-none flex-col gap-4">
             {quickContact.map((item) => (
-              <div key={item.id} className="flex items-center gap-3">
+              <motion.div key={item.id} variants={fadeUpItem} className="flex items-center gap-3">
                 <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                   <QuickIcon id={item.id} className="h-4 w-4" />
                 </span>
@@ -89,9 +94,9 @@ export default function FaqSupportBannerSection() {
                   <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-chalk">{item.label}</p>
                   <p className="max-w-[220px] font-mono text-sm font-bold text-chalk">{item.value}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

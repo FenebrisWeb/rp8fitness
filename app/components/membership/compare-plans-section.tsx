@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import DragScrollRow from "@/app/components/shared/drag-scroll-row";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 import type { ComparePlansContent } from "@/app/types/compare-plans";
 
 const COMPARE_PLANS_CONTENT: ComparePlansContent = {
@@ -46,78 +47,71 @@ function Cell({ value, highlight }: { value: boolean | string; highlight: boolea
   return <span className={`font-mono text-xs ${highlight ? "font-bold text-accent-strong" : "text-foreground"}`}>{value}</span>;
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function ComparePlansSection() {
   const { eyebrow, planNames, popularIndex, rows } = COMPARE_PLANS_CONTENT;
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="flex items-center justify-center gap-3">
+        <motion.div initial="hidden" whileInView="show" viewport={viewportOnce} variants={staggerContainer}>
+          <motion.div variants={fadeUp} className="flex items-center justify-center gap-3">
             <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
             <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
               {eyebrow}
             </span>
             <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
-          </div>
+          </motion.div>
 
           {/* The table is wider than a phone screen no matter how tight the
               columns get — a drag/swipe scroller keeps every column at a
-              readable width instead of shrinking the type further. */}
-          <DragScrollRow className="mt-8">
-            {/* w-full stretches the table to fill the section on desktop
-                (no more dead space beside it); min-w keeps it wider than a
-                phone screen so it still overflows into a drag-scroll there. */}
-            <table className="w-full min-w-[640px] flex-none border-separate border-spacing-0">
-              <thead>
-                <tr>
-                  <th className="border-b border-foreground/10 px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-[0.05em] text-foreground">
-                    Features
-                  </th>
-                  {planNames.map((name, i) => (
-                    <th
-                      key={name}
-                      className={`border-b px-4 py-3 text-center font-mono text-xs font-bold uppercase tracking-[0.05em] ${
-                        i === popularIndex ? "border-accent-strong text-accent-strong" : "border-foreground/10 text-foreground"
-                      }`}
-                    >
-                      {name}
+              readable width instead of shrinking the type further. The table
+              is animated as a single unit (not per-cell) so it doesn't fight
+              DragScrollRow's own pointer-drag handling. */}
+          <motion.div variants={fadeUp}>
+            <DragScrollRow className="mt-8">
+              {/* w-full stretches the table to fill the section on desktop
+                  (no more dead space beside it); min-w keeps it wider than a
+                  phone screen so it still overflows into a drag-scroll there. */}
+              <table className="w-full min-w-[640px] flex-none border-separate border-spacing-0">
+                <thead>
+                  <tr>
+                    <th className="border-b border-foreground/10 px-4 py-3 text-left font-mono text-xs font-bold uppercase tracking-[0.05em] text-foreground">
+                      Features
                     </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row.id}>
-                    <td className="border-b border-foreground/10 px-4 py-3 font-mono text-xs text-foreground">
-                      {row.label}
-                    </td>
-                    {row.values.map((value, i) => (
-                      <td
-                        key={`${row.id}-${i}`}
-                        className={`border-b px-4 py-3 text-center ${
-                          i === popularIndex ? "border-accent-strong/40 bg-accent-strong/5" : "border-foreground/10"
+                    {planNames.map((name, i) => (
+                      <th
+                        key={name}
+                        className={`border-b px-4 py-3 text-center font-mono text-xs font-bold uppercase tracking-[0.05em] ${
+                          i === popularIndex ? "border-accent-strong text-accent-strong" : "border-foreground/10 text-foreground"
                         }`}
                       >
-                        <Cell value={value} highlight={i === popularIndex} />
-                      </td>
+                        {name}
+                      </th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </DragScrollRow>
+                </thead>
+                <tbody>
+                  {rows.map((row) => (
+                    <tr key={row.id}>
+                      <td className="border-b border-foreground/10 px-4 py-3 font-mono text-xs text-foreground">
+                        {row.label}
+                      </td>
+                      {row.values.map((value, i) => (
+                        <td
+                          key={`${row.id}-${i}`}
+                          className={`border-b px-4 py-3 text-center ${
+                            i === popularIndex ? "border-accent-strong/40 bg-accent-strong/5" : "border-foreground/10"
+                          }`}
+                        >
+                          <Cell value={value} highlight={i === popularIndex} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </DragScrollRow>
+          </motion.div>
         </motion.div>
       </div>
     </section>

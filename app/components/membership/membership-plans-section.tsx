@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import DragScrollRow from "@/app/components/shared/drag-scroll-row";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { MembershipPlan, MembershipPlansContent } from "@/app/types/membership-plans";
 
 const MEMBERSHIP_PLANS_CONTENT: MembershipPlansContent = {
@@ -156,11 +158,6 @@ function PlanCard({ plan, className = "" }: { plan: MembershipPlan; className?: 
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function MembershipPlansSection() {
   const { eyebrow, headline, plans, footnote } = MEMBERSHIP_PLANS_CONTENT;
 
@@ -170,20 +167,19 @@ export default function MembershipPlansSection() {
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="text-center"
         >
-          <div className="flex items-center justify-center gap-3">
+          <motion.div variants={fadeUp} className="flex items-center justify-center gap-3">
             <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
             <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
               {eyebrow}
             </span>
             <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
-          </div>
+          </motion.div>
           <h2 className="mt-3 font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-            {headline}
+            <AnimatedWords text={headline} />
           </h2>
         </motion.div>
 
@@ -197,11 +193,19 @@ export default function MembershipPlansSection() {
           ))}
         </DragScrollRow>
 
-        <div className="mt-10 hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainerTight}
+          className="mt-10 hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4"
+        >
           {plans.map((plan) => (
-            <PlanCard key={plan.id} plan={plan} />
+            <motion.div key={plan.id} variants={fadeUpItem}>
+              <PlanCard plan={plan} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <p className="mt-8 flex items-center justify-center gap-2 text-center font-mono text-xs text-foreground">
           <svg viewBox="0 0 24 24" className="h-4 w-4 flex-none text-accent-strong" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

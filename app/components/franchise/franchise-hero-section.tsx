@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { FranchiseHeroContent } from "@/app/types/franchise-hero";
 
 const FRANCHISE_HERO_CONTENT: FranchiseHeroContent = {
@@ -45,11 +47,6 @@ function PointerIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function FranchiseHeroSection() {
   const {
     eyebrow,
@@ -76,7 +73,7 @@ export default function FranchiseHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover"
+          className="object-cover animate-slow-zoom"
         />
       </div>
 
@@ -84,40 +81,45 @@ export default function FranchiseHeroSection() {
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="max-w-xl"
           >
-            <div className="flex flex-wrap items-center gap-2">
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
                 {eyebrow}
               </span>
               <span aria-hidden className="text-accent-vivid">
                 ›
               </span>
-            </div>
+            </motion.div>
 
             <h1 className="mt-3 font-display text-3xl font-black uppercase leading-[1.05] tracking-tight text-chalk sm:text-4xl md:text-5xl">
-              <span className="block">{headlineLine1}</span>
-              <span className="block text-accent-vivid">{headlineAccent}</span>
-              <span className="block">{headlineLine3}</span>
+              <AnimatedWords text={headlineLine1} className="block" />
+              <AnimatedWords text={headlineAccent} className="block text-accent-vivid" />
+              <AnimatedWords text={headlineLine3} className="block" />
             </h1>
 
-            <p className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
+            <motion.p variants={fadeUp} className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">
+              {description}
+            </motion.p>
 
-            <dl className="mt-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-6">
+            <motion.dl
+              variants={staggerContainerTight}
+              className="mt-6 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-6"
+            >
               {pointers.map((pointer) => (
-                <div key={pointer.id} className="flex items-center gap-2.5">
+                <motion.div key={pointer.id} variants={fadeUpItem} className="flex items-center gap-2.5">
                   <PointerIcon id={pointer.id} className="h-5 w-5 flex-none text-accent-vivid" />
                   <dt className="font-mono text-xs font-bold uppercase tracking-[0.04em] text-chalk">
                     {pointer.label}
                   </dt>
-                </div>
+                </motion.div>
               ))}
-            </dl>
+            </motion.dl>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="#"
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
@@ -137,7 +139,7 @@ export default function FranchiseHeroSection() {
                 </svg>
                 {secondaryCtaLabel}
               </button>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

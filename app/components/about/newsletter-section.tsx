@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import type { NewsletterContent } from "@/app/types/newsletter";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 
 const NEWSLETTER_CONTENT: NewsletterContent = {
   headline: "Stay Updated",
@@ -59,8 +63,14 @@ export default function NewsletterSection() {
 
   return (
     <section className="border-t border-white/10 bg-black">
-      <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-8 px-6 py-10 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left">
-        <div className="flex flex-none items-start gap-3 sm:max-w-xs">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+        variants={staggerContainer}
+        className="mx-auto flex w-full max-w-[1700px] flex-col items-center gap-8 px-6 py-10 text-center sm:flex-row sm:justify-between sm:px-10 sm:text-left"
+      >
+        <motion.div variants={fadeUp} className="flex flex-none items-start gap-3 sm:max-w-xs">
           <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -71,9 +81,9 @@ export default function NewsletterSection() {
             <p className="font-display text-sm font-black uppercase tracking-tight text-chalk">{headline}</p>
             <p className="mt-1 font-mono text-xs text-chalk">{description}</p>
           </div>
-        </div>
+        </motion.div>
 
-        <form className="flex w-full max-w-md flex-none items-center gap-2 sm:w-auto">
+        <motion.form variants={fadeUp} className="flex w-full max-w-md flex-none items-center gap-2 sm:w-auto">
           <input
             type="email"
             required
@@ -86,9 +96,9 @@ export default function NewsletterSection() {
           >
             {ctaLabel}
           </button>
-        </form>
+        </motion.form>
 
-        <div className="flex flex-none items-center gap-3">
+        <motion.div variants={fadeUp} className="flex flex-none items-center gap-3">
           <span className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-chalk">
             {followLabel}
           </span>
@@ -104,8 +114,8 @@ export default function NewsletterSection() {
               </Link>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

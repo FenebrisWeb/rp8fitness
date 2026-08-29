@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { EndToEndSupportContent } from "@/app/types/end-to-end-support";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const SUPPORT_CONTENT: EndToEndSupportContent = {
   headlineLine1: "End To End",
@@ -47,11 +49,6 @@ function ItemIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function EndToEndSupportSection() {
   const { headlineLine1, headlineAccent, items, image } = SUPPORT_CONTENT;
 
@@ -60,32 +57,41 @@ export default function EndToEndSupportSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8 lg:p-10"
         >
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-10">
-            <div className="relative h-[220px] w-full flex-none overflow-hidden rounded-xl lg:h-[260px] lg:w-[280px]">
-              <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 280px, 100vw" className="object-cover" />
-            </div>
+            <motion.div
+              variants={fadeUp}
+              className="relative h-[220px] w-full flex-none overflow-hidden rounded-xl lg:h-[260px] lg:w-[280px]"
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(min-width: 1024px) 280px, 100vw"
+                className="object-cover animate-slow-zoom"
+              />
+            </motion.div>
 
             <div className="flex-1 text-center lg:text-left">
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
-                {headlineLine1} <span className="text-accent-vivid">{headlineAccent}</span>
-                <br className="hidden sm:block" /> At Every Step
+                <AnimatedWords text={headlineLine1} /> <AnimatedWords text={headlineAccent} className="text-accent-vivid" />
+                <br className="hidden sm:block" /> <AnimatedWords text="At Every Step" />
               </h2>
 
-              <div className="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-6 lg:justify-start">
+              <motion.div variants={staggerContainerTight} className="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-6 lg:justify-start">
                 {items.map((item) => (
-                  <div key={item.id} className="flex w-24 flex-col items-center gap-2 text-center lg:w-auto lg:flex-row lg:text-left">
+                  <motion.div key={item.id} variants={fadeUpItem} className="flex w-24 flex-col items-center gap-2 text-center lg:w-auto lg:flex-row lg:text-left">
                     <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                       <ItemIcon id={item.id} className="h-5 w-5" />
                     </span>
                     <p className="font-mono text-xs uppercase leading-snug text-chalk">{item.label}</p>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>

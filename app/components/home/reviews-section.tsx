@@ -5,6 +5,8 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import { AnimatePresence, animate, motion, useMotionValue, type PanInfo } from "framer-motion";
 import type { Review, ReviewsContent } from "@/app/types/reviews";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 
 const AUTOPLAY_MS = 3000;
 const spring = { type: "spring", stiffness: 260, damping: 34 } as const;
@@ -290,17 +292,29 @@ export default function ReviewsSection({ content = REVIEWS_CONTENT }: { content?
   return (
     <section className="relative overflow-hidden bg-transparent pb-20 pt-[6px] sm:pb-28">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
-        <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:text-left">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
+          className="flex flex-col items-center gap-6 text-center sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:text-left"
+        >
           <div>
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-              {headline}
+              <AnimatedWords text={headline} />
             </h2>
-            <span aria-hidden className="mx-auto mt-2 block h-1 w-16 rounded-full bg-accent-strong sm:mx-0" />
+            <motion.span
+              variants={fadeUp}
+              aria-hidden
+              className="mx-auto mt-2 block h-1 w-16 rounded-full bg-accent-strong sm:mx-0"
+            />
           </div>
 
           {/* Desktop/tablet only — on mobile this moves below the cards. */}
-          <div className="hidden sm:block">{ratingAndArrows}</div>
-        </div>
+          <motion.div variants={fadeUp} className="hidden sm:block">
+            {ratingAndArrows}
+          </motion.div>
+        </motion.div>
 
         <div
           className="mt-10 sm:mt-14"

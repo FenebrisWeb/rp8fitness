@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import type { ProcessStep } from "@/app/types/franchise-process";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const STEPS: ProcessStep[] = [
   { id: "enquire", number: "01", title: "Enquire", description: "Share your details and get in touch with our team." },
@@ -39,34 +41,32 @@ function StepIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function FranchiseProcessSection() {
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
         >
           <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-            Our Franchise <span className="text-accent-strong">Process</span>
+            <AnimatedWords text="Our Franchise" /> <AnimatedWords text="Process" className="text-accent-strong" />
           </h2>
 
           <div className="mt-8 rounded-2xl border border-chalk/10 bg-ink p-6 sm:mt-10 sm:p-8">
-            <div className="relative grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6">
+            <motion.div
+              variants={staggerContainerTight}
+              className="relative grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6"
+            >
               <span
                 aria-hidden
                 className="pointer-events-none absolute left-0 right-0 top-7 hidden border-t border-dashed border-chalk/20 lg:block"
               />
 
               {STEPS.map((step) => (
-                <div key={step.id} className="relative flex flex-col items-center gap-2 text-center">
+                <motion.div key={step.id} variants={fadeUpItem} className="relative flex flex-col items-center gap-2 text-center">
                   <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent-vivid/60 bg-ink text-accent-vivid">
                     <StepIcon id={step.id} className="h-5 w-5" />
                   </span>
@@ -75,9 +75,9 @@ export default function FranchiseProcessSection() {
                   <p className="max-w-[160px] font-mono text-xs leading-relaxed text-chalk">
                     {step.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

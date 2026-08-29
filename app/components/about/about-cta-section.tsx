@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { AboutCtaContent } from "@/app/types/about-cta";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 
 const ABOUT_CTA_CONTENT: AboutCtaContent = {
   headlineLine1: "Ready To Start",
@@ -12,11 +14,6 @@ const ABOUT_CTA_CONTENT: AboutCtaContent = {
   primaryCtaLabel: "Join Now",
   secondaryCtaLabel: "Book A Tour",
   image: { src: "/HomePage/plans.webp", alt: "Member training at RP8 Fitness" },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
 };
 
 export default function AboutCtaSection() {
@@ -28,26 +25,28 @@ export default function AboutCtaSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="relative isolate flex min-h-[280px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[300px] sm:rounded-3xl"
         >
           {/* Shown as-is, no gradient layered on top — the photo's own
               dark left half is where the copy sits. */}
-          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover" />
+          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover animate-slow-zoom" />
 
           <div className="flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10 lg:p-12">
             <div className="max-w-md">
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
-                {headlineLine1}
+                <AnimatedWords text={headlineLine1} />
                 <br />
-                <span className="text-accent-vivid">{headlineLine2}</span>
+                <AnimatedWords text={headlineLine2} className="text-accent-vivid" />
               </h2>
-              <p className="mt-3 font-mono text-sm text-chalk">{description}</p>
+              <motion.p variants={fadeUp} className="mt-3 font-mono text-sm text-chalk">
+                {description}
+              </motion.p>
             </div>
 
-            <div className="flex flex-none flex-wrap items-center gap-3">
+            <motion.div variants={fadeUp} className="flex flex-none flex-wrap items-center gap-3">
               <Link
                 href="#"
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
@@ -68,7 +67,7 @@ export default function AboutCtaSection() {
                 </svg>
                 {secondaryCtaLabel}
               </Link>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

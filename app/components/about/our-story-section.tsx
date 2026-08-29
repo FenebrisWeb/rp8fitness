@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { OurStoryContent } from "@/app/types/our-story";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 
 const OUR_STORY_CONTENT: OurStoryContent = {
   eyebrow: "Our Story",
@@ -20,11 +22,6 @@ const OUR_STORY_CONTENT: OurStoryContent = {
   image: { src: "/HomePage/Franchise.webp", alt: "RP8 Fitness storefront" },
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function OurStorySection() {
   const { eyebrow, headlineLines, description, signatureCaption, mission, image } = OUR_STORY_CONTENT;
 
@@ -33,23 +30,33 @@ export default function OurStorySection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-10"
         >
           <div className="max-w-sm flex-none">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
+            <motion.span
+              variants={fadeUp}
+              className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong"
+            >
               {eyebrow}
-            </span>
+            </motion.span>
             <h2 className="mt-3 font-display text-3xl font-black uppercase leading-tight tracking-tight text-foreground sm:text-4xl">
-              <span className="block">{headlineLines[0]}</span>
-              <span className="block">{headlineLines[1]}</span>
-              <span className="block text-accent-strong">{headlineLines[2]}</span>
+              <AnimatedWords text={headlineLines[0]} className="block" />
+              <AnimatedWords text={headlineLines[1]} className="block" />
+              <AnimatedWords text={headlineLines[2]} className="block text-accent-strong" />
             </h2>
-            <p className="mt-4 font-mono text-sm leading-relaxed text-foreground">{description}</p>
+            <motion.p variants={fadeUp} className="mt-4 font-mono text-sm leading-relaxed text-foreground">
+              {description}
+            </motion.p>
 
-            <svg viewBox="0 0 100 28" className="mt-6 h-7 w-24 text-foreground" aria-hidden>
+            <motion.svg
+              variants={fadeUp}
+              viewBox="0 0 100 28"
+              className="mt-6 h-7 w-24 text-foreground"
+              aria-hidden
+            >
               <path
                 d="M2 20c6-14 10 12 16 0s9 12 16 0 8-16 12-4 8 10 12-2 8 6 14-2"
                 fill="none"
@@ -57,12 +64,23 @@ export default function OurStorySection() {
                 strokeWidth="1.6"
                 strokeLinecap="round"
               />
-            </svg>
-            <p className="mt-1 font-mono text-xs uppercase tracking-wide text-foreground">{signatureCaption}</p>
+            </motion.svg>
+            <motion.p variants={fadeUp} className="mt-1 font-mono text-xs uppercase tracking-wide text-foreground">
+              {signatureCaption}
+            </motion.p>
           </div>
 
-          <div className="relative h-[280px] w-full flex-1 overflow-hidden rounded-2xl sm:h-[340px]">
-            <Image src={image.src} alt={image.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
+          <motion.div
+            variants={fadeUp}
+            className="relative h-[280px] w-full flex-1 overflow-hidden rounded-2xl sm:h-[340px]"
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover animate-slow-zoom"
+            />
             <button
               type="button"
               aria-label="Play our story video"
@@ -72,9 +90,12 @@ export default function OurStorySection() {
                 <path d="M0 0.5L12 7L0 13.5V0.5Z" />
               </svg>
             </button>
-          </div>
+          </motion.div>
 
-          <div className="flex-none rounded-2xl border border-accent-vivid/40 bg-ink p-6 sm:w-[220px]">
+          <motion.div
+            variants={fadeUp}
+            className="flex-none rounded-2xl border border-accent-vivid/40 bg-ink p-6 sm:w-[220px]"
+          >
             <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden>
                 <circle cx="12" cy="12" r="9" />
@@ -86,7 +107,7 @@ export default function OurStorySection() {
               {mission.title}
             </p>
             <p className="mt-2 font-mono text-xs leading-relaxed text-chalk">{mission.description}</p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

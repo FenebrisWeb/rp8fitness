@@ -4,6 +4,8 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { AboutContent } from "@/app/types/about";
 import Counter from "./counter";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const ABOUT_CONTENT: AboutContent = {
   headline:
@@ -27,11 +29,6 @@ const ABOUT_CONTENT: AboutContent = {
   ],
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 48 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function AboutSection() {
   const { headline, cardLabel, images, avatars, ratingValue, ratingSuffix, ratingLabel, stats } =
     ABOUT_CONTENT;
@@ -40,16 +37,19 @@ export default function AboutSection() {
     <motion.section
       className="relative overflow-hidden py-20 sm:py-28"
       initial="hidden"
-      animate="show"
-      variants={fadeUp}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      whileInView="show"
+      viewport={viewportOnce}
+      variants={staggerContainer}
     >
       <div className="mx-auto flex w-full max-w-[1700px] flex-col items-center px-6 text-center sm:px-10">
         <h2 className="max-w-3xl font-display font-medium uppercase leading-snug tracking-tight text-foreground text-xl sm:text-2xl md:text-3xl">
-          {headline}
+          <AnimatedWords text={headline} />
         </h2>
 
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-10 sm:mt-16 lg:flex-nowrap lg:gap-16">
+        <motion.div
+          variants={fadeUp}
+          className="mt-12 flex flex-wrap items-center justify-center gap-10 sm:mt-16 lg:flex-nowrap lg:gap-16"
+        >
           {/* Media cluster — a touch-swipeable, snap-scrolling slider on
               mobile (the three panels are wider than a phone screen
               combined); a static row from sm up. */}
@@ -65,7 +65,7 @@ export default function AboutSection() {
                 alt={images.primary.alt}
                 fill
                 sizes="190px"
-                className="object-cover"
+                className="object-cover animate-slow-zoom"
               />
             </div>
 
@@ -96,7 +96,7 @@ export default function AboutSection() {
                 alt={images.secondary.alt}
                 fill
                 sizes="190px"
-                className="object-cover"
+                className="object-cover animate-slow-zoom"
               />
             </div>
           </div>
@@ -105,16 +105,17 @@ export default function AboutSection() {
               beside it. */}
           <div className="flex flex-col items-center justify-center gap-8 sm:flex-row sm:items-center lg:flex-col lg:items-start lg:gap-10">
             <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
+              <motion.div variants={staggerContainerTight} className="flex -space-x-3">
                 {avatars.map((avatar) => (
-                  <span
+                  <motion.span
                     key={avatar.initials}
+                    variants={fadeUpItem}
                     className={`flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink font-mono text-[11px] font-bold text-ink ${avatar.color}`}
                   >
                     {avatar.initials}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
               <div className="text-left">
                 <p className="font-display text-lg font-black text-foreground">
                   <Counter value={ratingValue} suffix={ratingSuffix} />
@@ -123,18 +124,18 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="flex divide-x divide-foreground/10">
+            <motion.div variants={staggerContainerTight} className="flex divide-x divide-foreground/10">
               {stats.map((stat) => (
-                <div key={stat.label} className="px-6 text-left first:pl-0">
+                <motion.div key={stat.label} variants={fadeUpItem} className="px-6 text-left first:pl-0">
                   <p className="font-display text-3xl font-black text-foreground sm:text-4xl">
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </p>
                   <p className="mt-1 font-mono text-xs text-foreground">{stat.label}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

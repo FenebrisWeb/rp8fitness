@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import type { FaqCategory } from "@/app/types/faq-accordion";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const CATEGORIES: FaqCategory[] = [
   {
@@ -287,11 +289,6 @@ function CategoryIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?: string }) {
   const [activeCategoryId, setActiveCategoryId] = useState(CATEGORIES[0].id);
   const [openItemId, setOpenItemId] = useState<string | null>(CATEGORIES[0].items[0].id);
@@ -318,30 +315,37 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="text-center"
         >
-          <div className="flex items-center justify-center gap-3">
+          <motion.div variants={fadeUpItem} className="flex items-center justify-center gap-3">
             <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
             <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
               General Questions
             </span>
             <span aria-hidden className="h-px w-10 bg-accent-strong/40" />
-          </div>
+          </motion.div>
           <h2 className="mt-3 font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-            Everything You Need To Know
+            <AnimatedWords text="Everything You Need To Know" />
           </h2>
         </motion.div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-14 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <div className={`flex flex-col gap-2 ${isSearching ? "pointer-events-none opacity-40" : ""}`}>
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainerTight}
+            className={`flex flex-col gap-2 ${isSearching ? "pointer-events-none opacity-40" : ""}`}
+          >
             {CATEGORIES.map((category) => {
               const active = category.id === activeCategoryId && !isSearching;
               return (
-                <button
+                <motion.button
                   key={category.id}
+                  variants={fadeUpItem}
                   type="button"
                   onClick={() => selectCategory(category.id)}
                   className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 text-left font-mono text-sm font-bold transition-colors ${
@@ -352,10 +356,10 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
                 >
                   <CategoryIcon id={category.id} className="h-5 w-5 flex-none" />
                   {category.label}
-                </button>
+                </motion.button>
               );
             })}
-          </div>
+          </motion.div>
 
           <div className="flex flex-col gap-3">
             {isSearching && (

@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
 import DragScrollRow from "@/app/components/shared/drag-scroll-row";
+import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const ITEMS = [
   { id: "weight", title: "Controls Weight", description: "Helps you maintain a healthy body weight & BMI." },
@@ -30,11 +32,6 @@ function ItemIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function BmiExerciseImportanceSection() {
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -42,13 +39,12 @@ export default function BmiExerciseImportanceSection() {
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8"
         >
           <h2 className="font-display text-xl font-black uppercase tracking-tight text-chalk sm:text-2xl">
-            Why Exercise Is <span className="text-accent-vivid">Important</span> (No Matter Your BMI)
+            <AnimatedWords text="Why Exercise Is" /> <AnimatedWords text="Important" className="text-accent-vivid" /> <AnimatedWords text="(No Matter Your BMI)" />
           </h2>
 
           {/* Six items is cramped in 2 mobile columns without shrinking the
@@ -64,15 +60,15 @@ export default function BmiExerciseImportanceSection() {
             ))}
           </DragScrollRow>
 
-          <div className="mt-6 hidden gap-4 sm:grid sm:grid-cols-3">
+          <motion.div variants={staggerContainerTight} className="mt-6 hidden gap-4 sm:grid sm:grid-cols-3">
             {ITEMS.map((item) => (
-              <div key={item.id} className="rounded-xl border border-chalk/10 bg-black/20 p-5 text-center">
+              <motion.div key={item.id} variants={fadeUpItem} className="rounded-xl border border-chalk/10 bg-black/20 p-5 text-center">
                 <ItemIcon id={item.id} className="mx-auto h-7 w-7 text-accent-vivid" />
                 <p className="mt-2 font-mono text-sm font-bold text-chalk">{item.title}</p>
                 <p className="mt-1 font-mono text-sm leading-snug text-chalk">{item.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

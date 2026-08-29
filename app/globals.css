@@ -145,3 +145,27 @@ button:not(:disabled),
   display: none;
 }
 
+/* Ambient "Ken Burns" drift for every background/banner photo on the site —
+   runs continuously regardless of hover: a slow, even breathe from 1x up to
+   a gentle zoom and back down, looping forever. First half of the duration
+   is the zoom-in, second half is the zoom-out, so it never jump-cuts. */
+@keyframes slow-zoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 16s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slow-zoom {
+    animation: none;
+  }
+}
+

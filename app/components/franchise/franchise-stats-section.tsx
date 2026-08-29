@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { FranchiseStatItem } from "@/app/types/franchise-stats";
+import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const STATS: FranchiseStatItem[] = [
   { id: "area", value: "5000+", label: "Sq Ft Min. Area" },
@@ -37,25 +38,23 @@ function StatIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function FranchiseStatsSection() {
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 pt-10 sm:pb-20 sm:pt-14">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="rounded-2xl border border-chalk/10 bg-ink px-6 py-6 sm:rounded-3xl sm:px-10 sm:py-8"
         >
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:divide-x lg:divide-chalk/10">
+          <motion.div
+            variants={staggerContainerTight}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:divide-x lg:divide-chalk/10"
+          >
             {STATS.map((stat) => (
-              <div key={stat.id} className="flex items-center gap-3 lg:flex-1 lg:px-4">
+              <motion.div key={stat.id} variants={fadeUpItem} className="flex items-center gap-3 lg:flex-1 lg:px-4">
                 <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                   <StatIcon id={stat.id} className="h-5 w-5" />
                 </span>
@@ -67,9 +66,9 @@ export default function FranchiseStatsSection() {
                     {stat.label}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

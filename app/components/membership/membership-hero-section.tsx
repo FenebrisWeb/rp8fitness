@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import DragScrollRow from "@/app/components/shared/drag-scroll-row";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { MembershipHeroContent } from "@/app/types/membership-hero";
 
 const MEMBERSHIP_HERO_CONTENT: MembershipHeroContent = {
@@ -52,11 +54,6 @@ function FeatureIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function MembershipHeroSection() {
   const { eyebrow, headlineLine1, headlineAccent, description, features, offer, image } =
     MEMBERSHIP_HERO_CONTENT;
@@ -67,7 +64,7 @@ export default function MembershipHeroSection() {
           on the site — shown as-is, content sits in an ink panel below on
           mobile and overlays it directly from md up. */}
       <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
-        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover" />
+        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover animate-slow-zoom" />
       </div>
 
       <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
@@ -75,30 +72,33 @@ export default function MembershipHeroSection() {
           <motion.div
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-10"
           >
             <div className="max-w-xl">
-              <div className="flex flex-wrap items-center gap-2">
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2">
                 <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
                   {eyebrow}
                 </span>
                 <span aria-hidden className="text-accent-vivid">
                   ›
                 </span>
-              </div>
+              </motion.div>
 
               <h1 className="mt-3 font-display text-3xl font-black uppercase leading-[1.05] tracking-tight text-chalk sm:text-4xl md:text-5xl">
-                <span className="block">{headlineLine1}</span>
-                <span className="block text-accent-vivid">{headlineAccent}</span>
+                <AnimatedWords text={headlineLine1} className="block" />
+                <AnimatedWords text={headlineAccent} className="block text-accent-vivid" />
               </h1>
 
-              <p className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
+              <motion.p variants={fadeUp} className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">
+                {description}
+              </motion.p>
 
               {/* Four feature callouts — a drag/swipe row below md, where a
-                  4-up grid would otherwise cramp each label+caption pair. */}
+                  4-up grid would otherwise cramp each label+caption pair.
+                  Left as plain divs (no per-item motion) so they don't
+                  fight the row's own pointer-drag handling. */}
               <DragScrollRow className="mt-6 gap-4 sm:hidden">
                 {features.map((feature) => (
                   <div key={feature.id} className="w-[150px] flex-none">
@@ -111,22 +111,25 @@ export default function MembershipHeroSection() {
                 ))}
               </DragScrollRow>
 
-              <div className="mt-6 hidden grid-cols-4 gap-5 sm:grid">
+              <motion.div variants={staggerContainerTight} className="mt-6 hidden grid-cols-4 gap-5 sm:grid">
                 {features.map((feature) => (
-                  <div key={feature.id}>
+                  <motion.div key={feature.id} variants={fadeUpItem}>
                     <FeatureIcon id={feature.id} className="h-6 w-6 text-accent-vivid" />
                     <p className="mt-2 font-mono text-xs font-bold uppercase tracking-[0.04em] text-chalk">
                       {feature.label}
                     </p>
                     <p className="mt-1 font-mono text-xs leading-snug text-chalk/80">{feature.description}</p>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
             {/* Offer card — floats beside the headline from lg up, sits as
                 its own banner below the feature row on smaller screens. */}
-            <div className="flex-none rounded-2xl border border-accent-vivid/40 bg-ink/90 p-6 text-center backdrop-blur-sm lg:w-[220px]">
+            <motion.div
+              variants={fadeUp}
+              className="flex-none rounded-2xl border border-accent-vivid/40 bg-ink/90 p-6 text-center backdrop-blur-sm lg:w-[220px]"
+            >
               <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <rect x="3" y="8" width="18" height="13" rx="1.5" />
@@ -149,7 +152,7 @@ export default function MembershipHeroSection() {
                   ›
                 </span>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

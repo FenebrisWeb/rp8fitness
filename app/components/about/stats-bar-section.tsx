@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { StatBarItem } from "@/app/types/stats-bar";
+import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const STATS: StatBarItem[] = [
   { id: "zones", value: "10+", label: "Zones" },
@@ -40,25 +41,27 @@ function StatIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function StatsBarSection() {
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="rounded-2xl border border-chalk/10 bg-ink px-6 py-8 sm:rounded-3xl sm:px-10"
         >
-          <div className="grid grid-cols-2 gap-y-8 sm:grid-cols-3 lg:flex lg:divide-x lg:divide-chalk/10">
+          <motion.div
+            variants={staggerContainerTight}
+            className="grid grid-cols-2 gap-y-8 sm:grid-cols-3 lg:flex lg:divide-x lg:divide-chalk/10"
+          >
             {STATS.map((stat) => (
-              <div key={stat.id} className="flex flex-col items-center gap-2 text-center lg:flex-1 lg:px-4">
+              <motion.div
+                key={stat.id}
+                variants={fadeUpItem}
+                className="flex flex-col items-center gap-2 text-center lg:flex-1 lg:px-4"
+              >
                 <StatIcon id={stat.id} className="h-6 w-6 text-accent-vivid" />
                 <p className="font-display text-lg font-black uppercase leading-tight text-chalk sm:text-xl">
                   {stat.value}
@@ -66,9 +69,9 @@ export default function StatsBarSection() {
                 <p className="max-w-[110px] font-mono text-[10px] uppercase leading-snug tracking-wide text-chalk">
                   {stat.label}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

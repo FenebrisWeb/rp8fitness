@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 import type { FaqHeroContent } from "@/app/types/faq-hero";
 
 const FAQ_HERO_CONTENT: FaqHeroContent = {
@@ -13,11 +15,6 @@ const FAQ_HERO_CONTENT: FaqHeroContent = {
   // Placeholder — reusing an existing gym photo until dedicated FAQ page
   // photography is ready.
   image: { src: "/HomePage/plans.webp", alt: "RP8 Fitness training floor" },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
 };
 
 export default function FaqHeroSection({
@@ -40,7 +37,7 @@ export default function FaqHeroSection({
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover"
+          className="object-cover animate-slow-zoom"
         />
       </div>
 
@@ -48,26 +45,28 @@ export default function FaqHeroSection({
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="max-w-lg"
           >
-            <div className="flex items-center gap-3">
+            <motion.div variants={fadeUp} className="flex items-center gap-3">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
                 {eyebrow}
               </span>
               <span aria-hidden className="h-px w-10 bg-accent-vivid/40" />
-            </div>
+            </motion.div>
 
             <h1 className="mt-3 font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-chalk sm:text-5xl">
-              <span className="block">{headlineLine1}</span>
-              <span className="block text-accent-vivid">{headlineAccent}</span>
+              <AnimatedWords text={headlineLine1} className="block" />
+              <AnimatedWords text={headlineAccent} className="block text-accent-vivid" />
             </h1>
 
-            <p className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
+            <motion.p variants={fadeUp} className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">
+              {description}
+            </motion.p>
 
-            <div className="relative mt-6 max-w-md">
+            <motion.div variants={fadeUp} className="relative mt-6 max-w-md">
               <svg
                 viewBox="0 0 24 24"
                 className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/60"
@@ -87,7 +86,7 @@ export default function FaqHeroSection({
                 onChange={(e) => onSearch?.(e.target.value)}
                 className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-sm text-chalk placeholder:text-chalk/50 backdrop-blur-sm focus:border-accent-vivid focus:outline-none"
               />
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

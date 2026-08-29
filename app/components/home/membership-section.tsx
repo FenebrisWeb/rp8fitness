@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { MembershipContent } from "@/app/types/membership";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const MEMBERSHIP_CONTENT: MembershipContent = {
   headlineAccent: "Flexible",
@@ -53,11 +55,6 @@ function PointerIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function MembershipSection() {
   const { headlineAccent, headlineRest, description, ctaLabel, image, pointers, price } =
     MEMBERSHIP_CONTENT;
@@ -67,49 +64,57 @@ export default function MembershipSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* Full-bleed banner photo, shown as-is with no gradient layered
               on top — same treatment as the Franchise/Open Terrace banners. */}
-          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover" />
+          <Image src={image.src} alt={image.alt} fill sizes="100vw" className="-z-10 object-cover animate-slow-zoom" />
 
           <div className="flex flex-col gap-10 p-6 sm:p-10 lg:flex-row lg:items-center lg:gap-10 lg:p-14">
             <div className="max-w-xs">
               <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-3xl">
-                <span className="text-accent-vivid">{headlineAccent}</span> {headlineRest}
+                <AnimatedWords text={headlineAccent} className="text-accent-vivid" />{" "}
+                <AnimatedWords text={headlineRest} />
               </h2>
-              <p className="mt-3 font-mono text-sm text-chalk">{description}</p>
+              <motion.p variants={fadeUp} className="mt-3 font-mono text-sm text-chalk">
+                {description}
+              </motion.p>
 
-              <Link
-                href="/membership"
-                className="mt-6 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
-              >
-                {ctaLabel}
-                <span aria-hidden className="text-sm leading-none">
-                  ›
-                </span>
-              </Link>
+              <motion.div variants={fadeUp}>
+                <Link
+                  href="/membership"
+                  className="mt-6 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                >
+                  {ctaLabel}
+                  <span aria-hidden className="text-sm leading-none">
+                    ›
+                  </span>
+                </Link>
+              </motion.div>
             </div>
 
             <div className="hidden h-24 w-px flex-none bg-chalk/10 lg:block" />
 
-            <div className="flex flex-col gap-4">
+            <motion.div variants={staggerContainerTight} className="flex flex-col gap-4">
               {pointers.map((pointer) => (
-                <div key={pointer.id} className="flex items-center gap-3">
+                <motion.div key={pointer.id} variants={fadeUpItem} className="flex items-center gap-3">
                   <span className="flex h-8 w-8 flex-none items-center justify-center rounded-md border border-accent-vivid/50 text-accent-vivid">
                     <PointerIcon id={pointer.id} className="h-4 w-4" />
                   </span>
                   <span className="font-mono text-xs uppercase tracking-[0.04em] text-chalk">
                     {pointer.label}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="min-w-[240px] rounded-2xl border border-accent-vivid/50 bg-black/30 px-8 py-8 text-center backdrop-blur-sm sm:px-10 sm:py-9 lg:ml-auto">
+            <motion.div
+              variants={fadeUp}
+              className="min-w-[240px] rounded-2xl border border-accent-vivid/50 bg-black/30 px-8 py-8 text-center backdrop-blur-sm sm:px-10 sm:py-9 lg:ml-auto"
+            >
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-chalk">
                 {price.eyebrow}
               </p>
@@ -123,7 +128,7 @@ export default function MembershipSection() {
                 <br />
                 {price.notes[1]}
               </p>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

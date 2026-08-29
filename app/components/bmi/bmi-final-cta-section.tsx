@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 
 export default function BmiFinalCtaSection() {
   return (
@@ -15,29 +12,28 @@ export default function BmiFinalCtaSection() {
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="flex flex-col items-center gap-6 rounded-2xl border border-chalk/10 bg-ink p-6 text-center sm:rounded-3xl sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:text-left"
         >
           <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-center">
-            <span className="flex h-12 w-12 flex-none items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid">
+            <motion.span variants={fadeUp} className="flex h-12 w-12 flex-none items-center justify-center rounded-full border border-accent-vivid/50 text-accent-vivid">
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M8 4h8v3a4 4 0 01-4 4 4 4 0 01-4-4V4zM4 4h4v2a4 4 0 01-4 4M20 4h-4v2a4 4 0 004 4M12 11v4M9 20h6M9 20c0-2 1-3 3-3s3 1 3 3" />
               </svg>
-            </span>
+            </motion.span>
 
             <div>
               <p className="font-display text-xl font-black uppercase tracking-tight text-chalk sm:text-2xl">
-                Ready To <span className="text-accent-vivid">Transform?</span>
+                <AnimatedWords text="Ready To" /> <AnimatedWords text="Transform?" className="text-accent-vivid" />
               </p>
-              <p className="mx-auto mt-1 max-w-sm font-mono text-sm text-chalk lg:mx-0">
+              <motion.p variants={fadeUp} className="mx-auto mt-1 max-w-sm font-mono text-sm text-chalk lg:mx-0">
                 Join RP8 Fitness today and start your journey towards a healthier, stronger you!
-              </p>
+              </motion.p>
             </div>
           </div>
 
-          <div className="flex flex-none flex-wrap items-center justify-center gap-3">
+          <motion.div variants={fadeUp} className="flex flex-none flex-wrap items-center justify-center gap-3">
             <Link
               href="/contact"
               className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
@@ -57,7 +53,7 @@ export default function BmiFinalCtaSection() {
               </svg>
               +91 12345 67890
             </a>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ContactFormContent } from "@/app/types/contact-form";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const CONTACT_FORM_CONTENT: ContactFormContent = {
   formHeadlineLine1: "Send Us A",
@@ -99,11 +101,6 @@ function SocialIcon({ id, className }: { id: string; className?: string }) {
   }
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 const inputClasses =
   "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-sm text-chalk placeholder:text-chalk/50 focus:border-accent-vivid focus:outline-none";
 
@@ -117,17 +114,17 @@ export default function ContactFormSection() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
           <motion.div
             initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8"
           >
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-chalk sm:text-3xl">
-              {formHeadlineLine1} <span className="text-accent-vivid">{formHeadlineAccent}</span>
+              <AnimatedWords text={formHeadlineLine1} /> <AnimatedWords text={formHeadlineAccent} className="text-accent-vivid" />
             </h2>
-            <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
+            <motion.span variants={fadeUp} aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-vivid" />
 
-            <form onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col gap-4">
+            <motion.form variants={fadeUp} onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col gap-4">
               <div className="relative">
                 <input type="text" placeholder="Full Name" required className={inputClasses} />
                 <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -190,24 +187,25 @@ export default function ContactFormSection() {
                 </svg>
                 {privacyNote}
               </p>
-            </form>
+            </motion.form>
           </motion.div>
 
           <motion.div
             initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer}
           >
             <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-              {infoHeadlineLine1} <span className="text-accent-strong">{infoHeadlineAccent}</span>
+              <AnimatedWords text={infoHeadlineLine1} /> <AnimatedWords text={infoHeadlineAccent} className="text-accent-strong" />
             </h2>
-            <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
+            <motion.span variants={fadeUp} aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
 
-            <div className="mt-6 flex flex-col gap-3">
+            <motion.div variants={staggerContainerTight} className="mt-6 flex flex-col gap-3">
               {infoItems.map((item) => (
-                <div
+                <motion.div
                   key={item.id}
+                  variants={fadeUpItem}
                   className="flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5"
                 >
                   <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
@@ -226,27 +224,28 @@ export default function ContactFormSection() {
                   <span aria-hidden className="flex-none text-chalk/40">
                     ›
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <div className="mt-6 flex items-center gap-3">
+            <motion.div variants={fadeUp} className="mt-6 flex items-center gap-3">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-foreground">
                 {followLabel}
               </span>
-              <div className="flex items-center gap-2">
+              <motion.div variants={staggerContainerTight} className="flex items-center gap-2">
                 {SOCIAL_LINKS.map((social) => (
-                  <Link
-                    key={social.id}
-                    href={social.href}
-                    aria-label={social.label}
-                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-accent-strong hover:text-accent-strong"
-                  >
-                    <SocialIcon id={social.id} className="h-4 w-4" />
-                  </Link>
+                  <motion.div key={social.id} variants={fadeUpItem}>
+                    <Link
+                      href={social.href}
+                      aria-label={social.label}
+                      className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-accent-strong hover:text-accent-strong"
+                    >
+                      <SocialIcon id={social.id} className="h-4 w-4" />
+                    </Link>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

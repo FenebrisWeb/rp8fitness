@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
 import DragScrollRow from "@/app/components/shared/drag-scroll-row";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import {
   BMI_BOUNDARIES,
   BMI_CATEGORY_COLORS,
@@ -78,11 +80,6 @@ function GaugeBands() {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function BmiCalculatorSection({
   onResult,
 }: {
@@ -128,16 +125,15 @@ export default function BmiCalculatorSection({
           onSubmit={handleSubmit}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8"
         >
           <h2 className="font-display text-xl font-black uppercase tracking-tight text-chalk sm:text-2xl">
-            Calculate Your BMI
+            <AnimatedWords text="Calculate Your BMI" />
           </h2>
 
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1fr_auto]">
+          <motion.div variants={fadeUp} className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_1fr_auto]">
             <label className="block">
               <span className="font-mono text-xs text-chalk">Age</span>
               <input
@@ -214,20 +210,21 @@ export default function BmiCalculatorSection({
               </button>
               <p className="text-center font-mono text-xs text-chalk sm:text-left">All fields are required</p>
             </div>
-          </div>
+          </motion.div>
         </motion.form>
 
         {result && meaning && (
           <motion.div
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]"
           >
-            <div className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8">
-              <h3 className="font-display text-lg font-black uppercase tracking-tight text-chalk">Your BMI Result</h3>
+            <motion.div variants={fadeUp} className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8">
+              <h3 className="font-display text-lg font-black uppercase tracking-tight text-chalk">
+                <AnimatedWords text="Your BMI Result" />
+              </h3>
 
               <div className="relative mx-auto mt-4 w-full max-w-[280px]">
                 <svg viewBox="0 0 240 140" className="w-full">
@@ -265,22 +262,24 @@ export default function BmiCalculatorSection({
                   );
                 })}
               </DragScrollRow>
-            </div>
+            </motion.div>
 
-            <div className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8">
-              <h3 className="font-display text-lg font-black uppercase tracking-tight text-chalk">What Does This Mean?</h3>
+            <motion.div variants={fadeUp} className="rounded-2xl border border-chalk/10 bg-ink p-6 sm:rounded-3xl sm:p-8">
+              <h3 className="font-display text-lg font-black uppercase tracking-tight text-chalk">
+                <AnimatedWords text="What Does This Mean?" />
+              </h3>
               <p className="mt-3 font-mono text-sm leading-relaxed text-chalk">{meaning.message}</p>
 
-              <div className="mt-5 grid grid-cols-3 gap-3">
+              <motion.div variants={staggerContainerTight} className="mt-5 grid grid-cols-3 gap-3">
                 {meaning.benefits.map((benefit, i) => (
-                  <div key={benefit} className="rounded-xl border border-chalk/10 p-3 text-center">
+                  <motion.div key={benefit} variants={fadeUpItem} className="rounded-xl border border-chalk/10 p-3 text-center">
                     <svg viewBox="0 0 24 24" className="mx-auto h-6 w-6 text-accent-vivid" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                       <path d={BENEFIT_ICON_PATHS[i]} />
                     </svg>
                     <p className="mt-2 font-mono text-xs leading-snug text-chalk">{benefit}</p>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
               <div className="mt-6 border-l-2 border-accent-vivid pl-4">
                 <span aria-hidden className="font-display text-2xl leading-none text-accent-vivid">
@@ -290,7 +289,7 @@ export default function BmiCalculatorSection({
                   Maintaining a healthy BMI today can help you live a longer, stronger and happier life.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </div>

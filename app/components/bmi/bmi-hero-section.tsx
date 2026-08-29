@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { BmiHeroContent } from "@/app/types/bmi";
 
 const BMI_HERO_CONTENT: BmiHeroContent = {
@@ -35,11 +37,6 @@ function PointerIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function BmiHeroSection() {
   const { eyebrow, headlineLine1, headlineAccent, headlineRest, description, pointers, image } = BMI_HERO_CONTENT;
 
@@ -49,7 +46,7 @@ export default function BmiHeroSection() {
           hero: shown as-is, content overlaid on its own naturally dark
           left side, no gradient layered on top. */}
       <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
-        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover" />
+        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover animate-slow-zoom" />
       </div>
 
       <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0">
@@ -57,32 +54,36 @@ export default function BmiHeroSection() {
           <motion.div
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="max-w-lg"
           >
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
+            <motion.span
+              variants={fadeUp}
+              className="block font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid"
+            >
               {eyebrow}
-            </span>
+            </motion.span>
 
             <h1 className="mt-3 font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-chalk sm:text-5xl">
-              <span className="block">{headlineLine1}</span>
+              <AnimatedWords text={headlineLine1} className="block" />
               <span className="block">
-                <span className="text-accent-vivid">{headlineAccent}</span> {headlineRest}
+                <AnimatedWords text={headlineAccent} className="text-accent-vivid" /> <AnimatedWords text={headlineRest} />
               </span>
             </h1>
 
-            <p className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
+            <motion.p variants={fadeUp} className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">
+              {description}
+            </motion.p>
 
-            <div className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <motion.div variants={staggerContainerTight} className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-3">
               {pointers.map((pointer) => (
-                <div key={pointer.id}>
+                <motion.div key={pointer.id} variants={fadeUpItem}>
                   <PointerIcon id={pointer.id} className="h-6 w-6 text-accent-vivid" />
                   <p className="mt-2 font-mono text-sm font-bold text-chalk">{pointer.title}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

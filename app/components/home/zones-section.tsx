@@ -5,6 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Zone } from "@/app/types/zones";
 import ZoneIcon from "./zone-icon";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 // Demo photos for now — 1080x1080, swap for real zone photography later.
 const ZONES: Zone[] = [
@@ -92,53 +94,46 @@ const ACCENT_CLASSES: Record<(typeof ACCENTS)[number], { border: string; bg: str
   },
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function ZonesSection() {
   return (
     <section className="relative overflow-hidden bg-transparent py-20 sm:py-28">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="flex flex-wrap items-end justify-between gap-6"
         >
           <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-            Explore Our Zones
+            <AnimatedWords text="Explore Our Zones" />
           </h2>
 
-          <Link
-            href="#"
-            className="flex cursor-pointer items-center gap-2 rounded-full border border-foreground/25 px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-p25 hover:text-p25"
-          >
-            Explore All Zones
-            <span aria-hidden className="text-sm leading-none">
-              ↗
-            </span>
-          </Link>
+          <motion.div variants={fadeUp}>
+            <Link
+              href="#"
+              className="flex cursor-pointer items-center gap-2 rounded-full border border-foreground/25 px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-p25 hover:text-p25"
+            >
+              Explore All Zones
+              <span aria-hidden className="text-sm leading-none">
+                ↗
+              </span>
+            </Link>
+          </motion.div>
         </motion.div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-3 lg:grid-cols-5">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainerTight}
+          className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-3 lg:grid-cols-5"
+        >
           {ZONES.map((zone, i) => {
             const accent = ACCENT_CLASSES[ACCENTS[i % ACCENTS.length]];
 
             return (
-              <motion.div
-                key={zone.id}
-                initial="hidden"
-                animate="show"
-                variants={fadeUp}
-                transition={{
-                  duration: 0.5,
-                  delay: (i % 5) * 0.06,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
+              <motion.div key={zone.id} variants={fadeUpItem}>
                 <Link
                   href="#"
                   className="group relative flex aspect-[4/5] cursor-pointer overflow-hidden rounded-2xl border border-chalk/10"
@@ -148,7 +143,7 @@ export default function ZonesSection() {
                     alt={zone.title}
                     fill
                     sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="animate-slow-zoom object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
 
@@ -181,7 +176,7 @@ export default function ZonesSection() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

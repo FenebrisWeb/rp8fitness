@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import type { JourneyMilestone } from "@/app/types/our-journey";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const MILESTONES: JourneyMilestone[] = [
   {
@@ -55,31 +57,36 @@ function MilestoneIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function OurJourneySection() {
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
         >
           <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
-            Our Journey
+            <AnimatedWords text="Our Journey" />
           </h2>
 
-          <div className="mt-8 rounded-2xl border border-chalk/10 bg-ink p-6 sm:mt-10 sm:p-8">
-            <div className="relative grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 rounded-2xl border border-chalk/10 bg-ink p-6 sm:mt-10 sm:p-8"
+          >
+            <motion.div
+              variants={staggerContainerTight}
+              className="relative grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4"
+            >
               <span aria-hidden className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-chalk/15 sm:block" />
 
               {MILESTONES.map((milestone) => (
-                <div key={milestone.id} className="relative flex flex-col items-center gap-2 text-center">
+                <motion.div
+                  key={milestone.id}
+                  variants={fadeUpItem}
+                  className="relative flex flex-col items-center gap-2 text-center"
+                >
                   <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent-vivid/60 bg-ink text-accent-vivid">
                     <MilestoneIcon id={milestone.id} className="h-5 w-5" />
                   </span>
@@ -88,10 +95,10 @@ export default function OurJourneySection() {
                   <p className="max-w-[180px] font-mono text-xs leading-relaxed text-chalk">
                     {milestone.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 import type { AboutHeroContent } from "@/app/types/about-hero";
 
 const ABOUT_HERO_CONTENT: AboutHeroContent = {
@@ -15,11 +17,6 @@ const ABOUT_HERO_CONTENT: AboutHeroContent = {
   // Placeholder — reusing the homepage hero's action shot until dedicated
   // About page photography is ready.
   image: { src: "/HomePage/hero-banner01.webp", alt: "Athlete training at RP8 Fitness" },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
 };
 
 export default function AboutHeroSection() {
@@ -38,7 +35,7 @@ export default function AboutHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover"
+          className="object-cover animate-slow-zoom"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
       </div>
@@ -47,25 +44,32 @@ export default function AboutHeroSection() {
         <div className="mx-auto w-full max-w-[1700px] md:px-6 lg:px-10">
           <motion.div
             initial="hidden"
-            animate="show"
-            variants={fadeUp}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileInView="show"
+            viewport={viewportOnce}
+            variants={staggerContainer}
             className="max-w-lg"
           >
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
+            <motion.span
+              variants={fadeUp}
+              className="block font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid"
+            >
               {eyebrow}
-            </span>
+            </motion.span>
 
             <h1 className="mt-3 font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-chalk sm:text-5xl">
-              <span className="block">{headlineLine1}</span>
+              <AnimatedWords text={headlineLine1} className="block" />
               <span className="block">
-                <span className="text-accent-vivid">{headlineAccent}</span> {headlineRest}
+                <AnimatedWords text={headlineAccent} className="text-accent-vivid" />{" "}
+                <AnimatedWords text={headlineRest} />
               </span>
             </h1>
 
-            <p className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
+            <motion.p variants={fadeUp} className="mt-4 max-w-md font-mono text-sm text-chalk sm:text-base">
+              {description}
+            </motion.p>
 
-            <button
+            <motion.button
+              variants={fadeUp}
               type="button"
               className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
             >
@@ -73,7 +77,7 @@ export default function AboutHeroSection() {
                 <path d="M0 0.5L12 7L0 13.5V0.5Z" />
               </svg>
               {ctaLabel}
-            </button>
+            </motion.button>
           </motion.div>
         </div>
       </div>

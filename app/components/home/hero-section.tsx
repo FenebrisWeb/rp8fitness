@@ -48,8 +48,17 @@ const SLIDE_COUNT = HERO_SLIDES.length;
 
 const textVariants = {
   enter: { opacity: 0, y: 40 },
-  center: { opacity: 1, y: 0 },
+  center: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } },
   exit: { opacity: 0, y: -30 },
+};
+
+// The headline+description block and the stat numbers reveal as two
+// staggered beats within each slide's own enter/center/exit cycle, instead
+// of popping in as one flat block every time the carousel advances.
+const textChildVariants = {
+  enter: { opacity: 0, y: 24 },
+  center: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -16 },
 };
 
 const spring = { type: "spring", stiffness: 260, damping: 34 } as const;
@@ -154,7 +163,7 @@ export default function HeroSection() {
                 quality={85}
                 priority={i === 0}
                 draggable={false}
-                className="select-none object-cover"
+                className="select-none object-cover animate-slow-zoom"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
             </div>
@@ -176,7 +185,7 @@ export default function HeroSection() {
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-end justify-between gap-4 sm:gap-8"
             >
-              <div className="min-w-0">
+              <motion.div variants={textChildVariants} className="min-w-0">
                 <h1 className="font-display font-black uppercase leading-[0.85] tracking-tight text-chalk">
                   <span className="block text-[11vw] italic sm:text-[9vw] md:text-[8vw] lg:text-[6.5vw]">
                     {active.headlineLine1}
@@ -188,9 +197,9 @@ export default function HeroSection() {
                 <p className="mt-3 max-w-md font-mono text-xs text-chalk sm:mt-4 sm:text-sm">
                   {active.description}
                 </p>
-              </div>
+              </motion.div>
 
-              <dl className="flex flex-none gap-3 pb-1 sm:gap-6 sm:pb-2">
+              <motion.dl variants={textChildVariants} className="flex flex-none gap-3 pb-1 sm:gap-6 sm:pb-2">
                 {active.stats.map((stat) => (
                   <div key={stat.label} className="text-right">
                     <dt className="sr-only">{stat.label}</dt>
@@ -202,7 +211,7 @@ export default function HeroSection() {
                     </dd>
                   </div>
                 ))}
-              </dl>
+              </motion.dl>
             </motion.div>
           </AnimatePresence>
 

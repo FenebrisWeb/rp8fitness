@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import type { WhyPartnerContent } from "@/app/types/why-partner";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const WHY_PARTNER_CONTENT: WhyPartnerContent = {
   headlineLine1: "Why Partner With",
@@ -62,11 +64,6 @@ function CardIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function WhyPartnerSection() {
   const { headlineLine1, headlineAccent, description, cards } = WHY_PARTNER_CONTENT;
 
@@ -75,32 +72,32 @@ export default function WhyPartnerSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10"
         >
           <div className="max-w-xs flex-none">
             <h2 className="font-display text-2xl font-black uppercase leading-tight tracking-tight text-foreground sm:text-3xl">
-              {headlineLine1}
+              <AnimatedWords text={headlineLine1} />
               <br />
-              <span className="text-accent-strong">{headlineAccent}</span>
+              <AnimatedWords text={headlineAccent} className="text-accent-strong" />
             </h2>
-            <span aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
-            <p className="mt-4 font-mono text-sm text-foreground">{description}</p>
+            <motion.span aria-hidden variants={fadeUp} className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
+            <motion.p variants={fadeUp} className="mt-4 font-mono text-sm text-foreground">{description}</motion.p>
           </div>
 
-          <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <motion.div variants={staggerContainerTight} className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {cards.map((card) => (
-              <div key={card.id} className="rounded-xl border border-chalk/10 bg-ink p-5">
+              <motion.div key={card.id} variants={fadeUpItem} className="rounded-xl border border-chalk/10 bg-ink p-5">
                 <CardIcon id={card.id} className="h-7 w-7 text-accent-vivid" />
                 <p className="mt-4 font-mono text-sm font-bold uppercase leading-snug text-chalk">
                   {card.title}
                 </p>
                 <p className="mt-2 font-mono text-xs leading-relaxed text-chalk">{card.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

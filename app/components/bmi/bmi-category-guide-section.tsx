@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { BmiCategoryGuideItem } from "@/app/types/bmi";
 import { BMI_CATEGORY_COLORS, type BmiCategoryId } from "@/app/lib/bmi";
 
@@ -56,11 +58,6 @@ function BodyIcon({
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function BmiCategoryGuideSection({ activeCategory }: { activeCategory?: BmiCategoryId | null }) {
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -68,21 +65,21 @@ export default function BmiCategoryGuideSection({ activeCategory }: { activeCate
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          variants={staggerContainer}
         >
           <h2 className="font-display text-xl font-black uppercase tracking-tight text-foreground sm:text-2xl">
-            BMI Category Guide
+            <AnimatedWords text="BMI Category Guide" />
           </h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <motion.div variants={staggerContainerTight} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {CATEGORIES.map((category) => {
               const color = BMI_CATEGORY_COLORS[category.id];
               const active = category.id === activeCategory;
               return (
-                <div
+                <motion.div
                   key={category.id}
+                  variants={fadeUpItem}
                   className="rounded-xl border p-5"
                   style={{
                     borderColor: active ? color : "color-mix(in srgb, var(--chalk) 10%, transparent)",
@@ -95,14 +92,14 @@ export default function BmiCategoryGuideSection({ activeCategory }: { activeCate
                   </p>
                   <p className="font-display text-base font-black uppercase text-chalk">{category.label}</p>
                   <p className="mt-2 font-mono text-sm leading-relaxed text-chalk">{category.description}</p>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
-          <p className="mt-6 text-center font-mono text-xs text-foreground">
+          <motion.p variants={fadeUp} className="mt-6 text-center font-mono text-xs text-foreground">
             Disclaimer: This calculator is for informational purposes only. It is not a substitute for professional medical advice.
-          </p>
+          </motion.p>
         </motion.div>
       </div>
     </section>

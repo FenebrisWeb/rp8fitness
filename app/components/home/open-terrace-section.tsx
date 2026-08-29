@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { OpenTerraceContent } from "@/app/types/open-terrace";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const OPEN_TERRACE_CONTENT: OpenTerraceContent = {
   eyebrow: "Elevate Your Game",
@@ -46,11 +48,6 @@ function PointerIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function OpenTerraceSection() {
   const { eyebrow, headline, description, ctaLabel, image, pointers } = OPEN_TERRACE_CONTENT;
 
@@ -59,9 +56,9 @@ export default function OpenTerraceSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* The source photo already vignettes dark on the left and opens
@@ -72,40 +69,47 @@ export default function OpenTerraceSection() {
             alt={image.alt}
             fill
             sizes="100vw"
-            className="-z-10 object-cover"
+            className="-z-10 object-cover animate-slow-zoom"
           />
 
           <div className="flex max-w-xl flex-col gap-5 p-6 sm:gap-6 sm:p-10 lg:p-14">
-            <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
+            <motion.span
+              variants={fadeUp}
+              className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid"
+            >
               {eyebrow}
-            </span>
+            </motion.span>
 
             <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-tight text-chalk sm:text-4xl">
-              {headline}
+              <AnimatedWords text={headline} />
             </h2>
 
-            <p className="max-w-md font-mono text-base text-chalk sm:text-lg">{description}</p>
+            <motion.p variants={fadeUp} className="max-w-md font-mono text-base text-chalk sm:text-lg">
+              {description}
+            </motion.p>
 
-            <div className="mt-2 grid grid-cols-3 gap-4 sm:gap-6">
+            <motion.div variants={staggerContainerTight} className="mt-2 grid grid-cols-3 gap-4 sm:gap-6">
               {pointers.map((pointer) => (
-                <div key={pointer.id} className="flex flex-col gap-2">
+                <motion.div key={pointer.id} variants={fadeUpItem} className="flex flex-col gap-2">
                   <PointerIcon id={pointer.id} className="h-6 w-6 text-accent-vivid" />
                   <p className="font-mono text-xs uppercase leading-snug text-chalk">
                     {pointer.label}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <Link
-              href="#"
-              className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105"
-            >
-              {ctaLabel}
-              <span aria-hidden className="text-sm leading-none">
-                ↗
-              </span>
-            </Link>
+            <motion.div variants={fadeUp}>
+              <Link
+                href="#"
+                className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105"
+              >
+                {ctaLabel}
+                <span aria-hidden className="text-sm leading-none">
+                  ↗
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>

@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { GermanEquipmentContent } from "@/app/types/german-equipment";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
 const GERMAN_EQUIPMENT_CONTENT: GermanEquipmentContent = {
   eyebrow: "Built On Quality",
@@ -51,11 +53,6 @@ function FeatureIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function GermanEquipmentSection() {
   const { eyebrow, headlineLine1, headlineLine2, description, ctaLabel, image, features } =
     GERMAN_EQUIPMENT_CONTENT;
@@ -65,9 +62,9 @@ export default function GermanEquipmentSection() {
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"
-          animate="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="relative isolate flex min-h-[460px] flex-col justify-center overflow-hidden rounded-2xl border border-chalk/10 sm:min-h-[500px] sm:rounded-3xl lg:min-h-[540px]"
         >
           {/* The source photo already has its equipment on the left and a
@@ -79,42 +76,53 @@ export default function GermanEquipmentSection() {
             alt={image.alt}
             fill
             sizes="100vw"
-            className="-z-10 object-cover"
+            className="-z-10 object-cover animate-slow-zoom"
           />
 
           <div className="flex w-full p-6 sm:justify-end sm:p-10 lg:p-14">
             <div className="flex max-w-xl flex-col gap-5 sm:gap-6">
-              <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid">
+              <motion.span
+                variants={fadeUp}
+                className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-vivid"
+              >
                 {eyebrow}
-              </span>
+              </motion.span>
 
               <h2 className="font-display font-black uppercase leading-[0.95] tracking-tight text-chalk">
-                <span className="block text-3xl sm:text-4xl lg:text-5xl">{headlineLine1}</span>
-                <span className="block text-3xl sm:text-4xl lg:text-5xl">{headlineLine2}</span>
+                <span className="block text-3xl sm:text-4xl lg:text-5xl">
+                  <AnimatedWords text={headlineLine1} />
+                </span>
+                <span className="block text-3xl sm:text-4xl lg:text-5xl">
+                  <AnimatedWords text={headlineLine2} />
+                </span>
               </h2>
 
-              <p className="max-w-md font-mono text-sm text-chalk sm:text-base">{description}</p>
+              <motion.p variants={fadeUp} className="max-w-md font-mono text-sm text-chalk sm:text-base">
+                {description}
+              </motion.p>
 
-              <div className="mt-2 grid grid-cols-2 gap-6 sm:grid-cols-4">
+              <motion.div variants={staggerContainerTight} className="mt-2 grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {features.map((feature) => (
-                  <div key={feature.id} className="flex flex-col gap-2">
+                  <motion.div key={feature.id} variants={fadeUpItem} className="flex flex-col gap-2">
                     <FeatureIcon id={feature.id} className="h-6 w-6 text-accent-vivid" />
                     <p className="font-mono text-xs uppercase leading-snug text-chalk">
                       {feature.label}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
-              <Link
-                href="#"
-                className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
-              >
-                {ctaLabel}
-                <span aria-hidden className="text-sm leading-none">
-                  ›
-                </span>
-              </Link>
+              <motion.div variants={fadeUp}>
+                <Link
+                  href="#"
+                  className="mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+                >
+                  {ctaLabel}
+                  <span aria-hidden className="text-sm leading-none">
+                    ›
+                  </span>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </motion.div>

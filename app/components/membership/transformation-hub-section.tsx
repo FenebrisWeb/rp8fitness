@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import DragScrollRow from "@/app/components/shared/drag-scroll-row";
+import AnimatedWords from "@/app/components/shared/animated-words";
+import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { TransformationHubContent } from "@/app/types/transformation-hub";
 
 const TRANSFORMATION_HUB_CONTENT: TransformationHubContent = {
@@ -37,11 +39,6 @@ function FeatureIcon({ id, className }: { id: string; className?: string }) {
   );
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
-
 export default function TransformationHubSection() {
   const { eyebrow, headlineLine1, headlineBefore, headlineAccent, headlineAfter, features, video } =
     TRANSFORMATION_HUB_CONTENT;
@@ -52,13 +49,21 @@ export default function TransformationHubSection() {
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeUp}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          viewport={viewportOnce}
+          variants={staggerContainer}
           className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-12"
         >
-          <div className="relative h-[240px] w-full flex-none overflow-hidden rounded-2xl lg:h-[320px] lg:w-[440px]">
-            <Image src={video.src} alt={video.alt} fill sizes="(min-width: 1024px) 440px, 100vw" className="object-cover" />
+          <motion.div
+            variants={fadeUp}
+            className="relative h-[240px] w-full flex-none overflow-hidden rounded-2xl lg:h-[320px] lg:w-[440px]"
+          >
+            <Image
+              src={video.src}
+              alt={video.alt}
+              fill
+              sizes="(min-width: 1024px) 440px, 100vw"
+              className="object-cover animate-slow-zoom"
+            />
             <button
               type="button"
               aria-label="Play video"
@@ -68,22 +73,24 @@ export default function TransformationHubSection() {
                 <path d="M0 0.5L12 7L0 13.5V0.5Z" />
               </svg>
             </button>
-          </div>
+          </motion.div>
 
           <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-2">
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-xs font-bold uppercase tracking-[0.15em] text-accent-strong">
                 {eyebrow}
               </span>
               <span aria-hidden className="text-accent-strong">
                 ›
               </span>
-            </div>
+            </motion.div>
 
             <h2 className="mt-3 font-display text-2xl font-black uppercase leading-tight tracking-tight text-foreground sm:text-3xl">
-              <span className="block">{headlineLine1}</span>
               <span className="block">
-                {headlineBefore} <span className="text-accent-strong">{headlineAccent}</span> {headlineAfter}
+                <AnimatedWords text={headlineLine1} />
+              </span>
+              <span className="block">
+                <AnimatedWords text={headlineBefore} className="inline" /> <AnimatedWords text={headlineAccent} className="inline text-accent-strong" /> <AnimatedWords text={headlineAfter} className="inline" />
               </span>
             </h2>
 
@@ -101,17 +108,17 @@ export default function TransformationHubSection() {
               ))}
             </DragScrollRow>
 
-            <div className="mt-6 hidden grid-cols-2 gap-6 sm:grid">
+            <motion.div variants={staggerContainerTight} className="mt-6 hidden grid-cols-2 gap-6 sm:grid">
               {features.map((feature) => (
-                <div key={feature.id}>
+                <motion.div key={feature.id} variants={fadeUpItem}>
                   <FeatureIcon id={feature.id} className="h-6 w-6 text-accent-strong" />
                   <p className="mt-2 font-mono text-xs font-bold uppercase leading-snug tracking-[0.02em] text-foreground">
                     {feature.label}
                   </p>
                   <p className="mt-1 font-mono text-xs leading-snug text-foreground/70">{feature.description}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
