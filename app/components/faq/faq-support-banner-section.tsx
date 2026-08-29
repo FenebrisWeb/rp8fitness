@@ -19,7 +19,7 @@ const FAQ_SUPPORT_CONTENT: FaqSupportContent = {
   ],
   // Placeholder — reusing an existing training photo until dedicated FAQ
   // page photography is ready.
-  image: { src: "/HomePage/about/image-1.jpg", alt: "Trainer coaching a member at RP8 Fitness" },
+  image: { src: "/HomePage/hero-banner01.webp", alt: "Trainer coaching a member at RP8 Fitness" },
 };
 
 const ICON_PATHS: Record<string, string> = {

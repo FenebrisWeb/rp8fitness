@@ -11,8 +11,8 @@ const ABOUT_CONTENT: AboutContent = {
     "Professional coaching, advanced equipment, and a motivating fitness environment built for real and lasting progress impact",
   cardLabel: "Where strength meets discipline",
   images: {
-    primary: { src: "/HomePage/about/image-1.jpg", alt: "RP8 Fitness trainer" },
-    secondary: { src: "/HomePage/about/image-2.jpg", alt: "Member training at RP8 Fitness" },
+    primary: { src: "/HomePage/about/Run Indian Man.webp", alt: "Member running at RP8 Fitness" },
+    secondary: { src: "/HomePage/about/weighted barbell.webp", alt: "Weighted barbell training at RP8 Fitness" },
   },
   avatars: [
     { initials: "A", color: "bg-p25" },

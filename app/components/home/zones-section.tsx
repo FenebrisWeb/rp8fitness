@@ -8,77 +8,76 @@ import ZoneIcon from "./zone-icon";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 
-// Demo photos for now — 1080x1080, swap for real zone photography later.
 const ZONES: Zone[] = [
   {
     id: "cardio",
     title: "Cardio",
     description: "High-intensity machines",
     category: "train",
-    image: "https://picsum.photos/seed/rp8-cardio/1080/1080",
+    image: "/zones/RP8 Cardio.webp",
   },
   {
     id: "strength",
     title: "Strength",
     description: "Free weights & racks",
     category: "train",
-    image: "https://picsum.photos/seed/rp8-strength/1080/1080",
+    image: "/zones/RP8 Strength.webp",
   },
   {
     id: "zumba",
     title: "Zumba Classes",
     description: "Group dance fitness",
     category: "train",
-    image: "https://picsum.photos/seed/rp8-zumba/1080/1080",
+    image: "/zones/RP8 Zumba.webp",
   },
   {
     id: "crossfit",
     title: "CrossFit",
     description: "Functional training zone",
     category: "train",
-    image: "https://picsum.photos/seed/rp8-crossfit/1080/1080",
+    image: "/zones/RP8 CrossFit.webp",
   },
   {
     id: "boxing",
     title: "Boxing Area",
     description: "Bags, rings & pads",
     category: "train",
-    image: "https://picsum.photos/seed/rp8-boxing/1080/1080",
+    image: "/zones/RP8 Boxing Area.webp",
   },
   {
     id: "pickleball",
     title: "Pickleball Court",
     description: "Open terrace court",
     category: "play",
-    image: "https://picsum.photos/seed/rp8-pickleball/1080/1080",
+    image: "/zones/RP8 Pickleball.webp",
   },
   {
     id: "pool",
     title: "Pool Table",
     description: "Unwind between sets",
     category: "play",
-    image: "https://picsum.photos/seed/rp8-pool/1080/1080",
+    image: "/zones/RP8 Pool Table.webp",
   },
   {
     id: "cafe",
     title: "Cafe",
     description: "Protein-forward menu",
     category: "support",
-    image: "https://picsum.photos/seed/rp8-cafe/1080/1080",
+    image: "/zones/RP8 Cafe.webp",
   },
   {
     id: "supplement",
     title: "Supplement Store",
     description: "Everything you need",
     category: "support",
-    image: "https://picsum.photos/seed/rp8-supplement/1080/1080",
+    image: "/zones/RP8 Supplement.webp",
   },
   {
     id: "closet",
     title: "Walk-in Closet",
     description: "Secure locker storage",
     category: "support",
-    image: "https://picsum.photos/seed/rp8-closet/1080/1080",
+    image: "/zones/RP8 Closet.webp",
   },
 ];
 
@@ -145,7 +144,10 @@ export default function ZonesSection() {
                     sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
                     className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
+                  {/* Darkens only the bottom third, behind the title/description
+                      — the rest of the photo stays fully clear so the actual
+                      zone photography shows through undimmed. */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink from-0% via-ink/70 via-20% to-transparent to-45%" />
 
                   {/* Content painted above the image/gradient via normal DOM
                       order — avoids the negative-z-index trick, which would
