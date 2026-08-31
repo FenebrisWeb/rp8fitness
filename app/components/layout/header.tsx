@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./theme-toggle";
 import MobileMenu from "./mobile-menu";
+import JoinNowModal from "./join-now-modal";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -18,6 +19,7 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [joinOpen, setJoinOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   // A slightly denser, shadowed header once the page has actually scrolled —
@@ -55,15 +57,16 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <ThemeToggle />
 
-          <Link
-            href="#"
+          <button
+            type="button"
+            onClick={() => setJoinOpen(true)}
             className="group flex items-center gap-2 rounded-full bg-accent-strong px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105 active:scale-95"
           >
             Join Now
             <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
               ↗
             </span>
-          </Link>
+          </button>
 
           <button
             type="button"
@@ -87,6 +90,7 @@ export default function Header() {
       </div>
 
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} links={NAV_LINKS} />
+      <JoinNowModal open={joinOpen} onClose={() => setJoinOpen(false)} />
     </header>
   );
 }
