@@ -44,7 +44,7 @@ function StatIcon({ id, className }: { id: string; className?: string }) {
 
 export default function StatsBarSection() {
   return (
-    <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
+    <section className="relative overflow-hidden bg-transparent pt-8 pb-16 sm:pt-0 sm:pb-20">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
         <motion.div
           initial="hidden"

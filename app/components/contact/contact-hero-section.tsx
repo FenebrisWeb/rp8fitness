@@ -96,9 +96,12 @@ export default function ContactHeroSection() {
               {description}
             </motion.p>
 
-            <motion.div variants={staggerContainerTight} className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <motion.div
+              variants={staggerContainerTight}
+              className="no-scrollbar mt-7 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0"
+            >
               {pointers.map((pointer) => (
-                <motion.div key={pointer.id} variants={fadeUpItem}>
+                <motion.div key={pointer.id} variants={fadeUpItem} className="w-[180px] flex-none snap-start sm:w-auto">
                   <PointerIcon id={pointer.id} className="h-6 w-6 text-accent-vivid" />
                   <p className="mt-2 font-mono text-sm font-bold text-chalk">{pointer.title}</p>
                   <p className="mt-0.5 font-mono text-xs text-chalk">{pointer.description}</p>

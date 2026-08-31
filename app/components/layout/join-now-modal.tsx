@@ -15,8 +15,11 @@ const PERKS = [
   "Free body composition & goal-setting session",
 ];
 
+// text-base (16px) on mobile — anything smaller makes iOS/Android
+// auto-zoom the page on focus. Back down to text-sm from sm: up, where
+// that zoom trigger no longer applies.
 const inputClasses =
-  "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-sm text-chalk placeholder:text-chalk/50 transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20";
+  "w-full rounded-lg border border-chalk/15 bg-black/20 py-3.5 pl-4 pr-11 font-mono text-base text-chalk placeholder:text-chalk/50 transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:text-sm";
 
 type SubmitStatus = "idle" | "sending" | "sent";
 
@@ -62,7 +65,7 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
       {open && (
         <>
           <motion.div
-            className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] bg-black/55 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -70,12 +73,17 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
             onClick={onClose}
           />
 
-          <div className="fixed inset-0 z-[61] flex items-center justify-center overflow-y-auto p-4 sm:p-6">
+          {/* p-4/p-6 here keeps a visible backdrop margin around the panel
+              at every viewport size — the panel itself caps at 85vh and
+              scrolls its own content, instead of growing taller than the
+              screen and eating that margin (which read as a full-bleed
+              page, not a popup). */}
+          <div className="fixed inset-0 z-[61] flex items-center justify-center p-4 sm:p-6">
             <motion.div
               role="dialog"
               aria-modal="true"
               aria-label="Join RP8 Fitness"
-              className="relative w-full max-w-md overflow-hidden rounded-2xl border border-chalk/10 bg-ink shadow-2xl sm:rounded-3xl"
+              className="relative flex w-full max-w-md max-h-[85vh] flex-col overflow-y-auto overflow-x-hidden rounded-2xl border border-chalk/15 bg-ink shadow-2xl ring-1 ring-black/40 sm:rounded-3xl"
               initial={{ opacity: 0, y: 24, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 16, scale: 0.97 }}

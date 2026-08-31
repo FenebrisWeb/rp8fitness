@@ -113,7 +113,7 @@ export default function MembershipSection() {
 
             <motion.div
               variants={fadeUp}
-              className="min-w-[240px] rounded-2xl border border-accent-vivid/50 bg-black/30 px-8 py-8 text-center backdrop-blur-sm sm:px-10 sm:py-9 lg:ml-auto"
+              className="w-full rounded-2xl border border-accent-vivid/50 bg-black/30 px-8 py-8 text-center backdrop-blur-sm sm:w-auto sm:min-w-[240px] sm:px-10 sm:py-9 lg:ml-auto"
             >
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-chalk">
                 {price.eyebrow}

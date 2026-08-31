@@ -70,7 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} h-full overflow-x-hidden antialiased`}
       // The inline script below sets data-theme before hydration so light
       // mode never flashes dark first — React's hydration check has no way
       // to know that's expected, so this is the documented escape hatch.
@@ -85,7 +85,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <Wrapper>{children}</Wrapper>
       </body>
     </html>

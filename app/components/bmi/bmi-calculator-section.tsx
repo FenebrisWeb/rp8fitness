@@ -144,7 +144,7 @@ export default function BmiCalculatorSection({
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="Years"
-                className="mt-1.5 w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 font-mono text-sm text-chalk placeholder:text-chalk/50 transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
+                className="mt-1.5 w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 font-mono text-base text-chalk placeholder:text-chalk/50 transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:text-sm"
               />
             </label>
 
@@ -176,7 +176,7 @@ export default function BmiCalculatorSection({
                   required
                   value={height}
                   onChange={(e) => setHeight(e.target.value)}
-                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-sm text-chalk transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
+                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-base text-chalk transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:text-sm"
                 />
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-chalk">cm</span>
               </div>
@@ -192,7 +192,7 @@ export default function BmiCalculatorSection({
                   required
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
-                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-sm text-chalk transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
+                  className="w-full rounded-lg border border-chalk/15 bg-black/20 px-4 py-3 pr-12 font-mono text-base text-chalk transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:text-sm"
                 />
                 <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-chalk">kg</span>
               </div>
@@ -270,9 +270,16 @@ export default function BmiCalculatorSection({
               </h3>
               <p className="mt-3 font-mono text-sm leading-relaxed text-chalk">{meaning.message}</p>
 
-              <motion.div variants={staggerContainerTight} className="mt-5 grid grid-cols-3 gap-3">
+              <motion.div
+                variants={staggerContainerTight}
+                className="no-scrollbar mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0"
+              >
                 {meaning.benefits.map((benefit, i) => (
-                  <motion.div key={benefit} variants={fadeUpItem} className="rounded-xl border border-chalk/10 p-3 text-center">
+                  <motion.div
+                    key={benefit}
+                    variants={fadeUpItem}
+                    className="w-[130px] flex-none snap-start rounded-xl border border-chalk/10 p-3 text-center sm:w-auto"
+                  >
                     <svg viewBox="0 0 24 24" className="mx-auto h-6 w-6 text-accent-vivid" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                       <path d={BENEFIT_ICON_PATHS[i]} />
                     </svg>

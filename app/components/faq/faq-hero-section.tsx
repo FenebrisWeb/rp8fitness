@@ -82,7 +82,7 @@ export default function FaqHeroSection({
                 type="search"
                 placeholder={searchPlaceholder}
                 onChange={(e) => onSearch?.(e.target.value)}
-                className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-sm text-chalk placeholder:text-chalk/50 backdrop-blur-sm transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20"
+                className="w-full rounded-full border border-chalk/25 bg-black/20 py-3.5 pl-11 pr-5 font-mono text-base text-chalk placeholder:text-chalk/50 backdrop-blur-sm transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:text-sm"
               />
             </motion.div>
           </motion.div>

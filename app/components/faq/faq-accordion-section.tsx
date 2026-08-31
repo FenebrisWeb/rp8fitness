@@ -292,6 +292,7 @@ function CategoryIcon({ id, className }: { id: string; className?: string }) {
 export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?: string }) {
   const [activeCategoryId, setActiveCategoryId] = useState(CATEGORIES[0].id);
   const [openItemId, setOpenItemId] = useState<string | null>(CATEGORIES[0].items[0].id);
+  const [categoryMenuOpen, setCategoryMenuOpen] = useState(false);
 
   const query = searchQuery.trim().toLowerCase();
   const isSearching = query.length > 0;
@@ -308,6 +309,7 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
     setActiveCategoryId(id);
     const next = CATEGORIES.find((category) => category.id === id);
     setOpenItemId(next?.items[0]?.id ?? null);
+    setCategoryMenuOpen(false);
   };
 
   return (
@@ -333,33 +335,94 @@ export default function FaqAccordionSection({ searchQuery = "" }: { searchQuery?
         </motion.div>
 
         <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-14 lg:grid-cols-[280px_minmax(0,1fr)]">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={viewportOnce}
-            variants={staggerContainerTight}
-            className={`flex flex-col gap-2 ${isSearching ? "pointer-events-none opacity-40" : ""}`}
-          >
-            {CATEGORIES.map((category) => {
-              const active = category.id === activeCategoryId && !isSearching;
-              return (
-                <motion.button
-                  key={category.id}
-                  variants={fadeUpItem}
-                  type="button"
-                  onClick={() => selectCategory(category.id)}
-                  className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 text-left font-mono text-sm font-bold transition-colors ${
-                    active
-                      ? "border-accent-vivid bg-accent-vivid text-accent-vivid-contrast"
-                      : "border-chalk/10 bg-ink text-chalk hover:border-accent-vivid/50"
-                  }`}
+          <div className={`lg:sticky lg:top-24 lg:self-start ${isSearching ? "pointer-events-none opacity-40" : ""}`}>
+            {/* Mobile/tablet — a single dropdown trigger showing the active
+                category, instead of the full list taking up the whole
+                column before the questions even appear. */}
+            <div className="relative lg:hidden">
+              <button
+                type="button"
+                onClick={() => setCategoryMenuOpen((v) => !v)}
+                aria-expanded={categoryMenuOpen}
+                className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border border-accent-vivid bg-accent-vivid px-4 py-3.5 text-left font-mono text-sm font-bold text-accent-vivid-contrast"
+              >
+                <span className="flex items-center gap-3">
+                  <CategoryIcon id={activeCategory.id} className="h-5 w-5 flex-none" />
+                  {activeCategory.label}
+                </span>
+                <svg
+                  viewBox="0 0 24 24"
+                  className={`h-4 w-4 flex-none transition-transform duration-300 ${categoryMenuOpen ? "rotate-180" : "rotate-0"}`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
                 >
-                  <CategoryIcon id={category.id} className="h-5 w-5 flex-none" />
-                  {category.label}
-                </motion.button>
-              );
-            })}
-          </motion.div>
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+
+              <AnimatePresence>
+                {categoryMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute left-0 right-0 top-full z-20 mt-2 flex flex-col gap-1.5 rounded-xl border border-chalk/10 bg-ink p-2 shadow-2xl"
+                  >
+                    {CATEGORIES.map((category) => {
+                      const active = category.id === activeCategoryId;
+                      return (
+                        <button
+                          key={category.id}
+                          type="button"
+                          onClick={() => selectCategory(category.id)}
+                          className={`flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-left font-mono text-sm font-bold transition-colors ${
+                            active ? "bg-accent-vivid text-accent-vivid-contrast" : "text-chalk hover:bg-chalk/10"
+                          }`}
+                        >
+                          <CategoryIcon id={category.id} className="h-5 w-5 flex-none" />
+                          {category.label}
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Desktop — the full vertical list, sticky within the column. */}
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
+              variants={staggerContainerTight}
+              className="hidden flex-col gap-2 lg:flex"
+            >
+              {CATEGORIES.map((category) => {
+                const active = category.id === activeCategoryId && !isSearching;
+                return (
+                  <motion.button
+                    key={category.id}
+                    variants={fadeUpItem}
+                    type="button"
+                    onClick={() => selectCategory(category.id)}
+                    className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 text-left font-mono text-sm font-bold transition-colors ${
+                      active
+                        ? "border-accent-vivid bg-accent-vivid text-accent-vivid-contrast"
+                        : "border-chalk/10 bg-ink text-chalk hover:border-accent-vivid/50"
+                    }`}
+                  >
+                    <CategoryIcon id={category.id} className="h-5 w-5 flex-none" />
+                    {category.label}
+                  </motion.button>
+                );
+              })}
+            </motion.div>
+          </div>
 
           <div className="flex flex-col gap-3">
             {isSearching && (

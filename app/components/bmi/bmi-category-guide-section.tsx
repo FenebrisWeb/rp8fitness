@@ -72,7 +72,10 @@ export default function BmiCategoryGuideSection({ activeCategory }: { activeCate
             <AnimatedWords text="BMI Category Guide" />
           </h2>
 
-          <motion.div variants={staggerContainerTight} className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <motion.div
+            variants={staggerContainerTight}
+            className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-4"
+          >
             {CATEGORIES.map((category) => {
               const color = BMI_CATEGORY_COLORS[category.id];
               const active = category.id === activeCategory;
@@ -80,7 +83,7 @@ export default function BmiCategoryGuideSection({ activeCategory }: { activeCate
                 <motion.div
                   key={category.id}
                   variants={fadeUpItem}
-                  className="rounded-xl border p-5 transition-transform duration-300 hover:-translate-y-1"
+                  className="w-[220px] flex-none snap-start rounded-xl border p-5 transition-transform duration-300 hover:-translate-y-1 sm:w-auto"
                   style={{
                     borderColor: active ? color : "color-mix(in srgb, var(--chalk) 10%, transparent)",
                     backgroundColor: active ? `color-mix(in srgb, ${color} 12%, var(--ink))` : "var(--ink)",
