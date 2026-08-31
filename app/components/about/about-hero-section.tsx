@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 import type { AboutHeroContent } from "@/app/types/about-hero";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const ABOUT_HERO_CONTENT: AboutHeroContent = {
   eyebrow: "About RP8 Fitness",
@@ -20,6 +21,7 @@ const ABOUT_HERO_CONTENT: AboutHeroContent = {
 export default function AboutHeroSection() {
   const { eyebrow, headlineLine1, headlineAccent, headlineRest, description, ctaLabel, image } =
     ABOUT_HERO_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative w-full">
@@ -69,6 +71,7 @@ export default function AboutHeroSection() {
             <motion.button
               variants={fadeUp}
               type="button"
+              onClick={() => openEnquiry({ variant: "tour" })}
               className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
             >
               <svg viewBox="0 0 12 14" className="h-3 w-3" fill="currentColor" aria-hidden>

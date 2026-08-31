@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 import type { MembershipCtaContent } from "@/app/types/membership-cta";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const MEMBERSHIP_CTA_CONTENT: MembershipCtaContent = {
   headlineLine1: "Ready To Start",
@@ -14,6 +14,7 @@ const MEMBERSHIP_CTA_CONTENT: MembershipCtaContent = {
 
 export default function MembershipCtaSection() {
   const { headlineLine1, headlineAccent, description, ctaLabel } = MEMBERSHIP_CTA_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -45,15 +46,16 @@ export default function MembershipCtaSection() {
           </div>
 
           <motion.div variants={fadeUp}>
-            <Link
-              href="/contact"
+            <button
+              type="button"
+              onClick={() => openEnquiry({ variant: "join" })}
               className="flex-none cursor-pointer rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
             >
               {ctaLabel}
               <span aria-hidden className="ml-2 text-sm leading-none">
                 ›
               </span>
-            </Link>
+            </button>
           </motion.div>
         </motion.div>
       </div>

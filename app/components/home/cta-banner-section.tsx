@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { CtaBannerContent } from "@/app/types/cta-banner";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const CTA_BANNER_CONTENT: CtaBannerContent = {
   headline: "Ready To Start Your Fitness Journey?",
@@ -37,6 +37,7 @@ function WaveLines() {
 
 export default function CtaBannerSection() {
   const { headline, description, ctaLabel } = CTA_BANNER_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -59,15 +60,16 @@ export default function CtaBannerSection() {
             </motion.p>
 
             <motion.div variants={fadeUp}>
-              <Link
-                href="#"
+              <button
+                type="button"
+                onClick={() => openEnquiry({ variant: "join" })}
                 className="group mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {ctaLabel}
                 <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   ↗
                 </span>
-              </Link>
+              </button>
             </motion.div>
           </div>
         </motion.div>

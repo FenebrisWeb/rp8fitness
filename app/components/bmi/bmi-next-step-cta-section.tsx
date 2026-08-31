@@ -5,8 +5,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 export default function BmiNextStepCtaSection() {
+  const { openEnquiry } = useEnquiryModal();
+
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
@@ -48,15 +51,16 @@ export default function BmiNextStepCtaSection() {
                   ›
                 </span>
               </Link>
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={() => openEnquiry({ variant: "tour" })}
                 className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk transition-colors hover:border-accent-vivid hover:text-accent-vivid active:scale-95"
               >
                 Book A Free Tour
                 <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
-              </Link>
+              </button>
             </motion.div>
           </div>
         </motion.div>

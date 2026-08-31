@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Zone } from "@/app/types/zones";
 import ZoneIcon from "./zone-icon";
 import AnimatedWords from "@/app/components/shared/animated-words";
-import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import { fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const ZONES: Zone[] = [
   {
@@ -94,6 +94,8 @@ const ACCENT_CLASSES: Record<(typeof ACCENTS)[number], { border: string; bg: str
 };
 
 export default function ZonesSection() {
+  const { openEnquiry } = useEnquiryModal();
+
   return (
     <section className="relative overflow-hidden bg-transparent py-20 sm:py-28">
       <div className="mx-auto w-full max-w-[1700px] px-6 sm:px-10">
@@ -121,9 +123,10 @@ export default function ZonesSection() {
 
             return (
               <motion.div key={zone.id} variants={fadeUpItem}>
-                <Link
-                  href="#"
-                  className="group relative flex aspect-[4/5] cursor-pointer overflow-hidden rounded-2xl border border-chalk/10 transition-transform duration-300 hover:-translate-y-1"
+                <button
+                  type="button"
+                  onClick={() => openEnquiry({ variant: "zone", context: zone.title })}
+                  className="group relative flex aspect-[4/5] w-full cursor-pointer overflow-hidden rounded-2xl border border-chalk/10 text-left transition-transform duration-300 hover:-translate-y-1"
                 >
                   <Image
                     src={zone.image}
@@ -162,7 +165,7 @@ export default function ZonesSection() {
                   >
                     ↗
                   </span>
-                </Link>
+                </button>
               </motion.div>
             );
           })}

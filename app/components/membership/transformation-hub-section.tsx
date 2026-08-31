@@ -6,6 +6,7 @@ import DragScrollRow from "@/app/components/shared/drag-scroll-row";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { TransformationHubContent } from "@/app/types/transformation-hub";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const TRANSFORMATION_HUB_CONTENT: TransformationHubContent = {
   eyebrow: "Why Join RP8?",
@@ -42,6 +43,7 @@ function FeatureIcon({ id, className }: { id: string; className?: string }) {
 export default function TransformationHubSection() {
   const { eyebrow, headlineLine1, headlineBefore, headlineAccent, headlineAfter, features, video } =
     TRANSFORMATION_HUB_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -67,6 +69,7 @@ export default function TransformationHubSection() {
             <button
               type="button"
               aria-label="Play video"
+              onClick={() => openEnquiry({ variant: "tour" })}
               className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-accent-vivid text-accent-vivid-contrast transition-transform hover:scale-105"
             >
               <svg width="16" height="18" viewBox="0 0 12 14" fill="currentColor">

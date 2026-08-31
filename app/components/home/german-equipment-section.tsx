@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { GermanEquipmentContent } from "@/app/types/german-equipment";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const GERMAN_EQUIPMENT_CONTENT: GermanEquipmentContent = {
   eyebrow: "Built On Quality",
@@ -56,6 +56,7 @@ function FeatureIcon({ id, className }: { id: string; className?: string }) {
 export default function GermanEquipmentSection() {
   const { eyebrow, headlineLine1, headlineLine2, description, ctaLabel, image, features } =
     GERMAN_EQUIPMENT_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-5">
@@ -113,15 +114,16 @@ export default function GermanEquipmentSection() {
               </motion.div>
 
               <motion.div variants={fadeUp}>
-                <Link
-                  href="#"
+                <button
+                  type="button"
+                  onClick={() => openEnquiry({ variant: "zone", context: "Our German Equipment" })}
                   className="group mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
                 >
                   {ctaLabel}
                   <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                     ›
                   </span>
-                </Link>
+                </button>
               </motion.div>
             </div>
           </div>

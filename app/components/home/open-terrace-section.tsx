@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { OpenTerraceContent } from "@/app/types/open-terrace";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const OPEN_TERRACE_CONTENT: OpenTerraceContent = {
   eyebrow: "Elevate Your Game",
@@ -50,6 +50,7 @@ function PointerIcon({ id, className }: { id: string; className?: string }) {
 
 export default function OpenTerraceSection() {
   const { eyebrow, headline, description, ctaLabel, image, pointers } = OPEN_TERRACE_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-5">
@@ -100,15 +101,16 @@ export default function OpenTerraceSection() {
             </motion.div>
 
             <motion.div variants={fadeUp}>
-              <Link
-                href="#"
+              <button
+                type="button"
+                onClick={() => openEnquiry({ variant: "zone", context: "The Open Terrace & Pickleball Court" })}
                 className="group mt-3 inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105 active:scale-95"
               >
                 {ctaLabel}
                 <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   ↗
                 </span>
-              </Link>
+              </button>
             </motion.div>
           </div>
         </motion.div>

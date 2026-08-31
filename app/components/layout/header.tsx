@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "./theme-toggle";
 import MobileMenu from "./mobile-menu";
-import JoinNowModal from "./join-now-modal";
+import { useEnquiryModal } from "./enquiry-modal-context";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -19,8 +19,8 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [joinOpen, setJoinOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { openEnquiry } = useEnquiryModal();
 
   // A slightly denser, shadowed header once the page has actually scrolled —
   // reads as "lifted off the page" instead of always looking identical.
@@ -59,7 +59,7 @@ export default function Header() {
 
           <button
             type="button"
-            onClick={() => setJoinOpen(true)}
+            onClick={() => openEnquiry({ variant: "join" })}
             className="group flex items-center gap-2 rounded-full bg-accent-strong px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-strong-contrast transition-transform hover:scale-105 active:scale-95"
           >
             Join Now
@@ -90,7 +90,6 @@ export default function Header() {
       </div>
 
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} links={NAV_LINKS} />
-      <JoinNowModal open={joinOpen} onClose={() => setJoinOpen(false)} />
     </header>
   );
 }

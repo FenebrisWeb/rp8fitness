@@ -78,7 +78,7 @@ export default function FranchiseSection() {
 
               <motion.div variants={fadeUp}>
                 <Link
-                  href="#"
+                  href="/franchise"
                   className="group mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-accent-vivid/70 bg-accent-vivid/20 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-md shadow-[0_0_20px_var(--accent-vivid-glow)] transition-all hover:bg-accent-vivid/35 hover:shadow-[0_0_28px_var(--accent-vivid-glow-strong)] hover:scale-105 active:scale-95"
                 >
                   {ctaLabel}

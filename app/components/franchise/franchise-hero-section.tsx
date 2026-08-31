@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
 import type { FranchiseHeroContent } from "@/app/types/franchise-hero";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const FRANCHISE_HERO_CONTENT: FranchiseHeroContent = {
   eyebrow: "Franchise Opportunities",
@@ -59,6 +59,7 @@ export default function FranchiseHeroSection() {
     secondaryCtaLabel,
     image,
   } = FRANCHISE_HERO_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative w-full">
@@ -120,18 +121,20 @@ export default function FranchiseHeroSection() {
             </motion.dl>
 
             <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                href="#"
+              <button
+                type="button"
+                onClick={() => openEnquiry({ variant: "franchise" })}
                 className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {primaryCtaLabel}
                 <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
-              </Link>
+              </button>
 
               <button
                 type="button"
+                onClick={() => openEnquiry({ variant: "tour" })}
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
               >
                 <svg viewBox="0 0 12 14" className="h-3 w-3" fill="currentColor" aria-hidden>

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import type { AboutContent } from "@/app/types/about";
 import Counter from "./counter";
 import { fadeUp, fadeUpItem, staggerContainer, staggerContainerTight, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const ABOUT_CONTENT: AboutContent = {
   headline:
@@ -31,6 +32,7 @@ const ABOUT_CONTENT: AboutContent = {
 export default function AboutSection() {
   const { headline, cardLabel, images, avatars, ratingValue, ratingSuffix, ratingLabel, stats } =
     ABOUT_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <motion.section
@@ -87,6 +89,7 @@ export default function AboutSection() {
               <button
                 type="button"
                 aria-label="Play video"
+                onClick={() => openEnquiry({ variant: "tour" })}
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-vivid text-accent-vivid-contrast transition-transform hover:scale-105"
               >
                 <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor">

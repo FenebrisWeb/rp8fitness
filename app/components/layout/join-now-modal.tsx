@@ -7,10 +7,21 @@ import { AnimatePresence, motion } from "framer-motion";
 interface JoinNowModalProps {
   open: boolean;
   onClose: () => void;
+  badgeLabel?: string;
+  titleLine1?: string;
+  titleAccent?: string;
+  description?: string;
+  perks?: string[];
+  ctaLabel?: string;
+  sendingLabel?: string;
+  successTitle?: string;
+  successMessage?: string;
+  namePlaceholder?: string;
+  emailRequired?: boolean;
 }
 
-const PERKS = [
-  "1 free trial session — no card required",
+const DEFAULT_PERKS = [
+  "1 free trial session, no card required",
   "20% off your first month, locked in today",
   "Free body composition & goal-setting session",
 ];
@@ -23,7 +34,21 @@ const inputClasses =
 
 type SubmitStatus = "idle" | "sending" | "sent";
 
-export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
+export default function JoinNowModal({
+  open,
+  onClose,
+  badgeLabel = "Limited slots this month",
+  titleLine1 = "Your Fitness Story",
+  titleAccent = "Starts Today",
+  description = "Leave your details and a coach will call you back to lock in your spot, before it's gone.",
+  perks = DEFAULT_PERKS,
+  ctaLabel = "Claim My Spot",
+  sendingLabel = "Securing your spot...",
+  successTitle = "You're In!",
+  successMessage = "Your spot is reserved. A coach will call you within 24 hours to get you started.",
+  namePlaceholder = "Full Name",
+  emailRequired = false,
+}: JoinNowModalProps) {
   const [mounted, setMounted] = useState(false);
   const [status, setStatus] = useState<SubmitStatus>("idle");
   useEffect(() => setMounted(true), []);
@@ -112,20 +137,20 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
                       transition={{ duration: 0.2 }}
                     >
                       <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-vivid/15 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-accent-vivid">
-                        Limited slots this month
+                        {badgeLabel}
                       </span>
 
                       <h2 className="mt-4 font-display text-2xl font-black uppercase leading-[0.95] tracking-tight text-chalk sm:text-3xl">
-                        Your Fitness Story
-                        <span className="block text-accent-vivid">Starts Today</span>
+                        {titleLine1}
+                        <span className="block text-accent-vivid">{titleAccent}</span>
                       </h2>
 
                       <p className="mt-3 font-mono text-xs leading-relaxed text-chalk/70 sm:text-sm">
-                        Leave your details and a coach will call you back to lock in your spot — before it&apos;s gone.
+                        {description}
                       </p>
 
                       <ul className="mt-5 flex flex-col gap-2.5">
-                        {PERKS.map((perk) => (
+                        {perks.map((perk) => (
                           <li key={perk} className="flex items-start gap-2.5 font-mono text-xs text-chalk sm:text-sm">
                             <svg
                               viewBox="0 0 24 24"
@@ -146,7 +171,7 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
 
                       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
                         <div className="relative">
-                          <input type="text" placeholder="Full Name" required className={inputClasses} />
+                          <input type="text" placeholder={namePlaceholder} required className={inputClasses} />
                           <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                             <circle cx="12" cy="8" r="3.5" />
                             <path d="M5 20a7 7 0 0114 0" />
@@ -161,7 +186,7 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
                         </div>
 
                         <div className="relative">
-                          <input type="email" placeholder="Email Address" className={inputClasses} />
+                          <input type="email" placeholder="Email Address" required={emailRequired} className={inputClasses} />
                           <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                             <rect x="3" y="5" width="18" height="14" rx="2" />
                             <path d="M4 7l8 6 8-6" />
@@ -183,7 +208,7 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
                                 transition={{ duration: 0.18 }}
                                 className="flex items-center gap-2"
                               >
-                                Claim My Spot
+                                {ctaLabel}
                                 <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                                   ›
                                 </span>
@@ -202,7 +227,7 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
                                   <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" strokeOpacity="0.25" />
                                   <path d="M21 12a9 9 0 00-9-9" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                                 </svg>
-                                Securing your spot...
+                                {sendingLabel}
                               </motion.span>
                             )}
                           </AnimatePresence>
@@ -242,10 +267,10 @@ export default function JoinNowModal({ open, onClose }: JoinNowModalProps) {
                         </svg>
                       </motion.span>
                       <h2 className="mt-5 font-display text-2xl font-black uppercase tracking-tight text-chalk">
-                        You&apos;re In!
+                        {successTitle}
                       </h2>
                       <p className="mt-2 max-w-xs font-mono text-xs leading-relaxed text-chalk/70 sm:text-sm">
-                        Your spot is reserved. A coach will call you within 24 hours to get you started.
+                        {successMessage}
                       </p>
                       <button
                         type="button"

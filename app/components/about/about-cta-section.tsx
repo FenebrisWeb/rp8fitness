@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { AboutCtaContent } from "@/app/types/about-cta";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const ABOUT_CTA_CONTENT: AboutCtaContent = {
   headlineLine1: "Ready To Start",
@@ -19,6 +19,7 @@ const ABOUT_CTA_CONTENT: AboutCtaContent = {
 export default function AboutCtaSection() {
   const { headlineLine1, headlineLine2, description, primaryCtaLabel, secondaryCtaLabel, image } =
     ABOUT_CTA_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -47,18 +48,20 @@ export default function AboutCtaSection() {
             </div>
 
             <motion.div variants={fadeUp} className="flex flex-none flex-wrap items-center gap-3">
-              <Link
-                href="#"
+              <button
+                type="button"
+                onClick={() => openEnquiry({ variant: "join" })}
                 className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
               >
                 {primaryCtaLabel}
                 <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                   ›
                 </span>
-              </Link>
+              </button>
 
-              <Link
-                href="#"
+              <button
+                type="button"
+                onClick={() => openEnquiry({ variant: "tour" })}
                 className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 bg-black/30 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk backdrop-blur-sm transition-colors hover:border-accent-vivid hover:text-accent-vivid"
               >
                 <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -66,7 +69,7 @@ export default function AboutCtaSection() {
                   <path d="M3 10h18M8 3v4M16 3v4" />
                 </svg>
                 {secondaryCtaLabel}
-              </Link>
+              </button>
             </motion.div>
           </div>
         </motion.div>

@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import type { NewsletterContent } from "@/app/types/newsletter";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
 
@@ -60,6 +61,14 @@ function SocialIcon({ id, className }: { id: string; className?: string }) {
 
 export default function NewsletterSection() {
   const { headline, description, ctaLabel, followLabel } = NEWSLETTER_CONTENT;
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (subscribed) return;
+    setSubscribed(true);
+    window.setTimeout(() => setSubscribed(false), 3200);
+  };
 
   return (
     <section className="border-t border-white/10 bg-black">
@@ -83,16 +92,39 @@ export default function NewsletterSection() {
           </div>
         </motion.div>
 
-        <motion.form variants={fadeUp} className="flex w-full max-w-md flex-none items-center gap-2 sm:w-auto">
-          <input
-            type="email"
-            required
-            placeholder="Enter your email"
-            className="w-full min-w-0 rounded-full border border-chalk/20 bg-transparent px-4 py-2.5 font-mono text-base text-chalk placeholder:text-steel transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:w-56 sm:text-xs"
-          />
+        <motion.form
+          variants={fadeUp}
+          onSubmit={handleSubmit}
+          className="flex w-full max-w-md flex-none items-center gap-2 sm:w-auto"
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {subscribed ? (
+              <motion.p
+                key="done"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="w-full font-mono text-xs font-bold text-accent-vivid sm:w-56"
+              >
+                You&apos;re subscribed!
+              </motion.p>
+            ) : (
+              <motion.input
+                key="input"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                type="email"
+                required
+                placeholder="Enter your email"
+                className="w-full min-w-0 rounded-full border border-chalk/20 bg-transparent px-4 py-2.5 font-mono text-base text-chalk placeholder:text-steel transition-colors duration-200 focus:border-accent-vivid focus:outline-none focus:ring-2 focus:ring-accent-vivid/20 sm:w-56 sm:text-xs"
+              />
+            )}
+          </AnimatePresence>
           <button
             type="submit"
-            className="flex-none cursor-pointer rounded-full bg-accent-vivid px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105"
+            disabled={subscribed}
+            className="flex-none cursor-pointer rounded-full bg-accent-vivid px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 disabled:cursor-default disabled:opacity-60"
           >
             {ctaLabel}
           </button>

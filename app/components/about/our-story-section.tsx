@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import type { OurStoryContent } from "@/app/types/our-story";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const OUR_STORY_CONTENT: OurStoryContent = {
   eyebrow: "Our Story",
@@ -22,6 +23,7 @@ const OUR_STORY_CONTENT: OurStoryContent = {
 
 export default function OurStorySection() {
   const { eyebrow, headlineLines, description, signatureCaption, mission, image } = OUR_STORY_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -82,6 +84,7 @@ export default function OurStorySection() {
             <button
               type="button"
               aria-label="Play our story video"
+              onClick={() => openEnquiry({ variant: "tour" })}
               className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-accent-vivid text-accent-vivid-contrast transition-transform hover:scale-105"
             >
               <svg width="16" height="18" viewBox="0 0 12 14" fill="currentColor">

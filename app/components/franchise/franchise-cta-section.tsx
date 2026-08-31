@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import type { FranchiseCtaContent } from "@/app/types/franchise-cta";
 import AnimatedWords from "@/app/components/shared/animated-words";
 import { fadeUp, staggerContainer, viewportOnce } from "@/app/lib/motion";
+import { useEnquiryModal } from "@/app/components/layout/enquiry-modal-context";
 
 const FRANCHISE_CTA_CONTENT: FranchiseCtaContent = {
   headlineLine1: "Ready To Build A",
@@ -18,6 +18,7 @@ const FRANCHISE_CTA_CONTENT: FranchiseCtaContent = {
 export default function FranchiseCtaSection() {
   const { headlineLine1, headlineAccent, description, primaryCtaLabel, secondaryCtaLabel } =
     FRANCHISE_CTA_CONTENT;
+  const { openEnquiry } = useEnquiryModal();
 
   return (
     <section className="relative overflow-hidden bg-transparent pb-16 sm:pb-20">
@@ -39,25 +40,27 @@ export default function FranchiseCtaSection() {
           </div>
 
           <motion.div variants={fadeUp} className="flex flex-none flex-wrap items-center justify-center gap-3">
-            <Link
-              href="#"
+            <button
+              type="button"
+              onClick={() => openEnquiry({ variant: "franchise" })}
               className="group inline-flex cursor-pointer items-center gap-2 rounded-full bg-accent-vivid px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-accent-vivid-contrast transition-transform hover:scale-105 active:scale-95"
             >
               {primaryCtaLabel}
               <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-1">
                 ›
               </span>
-            </Link>
+            </button>
 
-            <Link
-              href="#"
+            <button
+              type="button"
+              onClick={() => openEnquiry({ variant: "brochure" })}
               className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-chalk/25 px-6 py-3 font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk transition-colors hover:border-accent-vivid hover:text-accent-vivid"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M12 3v13M7 11l5 5 5-5M4 20h16" />
               </svg>
               {secondaryCtaLabel}
-            </Link>
+            </button>
           </motion.div>
 
           {/* Decorative brochure thumbnail — a stand-in until a real
