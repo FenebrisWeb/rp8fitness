@@ -52,10 +52,10 @@ export default function FranchiseStatsSection() {
         >
           <motion.div
             variants={staggerContainerTight}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:divide-x lg:divide-chalk/10"
+            className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:flex lg:divide-x lg:divide-chalk/10"
           >
             {STATS.map((stat) => (
-              <motion.div key={stat.id} variants={fadeUpItem} className="flex items-center gap-3 lg:flex-1 lg:px-4">
+              <motion.div key={stat.id} variants={fadeUpItem} className="flex w-[230px] flex-none snap-start items-center gap-3 sm:w-auto sm:flex-auto lg:flex-1 lg:px-4">
                 <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                   <StatIcon id={stat.id} className="h-5 w-5" />
                 </span>

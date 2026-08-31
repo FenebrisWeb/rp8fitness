@@ -87,12 +87,15 @@ export default function WhyPartnerSection() {
             <motion.p variants={fadeUp} className="mt-4 font-mono text-sm text-foreground">{description}</motion.p>
           </div>
 
-          <motion.div variants={staggerContainerTight} className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <motion.div
+            variants={staggerContainerTight}
+            className="no-scrollbar flex flex-1 snap-x snap-mandatory gap-4 overflow-x-auto pb-1 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-5"
+          >
             {cards.map((card) => (
               <motion.div
                 key={card.id}
                 variants={fadeUpItem}
-                className="rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40"
+                className="w-[220px] flex-none snap-start rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40 sm:w-auto"
               >
                 <CardIcon id={card.id} className="h-7 w-7 text-accent-vivid" />
                 <p className="mt-4 font-mono text-sm font-bold uppercase leading-snug text-chalk">

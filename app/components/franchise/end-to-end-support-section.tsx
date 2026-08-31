@@ -82,9 +82,16 @@ export default function EndToEndSupportSection() {
                 <br className="hidden sm:block" /> <AnimatedWords text="At Every Step" />
               </h2>
 
-              <motion.div variants={staggerContainerTight} className="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-6 lg:justify-start">
+              <motion.div
+                variants={staggerContainerTight}
+                className="no-scrollbar mt-6 flex snap-x snap-mandatory justify-start gap-x-8 overflow-x-auto pb-1 sm:flex-wrap sm:justify-center sm:gap-y-6 sm:overflow-visible sm:pb-0 lg:justify-start"
+              >
                 {items.map((item) => (
-                  <motion.div key={item.id} variants={fadeUpItem} className="flex w-24 flex-col items-center gap-2 text-center lg:w-auto lg:flex-row lg:text-left">
+                  <motion.div
+                    key={item.id}
+                    variants={fadeUpItem}
+                    className="flex w-24 flex-none snap-start flex-col items-center gap-2 text-center sm:w-24 lg:w-auto lg:flex-row lg:text-left"
+                  >
                     <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                       <ItemIcon id={item.id} className="h-5 w-5" />
                     </span>

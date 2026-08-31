@@ -58,7 +58,7 @@ export default function FranchiseProcessSection() {
           <div className="mt-8 rounded-2xl border border-chalk/10 bg-ink p-6 sm:mt-10 sm:p-8">
             <motion.div
               variants={staggerContainerTight}
-              className="relative grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6"
+              className="no-scrollbar relative flex snap-x snap-mandatory gap-x-6 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:gap-y-10 sm:overflow-visible sm:pb-0 lg:grid-cols-6"
             >
               <span
                 aria-hidden
@@ -66,7 +66,11 @@ export default function FranchiseProcessSection() {
               />
 
               {STEPS.map((step) => (
-                <motion.div key={step.id} variants={fadeUpItem} className="relative flex flex-col items-center gap-2 text-center">
+                <motion.div
+                  key={step.id}
+                  variants={fadeUpItem}
+                  className="relative flex w-[140px] flex-none snap-start flex-col items-center gap-2 text-center sm:w-auto"
+                >
                   <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-accent-vivid/60 bg-ink text-accent-vivid">
                     <StepIcon id={step.id} className="h-5 w-5" />
                   </span>
