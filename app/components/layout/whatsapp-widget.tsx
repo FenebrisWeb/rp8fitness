@@ -61,8 +61,14 @@ export default function WhatsAppWidget() {
 
     // Open a blank tab synchronously, inside the click, so the popup
     // blocker doesn't kill it — then point it at WhatsApp only once the
-    // lead is actually saved, so the save genuinely happens first.
-    const tab = window.open("", "_blank", "noopener,noreferrer");
+    // lead is actually saved, so the save genuinely happens first. Can't
+    // pass "noopener" here: that makes window.open() return null (there's
+    // nothing to redirect later), which is what was silently leaving a
+    // blank tab behind — any window.open() call after the await is no
+    // longer inside the click's event-handler stack, so a browser's popup
+    // blocker kills it before it can fall back to that url itself.
+    const tab = window.open("", "_blank");
+    if (tab) tab.opener = null;
 
     try {
       await sendToSheet("whatsapp", { name, phone, message });
@@ -73,7 +79,7 @@ export default function WhatsAppWidget() {
     }
 
     if (tab) tab.location.href = url;
-    else window.open(url, "_blank", "noopener,noreferrer");
+    else window.location.href = url;
 
     form.reset();
     setOpen(false);
