@@ -4,6 +4,7 @@ import { MotionConfig } from "framer-motion";
 import Header from "./header";
 import Footer from "./footer";
 import BmiWidget from "./bmi-widget";
+import WhatsAppWidget from "./whatsapp-widget";
 import { EnquiryModalProvider } from "./enquiry-modal-context";
 
 export default function Wrapper({ children }: { children: React.ReactNode }) {
@@ -23,6 +24,7 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
           <main className="flex flex-1 flex-col">{children}</main>
           <Footer />
           <BmiWidget />
+          <WhatsAppWidget />
         </div>
       </EnquiryModalProvider>
     </MotionConfig>
