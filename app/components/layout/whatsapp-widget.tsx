@@ -3,11 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
-
-// Same placeholder number used for the tel: link elsewhere on the site
-// (footer, FAQ support banner, BMI final CTA) — swap this in one place once
-// a real WhatsApp Business number exists.
-const WHATSAPP_NUMBER = "911234567890";
+import { RP8_WHATSAPP_NUMBER, sendToSheet } from "@/app/lib/rp8-sheet";
 
 // text-base (16px) on mobile — anything smaller triggers iOS/Android's
 // auto-zoom on focus. Back down to text-sm from sm: up.
@@ -45,7 +41,7 @@ export default function WhatsAppWidget() {
     return () => window.clearTimeout(id);
   }, [open]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status !== "idle") return;
     setStatus("sending");
@@ -61,15 +57,26 @@ export default function WhatsAppWidget() {
       phone && `Phone: ${phone}`,
       message && `Message: ${message}`,
     ].filter(Boolean);
+    const url = `https://wa.me/${RP8_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
 
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+    // Open a blank tab synchronously, inside the click, so the popup
+    // blocker doesn't kill it — then point it at WhatsApp only once the
+    // lead is actually saved, so the save genuinely happens first.
+    const tab = window.open("", "_blank", "noopener,noreferrer");
 
-    // A brief delay so the "Opening WhatsApp..." state actually reads as
-    // feedback instead of an instant tab-switch, then hand off to WhatsApp.
-    window.setTimeout(() => {
-      window.open(url, "_blank", "noopener,noreferrer");
-      setOpen(false);
-    }, 500);
+    try {
+      await sendToSheet("whatsapp", { name, phone, message });
+    } catch (err) {
+      console.error(err);
+      // Still hand off to WhatsApp even if the sheet save failed — the
+      // conversation itself shouldn't be blocked by a logging error.
+    }
+
+    if (tab) tab.location.href = url;
+    else window.open(url, "_blank", "noopener,noreferrer");
+
+    form.reset();
+    setOpen(false);
   };
 
   const widget = (

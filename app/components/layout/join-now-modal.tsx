@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { sendToSheet } from "@/app/lib/rp8-sheet";
 
 interface JoinNowModalProps {
   open: boolean;
@@ -76,13 +77,26 @@ export default function JoinNowModal({
     return () => window.clearTimeout(id);
   }, [open]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (status !== "idle") return;
     setStatus("sending");
-    window.setTimeout(() => {
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value.trim(),
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value.trim(),
+      email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),
+    };
+
+    try {
+      await sendToSheet("popup", data);
       setStatus("sent");
-    }, 900);
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      setStatus("idle");
+    }
   };
 
   const modal = (
@@ -171,7 +185,7 @@ export default function JoinNowModal({
 
                       <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
                         <div className="relative">
-                          <input type="text" placeholder={namePlaceholder} required className={inputClasses} />
+                          <input name="name" type="text" placeholder={namePlaceholder} required className={inputClasses} />
                           <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                             <circle cx="12" cy="8" r="3.5" />
                             <path d="M5 20a7 7 0 0114 0" />
@@ -179,14 +193,14 @@ export default function JoinNowModal({
                         </div>
 
                         <div className="relative">
-                          <input type="tel" placeholder="Phone Number" required className={inputClasses} />
+                          <input name="phone" type="tel" placeholder="Phone Number" required className={inputClasses} />
                           <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                             <path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.3c1.1.4 2.3.6 3.6.6a1 1 0 011 1V20a1 1 0 01-1 1C10.6 21 3 13.4 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.3.2 2.5.6 3.6a1 1 0 01-.3 1z" />
                           </svg>
                         </div>
 
                         <div className="relative">
-                          <input type="email" placeholder="Email Address" required={emailRequired} className={inputClasses} />
+                          <input name="email" type="email" placeholder="Email Address" required={emailRequired} className={inputClasses} />
                           <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-chalk/50" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                             <rect x="3" y="5" width="18" height="14" rx="2" />
                             <path d="M4 7l8 6 8-6" />
