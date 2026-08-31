@@ -186,9 +186,22 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-foreground/10">
-        <div className="mx-auto flex max-w-[1700px] flex-wrap items-center justify-between gap-2 px-6 py-6 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground sm:px-10">
+        <div className="mx-auto flex max-w-[1700px] flex-col items-center gap-2 px-6 py-6 pr-6 font-mono text-[11px] uppercase tracking-[0.14em] text-foreground sm:flex-row sm:justify-between sm:pr-28 sm:px-10 lg:pr-32">
           <span>rp8fitness.com</span>
-          <span>{copyright}</span>
+          <span className="text-center sm:text-right">
+            {copyright}{" "}
+            <span className="text-foreground/50">
+              Developed By{" "}
+              <Link
+                href="https://fenebrisindia.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/50 transition-colors hover:text-accent-strong"
+              >
+                Fenebris India Pvt Ltd
+              </Link>
+            </span>
+          </span>
         </div>
       </div>
     </footer>
