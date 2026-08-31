@@ -285,15 +285,12 @@ export default function ContactFormSection() {
             </h2>
             <motion.span variants={fadeUp} aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
 
-            <motion.div
-              variants={staggerContainerTight}
-              className="no-scrollbar mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 sm:flex-col sm:overflow-visible sm:pb-0"
-            >
+            <motion.div variants={staggerContainerTight} className="mt-6 flex flex-col gap-3">
               {infoItems.map((item) => (
                 <motion.div
                   key={item.id}
                   variants={fadeUpItem}
-                  className="flex w-[260px] flex-none snap-start items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40 sm:w-auto"
+                  className="flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40"
                 >
                   <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
                     <InfoIcon id={item.id} className="h-5 w-5" />
