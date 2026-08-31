@@ -107,18 +107,6 @@ export default function ZonesSection() {
           <h2 className="font-display text-2xl font-black uppercase tracking-tight text-foreground sm:text-3xl">
             <AnimatedWords text="Explore Our Zones" />
           </h2>
-
-          <motion.div variants={fadeUp}>
-            <Link
-              href="#"
-              className="group flex cursor-pointer items-center gap-2 rounded-full border border-foreground/25 px-5 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.1em] text-foreground transition-colors hover:border-p25 hover:text-p25 active:scale-95"
-            >
-              Explore All Zones
-              <span aria-hidden className="text-sm leading-none transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                ↗
-              </span>
-            </Link>
-          </motion.div>
         </motion.div>
 
         <motion.div

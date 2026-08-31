@@ -88,7 +88,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
                 overflow-y-auto below only kicks in with that in place, so a
                 longer link list scrolls internally instead of pushing past
                 the viewport edge on shorter desktop windows. */}
-            <nav className="flex min-h-0 flex-1 flex-col justify-center gap-2 overflow-y-auto px-6 py-4 sm:px-10">
+            <nav className="flex min-h-0 flex-1 flex-col justify-start gap-2 overflow-y-auto px-6 py-4 sm:px-10">
               {links.map((link, i) => {
                 const active = pathname === link.href;
                 return (

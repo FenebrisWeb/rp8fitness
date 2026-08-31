@@ -29,8 +29,8 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ZonesSection />
-      <GermanEquipmentSection />
       <OpenTerraceSection />
+      <GermanEquipmentSection />
       <FranchiseSection />
       <WhyChooseSection />
       <ReviewsSection />
