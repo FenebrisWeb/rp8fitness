@@ -13,9 +13,14 @@ const FAQ_SUPPORT_CONTENT: FaqSupportContent = {
   description: "Can't find the answer you're looking for? Our support team is just a message away.",
   ctaLabel: "Contact Us",
   quickContact: [
-    { id: "call", label: "Call Us", value: "+91 12345 67890" },
-    { id: "email", label: "Email Us", value: "info@rp8fitness.com" },
-    { id: "visit", label: "Visit Our Gym", value: "123 Fitness Ave, Your City, State - 123456" },
+    { id: "call", label: "Call Us", value: "+91 92051 38707", href: "tel:+919205138707" },
+    { id: "email", label: "Email Us", value: "info@rp8fitness.com", href: "mailto:info@rp8fitness.com" },
+    {
+      id: "visit",
+      label: "Visit Our Gym",
+      value: "Balram Nagar, Loni, Ghaziabad, UP 201102",
+      href: "https://www.google.com/maps/search/?api=1&query=Balram+Nagar+Loni+Ghaziabad+Uttar+Pradesh+201102",
+    },
   ],
   // Placeholder — reusing an existing training photo until dedicated FAQ
   // page photography is ready.
@@ -85,17 +90,35 @@ export default function FaqSupportBannerSection() {
           </div>
 
           <motion.div variants={staggerContainerTight} className="flex flex-none flex-col gap-4">
-            {quickContact.map((item) => (
-              <motion.div key={item.id} variants={fadeUpItem} className="flex items-center gap-3">
-                <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
-                  <QuickIcon id={item.id} className="h-4 w-4" />
-                </span>
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-chalk">{item.label}</p>
-                  <p className="max-w-[220px] font-mono text-sm font-bold text-chalk">{item.value}</p>
-                </div>
-              </motion.div>
-            ))}
+            {quickContact.map((item) => {
+              const content = (
+                <>
+                  <span className="flex h-9 w-9 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
+                    <QuickIcon id={item.id} className="h-4 w-4" />
+                  </span>
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-chalk">{item.label}</p>
+                    <p className="max-w-[220px] font-mono text-sm font-bold text-chalk">{item.value}</p>
+                  </div>
+                </>
+              );
+              return (
+                <motion.div key={item.id} variants={fadeUpItem}>
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      target={item.id === "visit" ? "_blank" : undefined}
+                      rel={item.id === "visit" ? "noopener noreferrer" : undefined}
+                      className="flex items-center gap-3 transition-colors hover:text-accent-vivid"
+                    >
+                      {content}
+                    </Link>
+                  ) : (
+                    <div className="flex items-center gap-3">{content}</div>
+                  )}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </motion.div>
       </div>

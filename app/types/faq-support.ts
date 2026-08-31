@@ -2,6 +2,7 @@ export interface FaqQuickContactItem {
   id: string;
   label: string;
   value: string;
+  href?: string;
 }
 
 export interface FaqSupportContent {

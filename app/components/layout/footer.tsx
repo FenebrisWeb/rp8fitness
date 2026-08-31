@@ -35,17 +35,20 @@ const FOOTER_CONTENT: FooterContent = {
     },
   ],
   contact: [
-    { id: "address", lines: ["123 Fitness Ave,", "Your City, State"] },
-    { id: "phone", lines: ["+91 12345 67890"] },
-    { id: "email", lines: ["info@rp8fitness.com"] },
+    {
+      id: "address",
+      lines: ["Balram Nagar, Loni,", "Ghaziabad, Uttar Pradesh 201102"],
+      href: "https://www.google.com/maps/search/?api=1&query=Balram+Nagar+Loni+Ghaziabad+Uttar+Pradesh+201102",
+    },
+    { id: "phone", lines: ["+91 92051 38707"], href: "tel:+919205138707" },
+    { id: "email", lines: ["info@rp8fitness.com"], href: "mailto:info@rp8fitness.com" },
   ],
   copyright: `© ${new Date().getFullYear()} RP8 Fitness. All rights reserved.`,
 };
 
 const SOCIAL_LINKS = [
-  { id: "instagram", label: "Instagram", href: "#" },
-  { id: "facebook", label: "Facebook", href: "#" },
-  { id: "youtube", label: "YouTube", href: "#" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/rp8fitness?igsi=NnpzZ3RybWFoaW9q" },
+  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/share/19TikPdkd3/?mibextid=wwXIfr" },
 ] as const;
 
 function ContactIcon({ id, className }: { id: string; className?: string }) {
@@ -96,13 +99,6 @@ function SocialIcon({ id, className }: { id: string; className?: string }) {
           />
         </svg>
       );
-    case "youtube":
-      return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-          <rect x="3" y="6" width="18" height="12" rx="4" />
-          <path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none" />
-        </svg>
-      );
     default:
       return null;
   }
@@ -125,6 +121,8 @@ export default function Footer() {
                   key={social.id}
                   href={social.href}
                   aria-label={social.label}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-accent-strong hover:text-accent-strong"
                 >
                   <SocialIcon id={social.id} className="h-4 w-4" />
@@ -158,18 +156,30 @@ export default function Footer() {
               Contact Us
             </h3>
             <ul className="mt-4 flex flex-col gap-3">
-              {contact.map((item) => (
-                <li key={item.id} className="flex items-start gap-2.5">
-                  <ContactIcon id={item.id} className="mt-0.5 h-4 w-4 flex-none text-accent-strong" />
-                  <span className="font-mono text-sm text-foreground">
-                    {item.lines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
+              {contact.map((item) => {
+                const lines = item.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
                   </span>
-                </li>
-              ))}
+                ));
+                return (
+                  <li key={item.id} className="flex items-start gap-2.5">
+                    <ContactIcon id={item.id} className="mt-0.5 h-4 w-4 flex-none text-accent-strong" />
+                    {item.href ? (
+                      <Link
+                        href={item.href}
+                        target={item.id === "address" ? "_blank" : undefined}
+                        rel={item.id === "address" ? "noopener noreferrer" : undefined}
+                        className="font-mono text-sm text-foreground transition-colors hover:text-accent-strong"
+                      >
+                        {lines}
+                      </Link>
+                    ) : (
+                      <span className="font-mono text-sm text-foreground">{lines}</span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

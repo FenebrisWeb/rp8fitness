@@ -3,6 +3,7 @@ export interface ContactInfoItem {
   title: string;
   lines: string[];
   accentLine?: boolean;
+  href?: string;
 }
 
 export interface ContactFormContent {

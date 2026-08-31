@@ -118,10 +118,15 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
               })}
             </nav>
 
-            <div className="flex items-center justify-between px-6 py-8 font-mono text-xs uppercase tracking-[0.14em] text-black sm:px-10">
-              <span>123 Fitness Ave, Your City, State</span>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Balram+Nagar+Loni+Ghaziabad+Uttar+Pradesh+201102"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between px-6 py-8 font-mono text-xs uppercase tracking-[0.14em] text-black transition-colors hover:text-coral sm:px-10"
+            >
+              <span>Balram Nagar, Loni, Ghaziabad, UP 201102</span>
               <DoubleArrow className="h-3 w-6 text-coral" />
-            </div>
+            </a>
           </motion.div>
         </>
       )}

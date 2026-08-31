@@ -9,9 +9,8 @@
  * to answer an OPTIONS preflight, so a JSON body would fail outright.
  */
 
-// TODO: swap for the real WhatsApp Business number when it's ready — this
-// is a placeholder per user request. Country code, no + or spaces.
-export const RP8_WHATSAPP_NUMBER = "918777427484";
+// Country code, no + or spaces (wa.me requires this exact format).
+export const RP8_WHATSAPP_NUMBER = "919205138707";
 
 const RP8_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbwripEwZALkMedWQb8N1h-Xz3UohL0kaNAL3lDxV0cznQpt_Uyb3HZaIn0e9pAhI9QG/exec";

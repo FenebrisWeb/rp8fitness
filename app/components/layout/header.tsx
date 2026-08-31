@@ -50,9 +50,14 @@ export default function Header() {
           />
         </Link>
 
-        <span className="ml-auto mr-auto hidden whitespace-nowrap font-mono text-xs uppercase tracking-[0.1em] text-foreground md:block">
-          123 Fitness Ave, Your City, State
-        </span>
+        <Link
+          href="https://www.google.com/maps/search/?api=1&query=Balram+Nagar+Loni+Ghaziabad+Uttar+Pradesh+201102"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-auto mr-auto hidden whitespace-nowrap font-mono text-xs uppercase tracking-[0.1em] text-foreground transition-colors hover:text-accent-strong md:block"
+        >
+          Balram Nagar, Loni, Ghaziabad, UP 201102
+        </Link>
 
         <div className="flex items-center gap-4">
           <ThemeToggle />

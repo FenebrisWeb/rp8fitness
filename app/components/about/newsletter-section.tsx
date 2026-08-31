@@ -14,10 +14,8 @@ const NEWSLETTER_CONTENT: NewsletterContent = {
 };
 
 const SOCIAL_LINKS = [
-  { id: "instagram", label: "Instagram", href: "#" },
-  { id: "facebook", label: "Facebook", href: "#" },
-  { id: "youtube", label: "YouTube", href: "#" },
-  { id: "x", label: "X", href: "#" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/rp8fitness?igsi=NnpzZ3RybWFoaW9q" },
+  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/share/19TikPdkd3/?mibextid=wwXIfr" },
 ] as const;
 
 function SocialIcon({ id, className }: { id: string; className?: string }) {
@@ -39,19 +37,6 @@ function SocialIcon({ id, className }: { id: string; className?: string }) {
             fill="currentColor"
             stroke="none"
           />
-        </svg>
-      );
-    case "youtube":
-      return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-          <rect x="3" y="6" width="18" height="12" rx="4" />
-          <path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none" />
-        </svg>
-      );
-    case "x":
-      return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
-          <path d="M5 5l14 14M19 5L5 19" />
         </svg>
       );
     default:
@@ -140,6 +125,8 @@ export default function NewsletterSection() {
                 key={social.id}
                 href={social.href}
                 aria-label={social.label}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-chalk/25 text-chalk transition-colors hover:border-accent-vivid hover:text-accent-vivid"
               >
                 <SocialIcon id={social.id} className="h-4 w-4" />

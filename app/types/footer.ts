@@ -11,6 +11,7 @@ export interface FooterLinkGroup {
 export interface FooterContactItem {
   id: string;
   lines: string[];
+  href?: string;
 }
 
 export interface FooterContent {

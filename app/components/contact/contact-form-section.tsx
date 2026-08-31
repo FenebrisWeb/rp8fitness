@@ -18,18 +18,21 @@ const CONTACT_FORM_CONTENT: ContactFormContent = {
     {
       id: "visit",
       title: "Visit Our Gym",
-      lines: ["123 Fitness Ave,", "Your City, State - 123456", "India"],
+      lines: ["Balram Nagar, Loni,", "Ghaziabad, Uttar Pradesh 201102"],
+      href: "https://www.google.com/maps/search/?api=1&query=Balram+Nagar+Loni+Ghaziabad+Uttar+Pradesh+201102",
     },
     {
       id: "call",
       title: "Call Us",
-      lines: ["+91 12345 67890"],
+      lines: ["+91 92051 38707"],
       accentLine: true,
+      href: "tel:+919205138707",
     },
     {
       id: "email",
       title: "Email Us",
       lines: ["info@rp8fitness.com"],
+      href: "mailto:info@rp8fitness.com",
     },
     {
       id: "timings",
@@ -41,10 +44,9 @@ const CONTACT_FORM_CONTENT: ContactFormContent = {
 };
 
 const SOCIAL_LINKS = [
-  { id: "instagram", label: "Instagram", href: "#" },
-  { id: "facebook", label: "Facebook", href: "#" },
-  { id: "youtube", label: "YouTube", href: "#" },
-  { id: "whatsapp", label: "WhatsApp", href: "#" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/rp8fitness?igsi=NnpzZ3RybWFoaW9q" },
+  { id: "facebook", label: "Facebook", href: "https://www.facebook.com/share/19TikPdkd3/?mibextid=wwXIfr" },
+  { id: "whatsapp", label: "WhatsApp", href: "https://wa.me/919205138707" },
 ] as const;
 
 const INFO_ICONS: Record<string, string> = {
@@ -82,13 +84,6 @@ function SocialIcon({ id, className }: { id: string; className?: string }) {
             fill="currentColor"
             stroke="none"
           />
-        </svg>
-      );
-    case "youtube":
-      return (
-        <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
-          <rect x="3" y="6" width="18" height="12" rx="4" />
-          <path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none" />
         </svg>
       );
     case "whatsapp":
@@ -297,30 +292,47 @@ export default function ContactFormSection() {
             <motion.span variants={fadeUp} aria-hidden className="mt-2 block h-1 w-10 rounded-full bg-accent-strong" />
 
             <motion.div variants={staggerContainerTight} className="mt-6 flex flex-col gap-3">
-              {infoItems.map((item) => (
-                <motion.div
-                  key={item.id}
-                  variants={fadeUpItem}
-                  className="flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40"
-                >
-                  <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
-                    <InfoIcon id={item.id} className="h-5 w-5" />
-                  </span>
-                  <div className="flex-1">
-                    <p className="font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk">
-                      {item.title}
-                    </p>
-                    <div className={`mt-1 font-mono text-sm ${item.accentLine ? "text-accent-vivid" : "text-chalk"}`}>
-                      {item.lines.map((line) => (
-                        <p key={line}>{line}</p>
-                      ))}
+              {infoItems.map((item) => {
+                const content = (
+                  <>
+                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-accent-vivid/50 text-accent-vivid">
+                      <InfoIcon id={item.id} className="h-5 w-5" />
+                    </span>
+                    <div className="flex-1">
+                      <p className="font-mono text-xs font-bold uppercase tracking-[0.1em] text-chalk">
+                        {item.title}
+                      </p>
+                      <div className={`mt-1 font-mono text-sm ${item.accentLine ? "text-accent-vivid" : "text-chalk"}`}>
+                        {item.lines.map((line) => (
+                          <p key={line}>{line}</p>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <span aria-hidden className="flex-none text-chalk/40">
-                    ›
-                  </span>
-                </motion.div>
-              ))}
+                    <span aria-hidden className="flex-none text-chalk/40">
+                      ›
+                    </span>
+                  </>
+                );
+                const cardClasses =
+                  "flex items-center gap-4 rounded-xl border border-chalk/10 bg-ink p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent-vivid/40";
+
+                return (
+                  <motion.div key={item.id} variants={fadeUpItem}>
+                    {item.href ? (
+                      <Link
+                        href={item.href}
+                        target={item.id === "visit" ? "_blank" : undefined}
+                        rel={item.id === "visit" ? "noopener noreferrer" : undefined}
+                        className={cardClasses}
+                      >
+                        {content}
+                      </Link>
+                    ) : (
+                      <div className={cardClasses}>{content}</div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </motion.div>
 
             <motion.div variants={fadeUp} className="mt-6 flex items-center gap-3">
@@ -333,6 +345,8 @@ export default function ContactFormSection() {
                     <Link
                       href={social.href}
                       aria-label={social.label}
+                      target={social.href.startsWith("http") ? "_blank" : undefined}
+                      rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/25 text-foreground transition-colors hover:border-accent-strong hover:text-accent-strong"
                     >
                       <SocialIcon id={social.id} className="h-4 w-4" />
