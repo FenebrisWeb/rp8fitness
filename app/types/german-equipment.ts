@@ -11,6 +11,9 @@ export interface GermanEquipmentContent {
   ctaLabel: string;
   image: {
     src: string;
+    // Optional mobile-only crop/photo — rendered below md, with `src`
+    // taking over from md up. Falls back to `src` everywhere when omitted.
+    mobileSrc?: string;
     alt: string;
   };
   features: EquipmentFeature[];

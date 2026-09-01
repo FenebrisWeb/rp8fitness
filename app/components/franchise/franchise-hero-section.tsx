@@ -20,7 +20,11 @@ const FRANCHISE_HERO_CONTENT: FranchiseHeroContent = {
   ],
   primaryCtaLabel: "Get Franchise Info",
   secondaryCtaLabel: "Watch Franchise Video",
-  image: { src: "/HomePage/Franchise.webp", alt: "RP8 Fitness franchise outlet" },
+  image: {
+    src: "/HomePage/Franchise.webp",
+    mobileSrc: "/mobile/Franchise - Mobile Banner.webp",
+    alt: "RP8 Fitness franchise outlet",
+  },
 };
 
 const POINTER_ICONS: Record<string, string> = {
@@ -66,7 +70,18 @@ export default function FranchiseHeroSection() {
       {/* The photo already vignettes dark on the left, opening up to the
           lit storefront on the right — same treatment as the homepage
           Franchise banner, shown as-is with no gradient layered on top. */}
-      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        {image.mobileSrc && (
+          <Image
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            quality={85}
+            priority
+            className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+          />
+        )}
         <Image
           src={image.src}
           alt={image.alt}
@@ -74,7 +89,9 @@ export default function FranchiseHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
+          className={`object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+            image.mobileSrc ? "hidden md:block" : ""
+          }`}
         />
       </div>
 

@@ -14,7 +14,7 @@ const HERO_SLIDES: HeroSlide[] = [
     headlineLine1: "Train",
     headlineLine2: "Smarter",
     description: "Ten zones under one roof, built for every kind of training.",
-    image: { src: "/HomePage/hero-banner01.webp", alt: "Athlete training at RP8 Fitness" },
+    image: { src: "/HomePage/hero-banner01.webp", mobileSrc: "/mobile/RP8 Banner 01.webp", alt: "Athlete training at RP8 Fitness" },
     stats: [
       { value: 10, suffix: "+", label: "Zones" },
       { value: 5, suffix: "K+", label: "Sq Ft" },
@@ -25,7 +25,7 @@ const HERO_SLIDES: HeroSlide[] = [
     headlineLine1: "Box",
     headlineLine2: "Harder",
     description: "A dedicated boxing area to build power, speed, and reflexes.",
-    image: { src: "/HomePage/HomeBanner02.webp", alt: "Boxing area at RP8 Fitness" },
+    image: { src: "/HomePage/HomeBanner02.webp", mobileSrc: "/mobile/RP8 Banner 02.webp", alt: "Boxing area at RP8 Fitness" },
     stats: [
       { value: 6, suffix: "+", label: "Bags" },
       { value: 12, suffix: "+", label: "Coaches" },
@@ -36,7 +36,7 @@ const HERO_SLIDES: HeroSlide[] = [
     headlineLine1: "Push",
     headlineLine2: "Limits",
     description: "A dedicated CrossFit zone for high-intensity, functional training.",
-    image: { src: "/HomePage/HomeBanner03.webp", alt: "CrossFit zone at RP8 Fitness" },
+    image: { src: "/HomePage/HomeBanner03.webp", mobileSrc: "/mobile/RP8 Banner 03.webp", alt: "CrossFit zone at RP8 Fitness" },
     stats: [
       { value: 15, suffix: "+", label: "WODs" },
       { value: 40, suffix: "+", label: "Members" },
@@ -137,7 +137,7 @@ export default function HeroSection() {
           1920/750 banner ratio kicks in from md up. */}
       <div
         ref={containerRef}
-        className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]"
+        className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]"
       >
         <motion.div
           className="flex h-full"
@@ -155,6 +155,18 @@ export default function HeroSection() {
               className="relative h-full overflow-hidden"
               style={{ flex: slideFlex }}
             >
+              {slide.image.mobileSrc && (
+                <Image
+                  src={slide.image.mobileSrc}
+                  alt={slide.image.alt}
+                  fill
+                  sizes="100vw"
+                  quality={85}
+                  priority={i === 0}
+                  draggable={false}
+                  className="select-none object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+                />
+              )}
               <Image
                 src={slide.image.src}
                 alt={slide.image.alt}
@@ -163,7 +175,9 @@ export default function HeroSection() {
                 quality={85}
                 priority={i === 0}
                 draggable={false}
-                className="select-none object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
+                className={`select-none object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+                  slide.image.mobileSrc ? "hidden md:block" : ""
+                }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
             </div>

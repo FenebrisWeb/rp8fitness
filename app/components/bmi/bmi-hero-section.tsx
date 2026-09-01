@@ -19,7 +19,11 @@ const BMI_HERO_CONTENT: BmiHeroContent = {
   ],
   // Placeholder — reusing an existing gym photo until dedicated calculator
   // page photography is ready.
-  image: { src: "/HomePage/plans.webp", alt: "RP8 Fitness training floor" },
+  image: {
+    src: "/HomePage/plans.webp",
+    mobileSrc: "/mobile/BMI Calc - Mobile Banner.webp",
+    alt: "RP8 Fitness training floor",
+  },
 };
 
 const ICON_PATHS: Record<string, string> = {
@@ -45,8 +49,29 @@ export default function BmiHeroSection() {
       {/* Full-bleed banner photo — same treatment as every other page
           hero: shown as-is, content overlaid on its own naturally dark
           left side, no gradient layered on top. */}
-      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
-        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105" />
+      <div className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        {image.mobileSrc && (
+          <Image
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            quality={85}
+            priority
+            className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+          />
+        )}
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes="100vw"
+          quality={85}
+          priority
+          className={`object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+            image.mobileSrc ? "hidden md:block" : ""
+          }`}
+        />
       </div>
 
       <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">

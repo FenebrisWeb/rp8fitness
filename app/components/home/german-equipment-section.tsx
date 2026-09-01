@@ -13,7 +13,11 @@ const GERMAN_EQUIPMENT_CONTENT: GermanEquipmentContent = {
   headlineLine2: "Tech Machines",
   description: "Experience world class engineering for superior performance, safety and results.",
   ctaLabel: "Learn More",
-  image: { src: "/HomePage/German Equipment.webp", alt: "Imported German fitness equipment at RP8 Fitness" },
+  image: {
+    src: "/HomePage/German Equipment.webp",
+    mobileSrc: "/mobile/german machine mobile.webp",
+    alt: "Imported German fitness equipment at RP8 Fitness",
+  },
   features: [
     { id: "precision", label: "Precision Engineered" },
     { id: "performance", label: "Max Performance Guaranteed" },
@@ -72,12 +76,23 @@ export default function GermanEquipmentSection() {
               near-black right half, so — unlike the Franchise banner — no
               gradient overlay is layered on top; the copy sits on the
               right, over that naturally dark half. */}
+          {image.mobileSrc && (
+            <Image
+              src={image.mobileSrc}
+              alt={image.alt}
+              fill
+              sizes="100vw"
+              className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+            />
+          )}
           <Image
             src={image.src}
             alt={image.alt}
             fill
             sizes="100vw"
-            className="-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
+            className={`-z-10 object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+              image.mobileSrc ? "hidden md:block" : ""
+            }`}
           />
 
           <div className="flex w-full p-6 sm:justify-end sm:p-10 lg:p-14">

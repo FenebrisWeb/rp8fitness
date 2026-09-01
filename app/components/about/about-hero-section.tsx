@@ -15,7 +15,11 @@ const ABOUT_HERO_CONTENT: AboutHeroContent = {
   description:
     "RP8 Fitness is more than a gym, it's a complete fitness ecosystem designed to help you train smarter, live stronger and be your best every day.",
   ctaLabel: "Watch Our Story",
-  image: { src: "/pages/About Page Banner.webp", alt: "RP8 Fitness About page banner" },
+  image: {
+    src: "/pages/About Page Banner.webp",
+    mobileSrc: "/mobile/About us- Mobile Banner.webp",
+    alt: "RP8 Fitness About page banner",
+  },
 };
 
 export default function AboutHeroSection() {
@@ -27,7 +31,18 @@ export default function AboutHeroSection() {
     <section className="relative w-full">
       {/* Full-bleed banner photo — same photo (and same gradient, for the
           same legibility reason) as the homepage hero's first slide. */}
-      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        {image.mobileSrc && (
+          <Image
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            quality={85}
+            priority
+            className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+          />
+        )}
         <Image
           src={image.src}
           alt={image.alt}
@@ -35,7 +50,9 @@ export default function AboutHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
+          className={`object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+            image.mobileSrc ? "hidden md:block" : ""
+          }`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
       </div>

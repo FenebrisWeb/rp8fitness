@@ -6,6 +6,7 @@ export interface FaqHeroContent {
   searchPlaceholder: string;
   image: {
     src: string;
+    mobileSrc?: string;
     alt: string;
   };
 }

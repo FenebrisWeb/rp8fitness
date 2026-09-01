@@ -7,6 +7,7 @@ export interface AboutHeroContent {
   ctaLabel: string;
   image: {
     src: string;
+    mobileSrc?: string;
     alt: string;
   };
 }

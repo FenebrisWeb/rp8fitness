@@ -13,6 +13,7 @@ export interface ContactHeroContent {
   pointers: ContactHeroPointer[];
   image: {
     src: string;
+    mobileSrc?: string;
     alt: string;
   };
 }

@@ -12,7 +12,11 @@ const FAQ_HERO_CONTENT: FaqHeroContent = {
   headlineAccent: "We've Got Answers.",
   description: "Find answers to common questions about RP8 Fitness memberships, facilities, services and more.",
   searchPlaceholder: "Search your question here...",
-  image: { src: "/pages/FAQ Banner.webp", alt: "RP8 Fitness FAQ page banner" },
+  image: {
+    src: "/pages/FAQ Banner.webp",
+    mobileSrc: "/mobile/FAQ - Mobile Banner.webp",
+    alt: "RP8 Fitness FAQ page banner",
+  },
 };
 
 export default function FaqHeroSection({
@@ -27,7 +31,18 @@ export default function FaqHeroSection({
       {/* Full-bleed banner photo — same treatment as the other page heroes:
           shown as-is, content overlaid on its own naturally dark left
           side, no gradient layered on top. */}
-      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        {image.mobileSrc && (
+          <Image
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            quality={85}
+            priority
+            className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+          />
+        )}
         <Image
           src={image.src}
           alt={image.alt}
@@ -35,7 +50,9 @@ export default function FaqHeroSection({
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
+          className={`object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+            image.mobileSrc ? "hidden md:block" : ""
+          }`}
         />
       </div>
 

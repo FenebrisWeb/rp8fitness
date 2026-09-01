@@ -11,6 +11,10 @@ export interface HeroSlide {
   description: string;
   image: {
     src: string;
+    // Optional mobile-only crop/photo — rendered below md, with `image.src`
+    // taking over from md up. Falls back to `image.src` everywhere when
+    // omitted.
+    mobileSrc?: string;
     alt: string;
   };
   stats: HeroStat[];

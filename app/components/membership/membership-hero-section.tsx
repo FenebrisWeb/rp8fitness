@@ -26,7 +26,11 @@ const MEMBERSHIP_HERO_CONTENT: MembershipHeroContent = {
     line2: "On Annual Plans",
     ctaLabel: "Claim Offer",
   },
-  image: { src: "/HomePage/plans.webp", alt: "Member training at RP8 Fitness" },
+  image: {
+    src: "/HomePage/plans.webp",
+    mobileSrc: "/mobile/Membership - Mobile Banner.webp",
+    alt: "Member training at RP8 Fitness",
+  },
 };
 
 const FEATURE_ICONS: Record<string, string> = {
@@ -63,8 +67,29 @@ export default function MembershipHeroSection() {
       {/* Full-bleed banner photo, same treatment as every other page hero
           on the site — shown as-is, content sits in an ink panel below on
           mobile and overlays it directly from md up. */}
-      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
-        <Image src={image.src} alt={image.alt} fill sizes="100vw" quality={85} priority className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105" />
+      <div className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        {image.mobileSrc && (
+          <Image
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            quality={85}
+            priority
+            className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+          />
+        )}
+        <Image
+          src={image.src}
+          alt={image.alt}
+          fill
+          sizes="100vw"
+          quality={85}
+          priority
+          className={`object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+            image.mobileSrc ? "hidden md:block" : ""
+          }`}
+        />
       </div>
 
       <div className="relative bg-ink px-5 py-8 sm:px-10 sm:py-10 md:absolute md:inset-0 md:flex md:flex-col md:justify-center md:bg-transparent md:px-0 md:py-0 md:pointer-events-none">

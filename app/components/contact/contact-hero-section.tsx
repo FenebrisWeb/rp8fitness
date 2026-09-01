@@ -20,7 +20,11 @@ const CONTACT_HERO_CONTENT: ContactHeroContent = {
   // Placeholder — reusing an existing gym photo (already dark on the left,
   // shown as-is with no gradient) until dedicated contact page
   // photography is ready.
-  image: { src: "/HomePage/plans.webp", alt: "RP8 Fitness training floor" },
+  image: {
+    src: "/HomePage/plans.webp",
+    mobileSrc: "/mobile/Contact Us - Mobile Banner.webp",
+    alt: "RP8 Fitness training floor",
+  },
 };
 
 const ICON_PATHS: Record<string, string> = {
@@ -56,7 +60,18 @@ export default function ContactHeroSection() {
       {/* Full-bleed banner photo — same treatment as Home/Franchise: shown
           as-is, content overlaid on its own naturally dark left side, no
           gradient layered on top. */}
-      <div className="group relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+      <div className="group relative aspect-square w-full overflow-hidden sm:aspect-[16/9] md:aspect-[1920/750]">
+        {image.mobileSrc && (
+          <Image
+            src={image.mobileSrc}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            quality={85}
+            priority
+            className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 md:hidden"
+          />
+        )}
         <Image
           src={image.src}
           alt={image.alt}
@@ -64,7 +79,9 @@ export default function ContactHeroSection() {
           sizes="100vw"
           quality={85}
           priority
-          className="object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105"
+          className={`object-cover transition-transform duration-[9000ms] ease-out group-hover:scale-105 ${
+            image.mobileSrc ? "hidden md:block" : ""
+          }`}
         />
       </div>
 

@@ -14,6 +14,7 @@ export interface FranchiseHeroContent {
   secondaryCtaLabel: string;
   image: {
     src: string;
+    mobileSrc?: string;
     alt: string;
   };
 }

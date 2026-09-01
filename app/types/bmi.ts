@@ -7,7 +7,7 @@ export interface BmiHeroContent {
   headlineRest: string;
   description: string;
   pointers: { id: string; title: string }[];
-  image: { src: string; alt: string };
+  image: { src: string; mobileSrc?: string; alt: string };
 }
 
 export interface BmiMeaningContent {

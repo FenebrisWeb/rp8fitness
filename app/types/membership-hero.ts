@@ -19,5 +19,5 @@ export interface MembershipHeroContent {
   description: string;
   features: MembershipHeroFeature[];
   offer: MembershipHeroOffer;
-  image: { src: string; alt: string };
+  image: { src: string; mobileSrc?: string; alt: string };
 }
