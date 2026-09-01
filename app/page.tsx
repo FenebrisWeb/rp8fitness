@@ -28,8 +28,8 @@ export default function Home() {
     <>
       <HeroSection />
       <AboutSection />
-      <ZonesSection />
       <FranchiseSection />
+      <ZonesSection />
       <GermanEquipmentSection />
       <OpenTerraceSection />
       <WhyChooseSection />
