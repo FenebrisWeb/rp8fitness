@@ -184,10 +184,14 @@ export default function MembershipPlansSection() {
         </motion.div>
 
         {/* Four cards is cramped as a mobile column stack — a drag/swipe row
-            keeps each card at full width and takes far less vertical space. */}
-        <DragScrollRow className="mt-10 gap-4 sm:hidden">
+            keeps each card at full width and takes far less vertical space.
+            Each card is exactly the scroll container's own width (viewport
+            minus the section's own px-6 padding) so only one is ever in
+            view at a time, snapping cleanly to the next on swipe instead of
+            leaving the next card peeking in. */}
+        <DragScrollRow className="mt-10 snap-x snap-mandatory gap-4 sm:hidden">
           {plans.map((plan) => (
-            <div key={plan.id} className="w-[260px] flex-none">
+            <div key={plan.id} className="w-[calc(100vw-3rem)] flex-none snap-center">
               <PlanCard plan={plan} />
             </div>
           ))}
